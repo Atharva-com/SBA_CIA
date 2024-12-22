@@ -181,7 +181,7 @@ const Hero = () => {
                             </motion.button>
 
                             <motion.button
-                                className={`${dmSans.className} relative overflow-hidden border border-gray-700 hover:border-yellow-400 text-gray-100 md:px-8 px-4 py-4 rounded-lg`}
+                                className={`${dmSans.className} relative overflow-hidden border border-gray-700 hover:border-yellow-400 text-gray-100 md:px-8 px-3 py-4 rounded-lg`}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >

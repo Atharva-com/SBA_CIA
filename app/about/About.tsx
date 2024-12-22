@@ -117,12 +117,12 @@ const AboutSection = () => {
                         <motion.img
                             src="https://plus.unsplash.com/premium_photo-1661335257817-4552acab9656?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Replace with actual image path
                             alt="Founder of SBA-CIA"
-                            className="w-full h-auto object-cover transition-transform duration-500"
+                            className="w-full md:h-auto h-96 object-cover transition-transform duration-500"
                             animate={{ scale: hovered ? 1.05 : 1 }}
                         />
                         {/* 3D Tilt Effect */}
                         <motion.div
-                            className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-950 opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6"
+                            className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900 opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6"
                             style={{
                                 transform: hovered
                                     ? "rotateY(3deg) rotateX(-3deg)"
