@@ -29,13 +29,13 @@ const dmSans = DM_Sans({ subsets: ['latin'] });
 const services = [
   {
     icon: <Home className="w-8 h-8" />,
-    title: "Home Design",
-    description: "Create your dream home with our innovative residential architecture services.",
+    title: "Architectural Design",
+    description: "Custom building design for residential, commercial, and industrial projects.",
     features: [
-      "Custom Floor Plans & 3D Visualization",
+      "Custom Floor Plans",
       "Smart Home Integration Planning",
-      "Sustainable Materials Selection",
-      "Energy-Efficient Systems Design"
+      "Conceptual design and schematic design.",
+      "schematic design and design development.",
     ],
 
     benefits: [
