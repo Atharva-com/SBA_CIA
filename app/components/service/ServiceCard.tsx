@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     ChevronRight,
     CheckCircle2,
-    ArrowUpRight,
     Phone, Mail, Calendar, ArrowRight,
     RotateCcw
 } from 'lucide-react';
@@ -25,8 +24,6 @@ interface Service {
 
 export const ServiceCard = ({ service, index }: { service: Service, index: number }) => {
     const [isFlipped, setIsFlipped] = useState(false);
-    // const [hoveredIndex, setHoveredIndex] = useState(null);
-    const hoveredIndex = null;
     const [activeTab, setActiveTab] = useState('process');
     const [hoveredStep, setHoveredStep] = useState<number | null>(null);
 
@@ -37,31 +34,29 @@ export const ServiceCard = ({ service, index }: { service: Service, index: numbe
     ];
 
     const handleFlip = () => {
-        setIsFlipped(!isFlipped);
+        setIsFlipped((prev) => !prev);
         // Reset tab when card is flipped back
         if (isFlipped) {
             setTimeout(() => setActiveTab('process'), 300);
         }
     };
 
-
     return (
         <div className="relative h-[460px] w-full perspective-1000">
             <motion.div
                 className="w-full h-full relative preserve-3d transition-transform duration-700"
                 style={{
-                    transformStyle: "preserve-3d",
-                    transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)"
+                    transformStyle: 'preserve-3d',
+                    transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
                 }}
             >
-
                 {/* Front of Card */}
                 <div className="absolute w-full h-full backface-hidden">
                     <motion.div
                         className="h-full relative overflow-hidden rounded-2xl bg-gray-900 md:p-8 p-4 border border-gray-800 hover:border-yellow-400 transition-all duration-300 group"
                         whileHover={{ y: -5 }}
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
                         {/* Animated Background Pattern */}
                         <motion.div
                             className="absolute inset-0 opacity-10"
@@ -70,7 +65,7 @@ export const ServiceCard = ({ service, index }: { service: Service, index: numbe
                                 backgroundSize: "32px 32px"
                             }}
                             animate={{
-                                backgroundPosition: hoveredIndex === index ? ["0px 0px", "32px 32px"] : "0px 0px"
+                                backgroundPosition: hoveredStep === index ? ["0px 0px", "32px 32px"] : "0px 0px"
                             }}
                             transition={{
                                 duration: 2,
@@ -78,9 +73,9 @@ export const ServiceCard = ({ service, index }: { service: Service, index: numbe
                                 ease: "linear"
                             }}
                         />
-
                         {/* Front Content */}
                         <div className="relative z-10">
+                            {/* Icon and Title */}
                             <div className="flex items-center justify-between mb-6">
                                 <motion.div
                                     className="p-3 bg-gray-800 rounded-lg text-yellow-400 group-hover:bg-yellow-400 group-hover:text-gray-900 transition-all duration-300"
@@ -88,14 +83,6 @@ export const ServiceCard = ({ service, index }: { service: Service, index: numbe
                                     transition={{ duration: 0.5 }}
                                 >
                                     {service.icon}
-                                </motion.div>
-                                <motion.div
-                                    animate={{
-                                        x: hoveredIndex === index ? 0 : -10,
-                                        opacity: hoveredIndex === index ? 1 : 0
-                                    }}
-                                >
-                                    <ArrowUpRight className="w-6 h-6 text-yellow-400" />
                                 </motion.div>
                             </div>
 
@@ -127,7 +114,7 @@ export const ServiceCard = ({ service, index }: { service: Service, index: numbe
                             <motion.button
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
-                                onClick={() => setIsFlipped(true)}
+                                onClick={handleFlip}
                                 className={`${dmSans.className} mt-8 px-6 py-3 bg-gray-800 text-gray-100 rounded-lg hover:bg-yellow-400 hover:text-gray-900 transition-all duration-300 w-full flex items-center justify-center gap-2`}
                             >
                                 Show More
@@ -139,26 +126,28 @@ export const ServiceCard = ({ service, index }: { service: Service, index: numbe
 
                 {/* Back of Card */}
                 <div
-                    className="absolute w-full h-full backface-hidden "
-                    style={{ transform: "rotateY(180deg)" }}
+                    className="absolute w-full h-full backface-hidden"
+                    style={{
+                        transform: "rotateY(180deg)",
+                        zIndex: isFlipped ? 10 : -1, // Ensure correct z-index for interactivity
+                        pointerEvents: isFlipped ? "auto" : "none" // Allow interaction only when flipped
+                    }}
                 >
-
-                    <div className="h-full relative rounded-2xl bg-gray-900 p-8 border border-yellow-400 group">
-
-                        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="h-full relative rounded-2xl bg-gray-900 md:p-8 p-4 border border-yellow-400 group">
+                        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
 
                         {/* Animated Background Pattern */}
                         <motion.div
-                            className="absolute inset-0 opacity-5"
+                            className="absolute inset-0 opacity-10"
+                            style={{
+                                backgroundImage: "radial-gradient(circle at 2px 2px, yellow 1px, transparent 0)",
+                                backgroundSize: "32px 32px"
+                            }}
                             animate={{
-                                background: [
-                                    "radial-gradient(circle at 0% 0%, #FCD34D 0%, transparent 50%)",
-                                    "radial-gradient(circle at 100% 100%, #FCD34D 0%, transparent 50%)",
-                                    "radial-gradient(circle at 0% 0%, #FCD34D 0%, transparent 50%)"
-                                ]
+                                backgroundPosition: hoveredStep === index ? ["0px 0px", "32px 32px"] : "0px 0px"
                             }}
                             transition={{
-                                duration: 10,
+                                duration: 2,
                                 repeat: Infinity,
                                 ease: "linear"
                             }}
@@ -180,7 +169,7 @@ export const ServiceCard = ({ service, index }: { service: Service, index: numbe
                                         key={tab.id}
                                         onClick={() => setActiveTab(tab.id)}
                                         className={`px-4 py-2 rounded-lg text-sm ${dmSans.className} transition-all
-                        ${activeTab === tab.id
+                            ${activeTab === tab.id
                                                 ? 'bg-yellow-400 text-gray-900'
                                                 : 'bg-gray-800 text-gray-300 hover:bg-gray-700'}`}
                                         whileHover={{ scale: 1.05 }}
@@ -212,7 +201,7 @@ export const ServiceCard = ({ service, index }: { service: Service, index: numbe
                                                 >
                                                     <motion.div
                                                         className={`p-4 rounded-lg border ${hoveredStep === stepIndex
-                                                            ?  'bg-gray-800'
+                                                            ? 'bg-gray-800'
                                                             : 'border-gray-800 bg-gray-900'
                                                             } transition-all duration-300`}
                                                     >
@@ -302,8 +291,6 @@ export const ServiceCard = ({ service, index }: { service: Service, index: numbe
                                 </motion.button>
                             </motion.div>
                         </div>
-
-
                     </div>
                 </div>
 
@@ -311,3 +298,4 @@ export const ServiceCard = ({ service, index }: { service: Service, index: numbe
         </div>
     );
 };
+

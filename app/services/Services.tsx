@@ -34,8 +34,8 @@ const services = [
     features: [
       "Custom Floor Plans",
       "Smart Home Integration Planning",
-      "Conceptual design and schematic design.",
-      "schematic design and design development.",
+      "Conceptual and schematic design.",
+      "schematic and design development.",
     ],
 
     benefits: [

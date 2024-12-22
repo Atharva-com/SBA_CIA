@@ -130,7 +130,7 @@ const AboutSection = () => {
                             }}
                         >
                             <h3 className="text-2xl font-bold text-yellow-400 font-display">Ar. Shashank Pare</h3>
-                            <p className="text-gray-300 text-sm font-ui">Shree Bhargava and Associate - Creative Indian Architect</p>
+                            <p className="text-gray-400 text-sm font-ui">Shree Bhargava and Associate - Creative Indian Architect</p>
                             <p className="text-gray-300 text-sm font-ui">Founder & Lead Architect</p>
                         </motion.div>
                     </div>

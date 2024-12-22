@@ -168,7 +168,7 @@ const Hero = () => {
                             transition={{ delay: 0.8 }}
                         >
                             <motion.button
-                                className={`${dmSans.className} group bg-yellow-400 hover:bg-yellow-500 text-gray-900 md:px-8 px-4 py-4 rounded-lg flex items-center gap-2 transition-all duration-300`}
+                                className={`${dmSans.className} group bg-yellow-400 hover:bg-yellow-500 text-gray-900 md:px-8 px-3 py-4 rounded-lg flex items-center gap-2 transition-all duration-300`}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
@@ -198,7 +198,7 @@ const Hero = () => {
                         {/* Enhanced stats section */}
                         <motion.div
                             ref={ref}
-                            className="grid grid-cols-4 gap-8 pt-12 border-t border-gray-800"
+                            className="grid grid-cols-3 gap-8 pt-12 border-t border-gray-800"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                         >
