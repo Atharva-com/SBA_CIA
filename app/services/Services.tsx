@@ -239,7 +239,7 @@ const ServicesSection = () => {
 
 
   return (
-    <div className="bg-gray-950 py-24 px-6">
+    <div className="bg-gray-950 md:py-24 py-16 px-6">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div

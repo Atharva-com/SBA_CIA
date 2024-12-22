@@ -39,7 +39,7 @@ const TeamSection = () => {
     ];
 
     return (
-        <div className="bg-gray-950 py-24 px-6">
+        <div className="bg-gray-950 md:py-24 py-16 px-6">
             <div className="container mx-auto">
 
                 {/* Section Header */}
@@ -53,7 +53,7 @@ const TeamSection = () => {
                         className="text-yellow-400 text-lg tracking-wider font-sans"
                         whileHover={{ scale: 1.05 }}
                     >
-                        ABOUT US
+                        MORE ABOUT US
                     </motion.span>
                     <h2 className="text-4xl md:text-5xl font-bold text-gray-100 font-display">
                         Our Journey, Our Team, Our Vision

@@ -21,7 +21,7 @@ const AboutSection = () => {
 
 
     return (
-        <div className="bg-gray-950 py-24 px-6 relative overflow-hidden">
+        <div className="bg-gray-950 md:py-24 py-16 px-6 relative overflow-hidden">
             {/* Floating Decorative Elements */}
             <motion.div
                 className="absolute top-16 right-16 w-32 h-32 bg-yellow-400 rounded-full blur-2xl opacity-30"
@@ -79,7 +79,7 @@ const AboutSection = () => {
                         </motion.div>
                     </motion.div>
                     <motion.p
-                        className="text-gray-400 leading-relaxed font-ui"
+                        className="text-gray-400 leading-relaxed font-ui md:block hidden"
                         variants={itemVariants}
                     >
                         At SBA-CIA, we transform spaces into timeless masterpieces, blending creativity and precision to bring every client’s vision to life. Our designs harmonize aesthetics with functionality, delivering personalized architectural experiences that inspire and endure
