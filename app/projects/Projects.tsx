@@ -4,6 +4,8 @@ import { Playfair_Display, DM_Sans } from 'next/font/google';
 import ProjectCard from './ProjectCard';
 import ProjectPreview from './ProjectPreview';
 import ProjectTransitions from './ProjectTransitions';
+import { ArrowRight } from 'lucide-react'
+import { useRouter } from 'next/navigation';
 
 const playfair = Playfair_Display({ subsets: ['latin'] });
 const dmSans = DM_Sans({ subsets: ['latin'] });
@@ -46,10 +48,13 @@ const categories = [
 
 export const ProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState('all');
-  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<null | { id: number; title: string; category: string; year: string; location: string; description: string; images: string[]; tags: string[] }>(null);
   const [direction, setDirection] = useState(0);
-  // const categories = ['All', 'Residential', 'Commercial', 'Industrial', 'Landscape'];
+  const router = useRouter();
+
+  const handleExploreClick = () => {
+    router.push("/projects"); 
+  };
 
   const handleProjectClick = (project: { id: number; title: string; category: string; year: string; location: string; description: string; images: string[]; tags: string[] }) => {
     setSelectedProject(project);
@@ -59,11 +64,6 @@ export const ProjectsSection = () => {
     setSelectedProject(null);
   };
 
-  // const handleFilterChange = (newFilter: string) => {
-  //   setDirection(categories.indexOf(newFilter) > categories.indexOf(filter) ? 1 : -1);
-  //   setFilter(newFilter);
-  // };
-
   const filteredProjects = activeCategory === 'all'
     ? projects
     : projects.filter(project => project.category === activeCategory);
@@ -72,16 +72,13 @@ export const ProjectsSection = () => {
     <div className="bg-gray-950 py-24">
       <div className="container mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          viewport={{ margin: "-100px" }}
           className="mb-16 text-center"
         >
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5 }}
+          <div
           >
             <h2 className={`${playfair.className} text-4xl md:text-5xl font-bold text-gray-100 mb-4`}>
               Featured Projects
@@ -100,40 +97,17 @@ export const ProjectsSection = () => {
                 .
               </motion.span>
             </h2>
-          </motion.div>
-          <motion.p
+          </div>
+          <p
             className={`${dmSans.className} text-gray-400 max-w-2xl mx-auto`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
           >
             Explore our portfolio of innovative architectural designs spanning residential,
             commercial, and landscape projects.
-          </motion.p>
+          </p>
         </motion.div>
 
-       {/* Category Filter */}
-      {/* <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="flex flex-wrap justify-center gap-4 mb-16"
-      >
-        {categories.map((category) => (
-          <motion.button
-            key={category}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className={`${dmSans.className} px-6 py-2 rounded-full text-sm transition-colors ${
-              filter === category
-                ? 'bg-yellow-400 text-gray-900'
-                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-            }`}
-            onClick={() => handleFilterChange(category)}
-          >
-            {category}
-          </motion.button>
-        ))}
-      </motion.div> */}
+        {/* Category Filter */}
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -156,20 +130,56 @@ export const ProjectsSection = () => {
         </motion.div>
 
         {/* Projects Grid */}
-      <AnimatePresence mode="wait">
-        <ProjectTransitions direction={direction}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                onClick={() => handleProjectClick(project)}
-              />
-            ))}
-          </div>
-        </ProjectTransitions>
-      </AnimatePresence>
+        <AnimatePresence mode="wait">
+          <ProjectTransitions direction={direction}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProjects.map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  onClick={() => handleProjectClick(project)}
+                />
+              ))}
+            </div>
+          </ProjectTransitions>
+        </AnimatePresence>
 
+        {/* All projects Button */}
+        <div className="text-center mt-12">
+          <motion.button
+            onClick={handleExploreClick}
+            whileHover={{
+              scale: 1.05,
+              background: "linear-gradient(90deg, #FFD700, #FFC107, #FFB300)",
+              boxShadow: "0px 0px 15px rgba(255, 213, 0, 0.7)",
+            }}
+            whileTap={{ scale: 0.95 }}
+            className="relative overflow-hidden px-8 md:px-16 md:py-4 py-3 text-sm md:text-base font-medium bg-yellow-400 text-gray-900 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-500 transition-all duration-300"
+          >
+            <span className="relative z-10 flex items-center justify-center gap-2 font-sans">
+              Explore Our Work
+              <motion.span
+                initial={{ x: -10 }}
+                animate={{ x: [0, 5, 0] }}
+                transition={{
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 1.5,
+                }}
+              >
+                <ArrowRight className="w-4 h-4" />
+              </motion.span>
+            </span>
+
+            {/* Ripple Effect */}
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 bg-yellow-500 opacity-20 rounded-full transform scale-0 group-hover:scale-150 transition-all duration-700 ease-out"
+            ></span>
+          </motion.button>
+        </div>
+
+        {/* full preview */}
         <AnimatePresence>
           {selectedProject && (
             <>

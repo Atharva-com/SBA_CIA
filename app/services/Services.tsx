@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import {
   Home,
   Trees,
@@ -223,6 +223,8 @@ const services = [
 const ServicesSection = () => {
   // const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   // const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { margin: '-100px' });
   const router = useRouter();
 
   const handleExploreClick = () => {
@@ -239,13 +241,13 @@ const ServicesSection = () => {
 
 
   return (
-    <div className="bg-gray-950 md:py-24 py-16 px-6">
+    <div ref={ref} className="bg-gray-950 md:py-24 py-16 px-6">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 50, scale: 0.8 }} 
+          animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center mb-16 space-y-4"
         >
           <motion.span
@@ -268,7 +270,6 @@ const ServicesSection = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
           className="grid md:grid-cols-3 gap-8"
         >
           {services.map((service, index) => (
@@ -288,7 +289,7 @@ const ServicesSection = () => {
             whileTap={{ scale: 0.95 }}
             className="relative overflow-hidden px-8 md:px-16 md:py-4 py-3 text-sm md:text-base font-medium bg-yellow-400 text-gray-900 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-500 transition-all duration-300"
           >
-            <span className="relative z-10 flex items-center justify-center gap-2">
+            <span className="relative z-10 flex items-center justify-center gap-2 font-sans">
               Explore All Services
               <motion.span
                 initial={{ x: -10 }}

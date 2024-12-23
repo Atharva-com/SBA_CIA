@@ -1,7 +1,9 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
 const AboutSection = () => {
     const [hovered, setHovered] = useState(false);
+    const ref = useRef(null);
+    const isInView = useInView(ref, { margin: '-100px' });
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -21,7 +23,7 @@ const AboutSection = () => {
 
 
     return (
-        <div className="bg-gray-950 md:py-24 py-16 px-6 relative overflow-hidden">
+        <div ref={ref} className="bg-gray-950 md:py-24 py-16 px-6 relative overflow-hidden">
             {/* Floating Decorative Elements */}
             <motion.div
                 className="absolute top-16 right-16 w-32 h-32 bg-yellow-400 rounded-full blur-2xl opacity-30"
@@ -34,15 +36,13 @@ const AboutSection = () => {
                 transition={{ duration: 6, repeat: Infinity }}
             ></motion.div>
 
-
-
             <div className="container mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
                 {/* Left Content */}
                 <motion.div
                     variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
+                    initial={{ opacity: 0, scale:0.8, x: -100 }}
+                    animate={isInView ? { opacity: 1, scale:1, x: 0 } : {}} 
+                    transition={{ duration: 1, delay: 0.2 }}
                     className="md:w-1/2 space-y-6"
                 >
                     <motion.div
@@ -103,10 +103,9 @@ const AboutSection = () => {
                 {/* Right Content (Founder Image and Info) */}
                 <motion.div
                     className="md:w-1/2 relative"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
+                    initial={{ opacity: 0, scale: 0.8, x: 100}}
+                    animate={isInView ? { opacity: 1, scale:1, x: 0 } : {}}
+                    transition={{ duration: 1, delay: 0.2 }}
                 >
                     {/* Founder Image with Hover Effects */}
                     <div

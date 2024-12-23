@@ -42,8 +42,13 @@ export const ServiceCard = ({ service, index }: { service: Service, index: numbe
     };
 
     return (
-        <div className="relative h-[460px] w-full perspective-1000">
+        <motion.div 
+        initial={index === 0 ? { opacity: 0, x:-100, scale: 0.5 } : index === 2 ? {opacity: 0, x: 100, scale: 0.5 } : {opacity: 0, scale: 0.5 }}
+        whileInView={{ opacity: 1, x: 0, scale: 1 }}
+        transition={{ duration: 1, delay: 0.2 }}
+        className="relative h-[460px] w-full perspective-1000">
             <motion.div
+          
                 className="w-full h-full relative preserve-3d transition-transform duration-700"
                 style={{
                     transformStyle: 'preserve-3d',
@@ -295,7 +300,7 @@ export const ServiceCard = ({ service, index }: { service: Service, index: numbe
                 </div>
 
             </motion.div>
-        </div>
+        </motion.div>
     );
 };
 

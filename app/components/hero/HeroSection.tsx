@@ -114,9 +114,9 @@ const Hero = () => {
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     {/* Left column - Enhanced text content */}
                     <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
+                        initial={{ opacity: 0, x: -100, scale: 0.8 }}
+                        whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
                         className="space-y-8"
                     >
                         <div className="space-y-4 text-center md:text-left">
@@ -132,7 +132,7 @@ const Hero = () => {
                                 </motion.span>
                                 <div
                                     className="absolute inset-0 bg-gray-800 opacity-20 rounded-lg -z-10"
-                                    // layoutId="highlight"
+                                // layoutId="highlight"
                                 />
                             </motion.div>
 
@@ -235,7 +235,7 @@ const Hero = () => {
 
                     {/* Right column - Enhanced image/3D content */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
+                        initial={{ opacity: 0, scale: 0.5 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1 }}
                         style={{
