@@ -19,7 +19,7 @@ import {
   // Scale,
 } from 'lucide-react';
 import { Inter, Playfair_Display, DM_Sans } from 'next/font/google';
-import { ServiceCard } from '../components/service/ServiceCard';
+import { ServiceCard } from '../../components/service/ServiceCard';
 import { useRouter } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
