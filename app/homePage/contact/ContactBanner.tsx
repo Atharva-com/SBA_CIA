@@ -114,9 +114,9 @@ const ContactBanner = () => {
     <div
       ref={ref}
 
-      className={`${inter.className} bg-yellow-50 text-gray-100 relative`}>
+      className={`${inter.className} bg-gray-950 text-gray-100 relative`}>
 
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 md:px-16 py-12">
         {/* Tabs */}
         <motion.div
           initial={{ opacity: 0, y: -50 }} // Slide up from below
@@ -152,7 +152,7 @@ const ContactBanner = () => {
               initial={{ opacity: 0, scale:0.8, x: -200 }}
               animate={isInView ? { opacity: 1, scale:1, x: 0 } : {}} 
               transition={{ duration: 1, delay: 0.2 }}
-              className="bg-gray-900 rounded-xl p-6 space-y-6"
+              className="bg-gray-900 rounded-xl p-4 space-y-4"
             >
               {activeTab === 'contact' && (
                 <>
@@ -166,7 +166,7 @@ const ContactBanner = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
                         onClick={() => handleContactMethod(item.type, item.value)}
-                        className="flex items-center gap-4 p-4 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700/50 transition-colors group"
+                        className="flex items-center gap-4 p-3 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700/50 transition-colors group"
                       >
                         <item.icon className="w-5 h-5 text-yellow-400" />
                         <div>
@@ -249,7 +249,7 @@ const ContactBanner = () => {
             initial={{ opacity: 0, scale:0.8, x: 200 }}
             animate={isInView ? { opacity: 1, scale:1, x: 0 } : {}} 
             transition={{ duration: 1, delay: 0.2 }}
-            className="relative h-[400px]"
+            className="relative h-full"
           >
             <div
               onClick={() => handleContactMethod('map', businessInfo.mapUrl)}

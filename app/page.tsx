@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import ServicesSection from './homePage/services/Services';
-import Hero from './components/hero/HeroSection';
+import Hero from './homePage/hero/HeroSection';
 import AboutSection from './homePage/about/About';
 import { ProjectsSection } from './homePage/projects/Projects';
 import ContactBanner from './homePage/contact/ContactBanner';

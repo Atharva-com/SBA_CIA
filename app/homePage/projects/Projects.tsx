@@ -72,9 +72,9 @@ export const ProjectsSection = () => {
     <div className="bg-gray-950 py-24">
       <div className="container mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 50, scale: 0.8 }} 
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ margin: "-100px" }}
           className="mb-16 text-center"
         >

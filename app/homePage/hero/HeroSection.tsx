@@ -69,7 +69,7 @@ const Hero = () => {
     return (
         <div className="relative min-h-screen bg-gray-950 overflow-hidden">
             {/* Enhanced animated background patterns */}
-            <div className="absolute inset-0 opacity-20">
+            <div className="absolute inset-0 md:opacity-20 opacity-10">
                 <motion.div
                     animate={{
                         scale: [1, 1.2, 1],
@@ -80,7 +80,7 @@ const Hero = () => {
                         repeat: Infinity,
                         repeatType: "reverse"
                     }}
-                    className="absolute w-96 h-96 bg-yellow-400 rounded-full blur-3xl -top-20 -left-20"
+                    className="absolute w-96 h-96 bg-yellow-400 rounded-full blur-3xl md:top-0 md:left-0"
                 />
                 <motion.div
                     animate={{
@@ -92,15 +92,15 @@ const Hero = () => {
                         repeat: Infinity,
                         repeatType: "reverse"
                     }}
-                    className="absolute w-96 h-96 bg-gray-400 rounded-full blur-3xl -bottom-20 -right-20"
+                    className="absolute w-96 h-96 bg-gray-400 rounded-full blur-3xl md:bottom-12 md:right-0 top-0"
                 />
             </div>
 
             {/* Interactive grid pattern overlay */}
             <motion.div
-                className="absolute inset-0 bg-grid-pattern opacity-5"
+                className="absolute inset-0 bg-grid-pattern opacity-30 top-0 left-0"
                 animate={{
-                    backgroundPosition: ['0px 0px', '20px 20px', '0px 0px'],
+                    backgroundPosition: ['0px 0px', '40px 40px', '0px 0px'],
                 }}
                 transition={{
                     duration: 20,
@@ -198,7 +198,7 @@ const Hero = () => {
                         {/* Enhanced stats section */}
                         <motion.div
                             ref={ref}
-                            className="grid grid-cols-3 gap-8 pt-12 border-t border-gray-800"
+                            className="grid grid-cols-3 gap-8 pt-12 md:border-t border-gray-800"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                         >
@@ -255,17 +255,17 @@ const Hero = () => {
                         >
 
                             <AnimatePresence>
-                                {isHoveringImage && (
+                                {/* {isHoveringImage && ( */}
                                     <motion.div
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}
                                         className="absolute inset-0 bg-yellow-400 mix-blend-saturation z-10 rounded-xl"
                                     />
-                                )}
+                                {/* )} */}
                             </AnimatePresence>
 
-                            <div className="absolute inset-0 bg-gradient-to-tr from-gray-900 to-transparent opacity-40 z-10 rounded-xl" />
+                            {/* <div className="absolute inset-0 bg-gradient-to-tr from-gray-900 to-transparent opacity-40 z-10 rounded-xl" /> */}
                             <div className="flex min-h-screen bg-gray-900">
                                 <div className="grid grid-cols-4 grid-rows-4 gap-2 w-full overflow-hidden">
                                     {/* 16 Divs for grid cells */}

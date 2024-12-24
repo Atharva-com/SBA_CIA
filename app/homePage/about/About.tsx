@@ -25,13 +25,13 @@ const AboutSection = () => {
     return (
         <div ref={ref} className="bg-gray-950 md:py-24 py-16 px-6 relative overflow-hidden">
             {/* Floating Decorative Elements */}
-            <motion.div
+            {/* <motion.div
                 className="absolute top-16 right-16 w-32 h-32 bg-yellow-400 rounded-full blur-2xl opacity-30"
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 4, repeat: Infinity }}
-            ></motion.div>
+            ></motion.div> */}
             <motion.div
-                className="absolute bottom-20 left-10 w-24 h-24 bg-gray-800 rounded-full blur-2xl opacity-50"
+                className="absolute bottom-12 left-0 w-96 h-96 bg-gray-800 rounded-full blur-2xl opacity-10"
                 animate={{ scale: [1, 0.9, 1] }}
                 transition={{ duration: 6, repeat: Infinity }}
             ></motion.div>
