@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence, useSpring  } from 'framer-motion';
+import { motion, useScroll, useTransform  } from 'framer-motion';
 import {
-  Ruler, Compass, PenTool, Building2, Users, Award, Landmark, Home, Building, Scale, Brush, Warehouse, HardHat, Scan,
+  Ruler, Compass, Building2, Users, Award,Building, Scale, Brush, Warehouse, HardHat, Scan,
 } from 'lucide-react';
 import { Playfair_Display, Inter, DM_Sans } from 'next/font/google';
 

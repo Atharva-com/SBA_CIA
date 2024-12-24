@@ -12,7 +12,6 @@ const dmSans = DM_Sans({ subsets: ['latin'] });
 const Hero = () => {
     const [scrollY, setScrollY] = useState(0);
     const [hoveredStat, setHoveredStat] = useState<number | null>(null);
-    const [isHoveringImage, setIsHoveringImage] = useState(false);
     const [ref, inView] = useInView({ triggerOnce: true }); // Detects when the stats section is in view
     const [values, setValues] = useState([0, 0, 0, 0]);
     const mouseX = useMotionValue(0);
@@ -244,8 +243,7 @@ const Hero = () => {
                             rotateY: rotateY,
                         }}
                         onMouseMove={handleMouseMove}
-                        onMouseEnter={() => setIsHoveringImage(true)}
-                        onMouseLeave={() => setIsHoveringImage(false)}
+                        
                         className="relative hidden md:block perspective-1000"
                     >
                         <motion.div

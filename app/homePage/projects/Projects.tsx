@@ -49,7 +49,8 @@ const categories = [
 export const ProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedProject, setSelectedProject] = useState<null | { id: number; title: string; category: string; year: string; location: string; description: string; images: string[]; tags: string[] }>(null);
-  const [direction, setDirection] = useState(0);
+  // const [direction, setDirection] = useState(0);
+  const direction = 0;
   const router = useRouter();
 
   const handleExploreClick = () => {
