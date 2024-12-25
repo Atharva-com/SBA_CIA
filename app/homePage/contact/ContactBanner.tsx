@@ -29,15 +29,26 @@ const ContactBanner = () => {
       linkedin: "https://linkedin.com/company/architectstudio",
       twitter: "https://twitter.com/architectstudio"
     },
-    businessHours: {
-      mon: { open: '09:00', close: '18:00' },
-      tue: { open: '09:00', close: '18:00' },
-      wed: { open: '09:00', close: '18:00' },
-      thu: { open: '09:00', close: '18:00' },
-      fri: { open: '09:00', close: '18:00' },
-      sat: { open: '10:00', close: '14:00' },
-      sun: { open: null, close: null }
-    }
+    
+  };
+
+  type Day =
+  | 'mon'
+  | 'tue'
+  | 'wed'
+  | 'thu'
+  | 'fri'
+  | 'sat'
+  | 'sun';
+
+  const businessHours: Record<Day, { open: string; close: string }> = {
+    mon: { open: '9:00 AM', close: '5:00 PM' },
+    tue: { open: '9:00 AM', close: '5:00 PM' },
+    wed: { open: '9:00 AM', close: '5:00 PM' },
+    thu: { open: '9:00 AM', close: '5:00 PM' },
+    fri: { open: '9:00 AM', close: '5:00 PM' },
+    sat: { open: '10:00 AM', close: '4:00 PM' },
+    sun: { open: '', close: '' }, // Closed
   };
 
   // Contact Details
@@ -83,8 +94,8 @@ const ContactBanner = () => {
     const checkBusinessHours = () => {
       const now = new Date();
       const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-      const currentDay = days[now.getDay()];
-      const hours = businessInfo.businessHours[currentDay];
+      const currentDay = days[now.getDay()] as Day;
+      const hours = businessHours[currentDay];
 
       if (!hours.open || !hours.close) {
         setIsOpen(false);
@@ -207,7 +218,7 @@ const ContactBanner = () => {
                     </span>
                   </motion.div>
 
-                  {Object.entries(businessInfo.businessHours).map(([day, hours], index) => (
+                  {Object.entries(businessHours).map(([day, hours], index) => (
                     <motion.div
                       key={day}
                       initial={{ opacity: 0, x: -20 }}
