@@ -46,6 +46,7 @@ const categories = [
   { id: 'landscape', name: 'Landscape' }
 ];
 
+
 export const ProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedProject, setSelectedProject] = useState<null | { id: number; title: string; category: string; year: string; location: string; description: string; images: string[]; tags: string[] }>(null);

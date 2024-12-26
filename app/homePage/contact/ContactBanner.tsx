@@ -20,7 +20,7 @@ const ContactBanner = () => {
   const businessInfo = {
     address: "Ambikapuri Extension, 60 Feet road, Indore, In",
     phone: "+91 7693005811",
-    whatsapp: "+91 7693005811",
+    whatsapp: "7693005811",
     email: "contact@architectstudio.com",
     mapUrl: "https://www.google.com/maps?q=40.7128,-74.0060",
     socials: {
@@ -121,11 +121,13 @@ const ContactBanner = () => {
     return () => clearInterval(interval);
   }, []);
 
+  
+
   return (
     <div
       ref={ref}
 
-      className={`${inter.className} bg-gray-950 text-gray-100 relative`}>
+      className={`${inter.className} bg-[#f3ce1b] text-gray-100 relative`}>
 
       <div className="container mx-auto px-4 md:px-16 py-12">
         {/* Tabs */}

@@ -4,7 +4,7 @@ import { Plus } from 'lucide-react';
 import Image from 'next/image';
 
 interface Project {
-  id: string;
+  id: number;
   title: string;
   category: string;
   images: string[];
