@@ -19,7 +19,7 @@ import {
   // Scale,
 } from 'lucide-react';
 import { Inter, Playfair_Display, DM_Sans } from 'next/font/google';
-import { ServiceCard } from '../../components/service/ServiceCard';
+import { ServiceCard } from './ServiceCard';
 import { useRouter } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -102,7 +102,7 @@ const services = [
   },
   {
     icon: <Paintbrush2 className="w-8 h-8" />,
-    title: "Interior Design",
+    title: "Interior Solutions",
     description: "Elevate your spaces with our comprehensive interior design services that reflect style.",
     features: [
       "Custom Color & Material Consultation",
@@ -228,51 +228,49 @@ const ServicesSection = () => {
   const router = useRouter();
 
   const handleExploreClick = () => {
-    router.push("/services"); // Navigate to the services page
+    router.push("/services");
   };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2 }
-    }
-  };
-
 
   return (
-    <div ref={ref} className="md:py-24 py-16 px-6 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+    <div ref={ref} className="relative md:py-24 py-16 px-6">
+
+      {/* serives Background */}
+      <div className="absolute top-0 left-0 w-full h-2/3 inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900"></div>
+
+      {/* Main Content */}
       <div className="container mx-auto">
+
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 50, scale: 0.8 }} 
+          initial={{ opacity: 0, y: 50, scale: 0.8 }}
           animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center mb-16 space-y-4"
+          className="text-center mb-16 space-y-4 relative z-10"
         >
+
           <motion.span
             className={`${dmSans.className} text-yellow-400 text-lg tracking-wider`}
             whileHover={{ scale: 1.05 }}
           >
             OUR EXPERTISE
           </motion.span>
+
           <h2 className={`${playfair.className} text-4xl md:text-5xl font-bold text-gray-100`}>
             Comprehensive Architectural Services
           </h2>
+
           <p className={`${inter.className} text-gray-400 max-w-2xl mx-auto`}>
             From concept to completion, we offer a full range of architectural services
             tailored to your unique vision and requirements.
           </p>
+
         </motion.div>
 
         {/* Services Grid */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
           className="grid md:grid-cols-3 gap-8"
         >
-          
+
           {services.map((service, index) => (
             <ServiceCard key={service.title} service={service} index={index} />
           ))}

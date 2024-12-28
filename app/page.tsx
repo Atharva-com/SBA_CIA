@@ -19,8 +19,8 @@ export default function Home() {
       <AboutSection />
       <ServicesSection />
       <ContactBanner />
-      <ProjectsSection />
-      <WhyChooseUs />
+      {/* <ProjectsSection /> */}
+      {/* <WhyChooseUs /> */}
     </main>
   );
 }

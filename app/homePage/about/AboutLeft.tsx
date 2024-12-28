@@ -1,0 +1,125 @@
+import React from 'react'
+import { motion } from "framer-motion";
+import { ArrowRight } from 'lucide-react';
+
+const AboutLeft = () => {
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.3 },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { y: 30, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                duration: 0.6,
+                delay: 0.2,
+            },
+        }
+    };
+
+    return (
+        <>
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                className="md:w-1/2 space-y-6"
+            >
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    variants={itemVariants}
+                >
+                    {/* Wrapper for the leader section */}
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        variants={itemVariants}
+                        className=""
+                    >
+                        {/* Subheading */}
+                        <motion.span
+                            className="text-yellow-400 text-sm tracking-wider uppercase font-sans font-bold"
+                            whileHover={{ scale: 1.05 }}
+                            initial="hidden"
+                            whileInView="visible"
+                            variants={itemVariants}
+                            style={{
+                                background: 'linear-gradient(to right, #f59e0b, #fbbf24)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                            }}
+                        >
+                            SBA_CIA - Crafting Spaces Since 2016
+                        </motion.span>
+
+                        {/* Main Heading */}
+                        <motion.h2
+                            initial="hidden"
+                            whileInView="visible"
+                            className="text-4xl md:text-6xl font-bold text-gray-800 font-display text-transparent bg-gradient-to-r from-gray-600 to-gray-900 bg-clip-text"
+                            variants={itemVariants}
+                        >
+                            Who We Are
+                        </motion.h2>
+                    </motion.div>
+                </motion.div>
+
+                {/* Paragraph */}
+                <motion.p
+                    className="text-gray-700 text-lg leading-relaxed font-ui md:block hidden"
+                    initial="hidden"
+                    whileInView="visible"
+                    variants={itemVariants}
+                >
+                    We are visionary architects and designers who believe in the transformative power of thoughtful design. Our expertise spans residential masterpieces, commercial landmarks, and urban renewal projects, each reflecting our timeless architecture.
+                </motion.p>
+
+                {/* Founder Quote */}
+                <motion.div 
+                initial="hidden"
+                whileInView="visible"
+                variants={itemVariants}
+                className="mt-6 bg-gradient-to-r from-gray-700 to-gray-900 p-6 rounded-lg shadow-lg">
+                    <motion.p className="text-gray-300 italic">
+                        {/* “we go beyond building structures; we craft environments that inspire, reflect, and elevate the way you live and work.” */}
+
+                        “Architecture is not just about buildings; it&apos;s about creating experiences that resonate with people&apos;s lives, aspirations, and dreams. Every project we undertake is an opportunity to leave a lasting legacy in the built environment.”
+                    </motion.p>
+
+                    {/* Button */}
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="mt-4 px-4 py-2 text-sm font-bold text-gray-800 bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] rounded-full shadow hover:bg-gradient-to-r hover:from-[#fbbf24] hover:to-[#f59e0b] transition-all duration-300 font-ui cursor-pointer flex items-center"
+                    >
+                        Discover Our Journey
+                        <motion.span
+                                    initial={{ x: -10 }}
+                                    animate={{ x: [0, 5, 0] }}
+                                    transition={{
+                                        repeat: Infinity,
+                                        repeatType: "loop",
+                                        duration: 1.5,
+                                    }}
+                                    className='pl-2'
+                                >
+                                    <ArrowRight className="w-4 h-4" />
+                                </motion.span>
+                    </motion.button>
+
+                </motion.div>
+
+            </motion.div>
+        </>
+    )
+}
+
+export default AboutLeft

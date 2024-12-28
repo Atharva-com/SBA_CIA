@@ -15,12 +15,12 @@ const DynamicBackground = ({ children }: { children: ReactNode }) => {
   ];
 
   // Background patterns for dark mode (yellow and gray tones)
-  const darkPatterns = [
-    'bg-[#030712]',
-    'bg-[#2c2f36]',
-    'bg-[#0f172b]',
-    ' bg-[#101d2d]',
-  ];
+  // const darkPatterns = [
+  //   'bg-[#030712]',
+  //   'bg-[#2c2f36]',
+  //   'bg-[#0f172b]',
+  //   ' bg-[#101d2d]',
+  // ];
 
   return (
     <motion.div
