@@ -105,8 +105,8 @@ const ContactLeft: React.FC<ContactLeftProps> = ({ activeTab, handleContactMetho
 
                 <motion.div
                     key={activeTab}
-                    initial={{ opacity: 0, scale: 0.8, y: -100 }}
-                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="bg-gray-900 rounded-xl p-4 space-y-4"
                 >

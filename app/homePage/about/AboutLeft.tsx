@@ -83,11 +83,11 @@ const AboutLeft = () => {
                 </motion.p>
 
                 {/* Founder Quote */}
-                <motion.div 
-                initial="hidden"
-                whileInView="visible"
-                variants={itemVariants}
-                className="mt-6 bg-gradient-to-r from-gray-700 to-gray-900 p-6 rounded-lg shadow-lg">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    variants={itemVariants}
+                    className="mt-6 bg-gradient-to-r from-gray-700 to-gray-900 p-6 rounded-lg shadow-lg">
                     <motion.p className="text-gray-300 italic">
                         {/* “we go beyond building structures; we craft environments that inspire, reflect, and elevate the way you live and work.” */}
 
@@ -102,17 +102,17 @@ const AboutLeft = () => {
                     >
                         Discover Our Journey
                         <motion.span
-                                    initial={{ x: -10 }}
-                                    animate={{ x: [0, 5, 0] }}
-                                    transition={{
-                                        repeat: Infinity,
-                                        repeatType: "loop",
-                                        duration: 1.5,
-                                    }}
-                                    className='pl-2'
-                                >
-                                    <ArrowRight className="w-4 h-4" />
-                                </motion.span>
+                            initial={{ x: -10 }}
+                            animate={{ x: [0, 5, 0] }}
+                            transition={{
+                                repeat: Infinity,
+                                repeatType: "loop",
+                                duration: 1.5,
+                            }}
+                            className='pl-2'
+                        >
+                            <ArrowRight className="w-4 h-4" />
+                        </motion.span>
                     </motion.button>
 
                 </motion.div>

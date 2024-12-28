@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Playfair_Display, DM_Sans } from 'next/font/google';
+import { DM_Sans } from 'next/font/google';
 import ProjectCard from './ProjectCard';
 import ProjectPreview from './ProjectPreview';
 import ProjectTransitions from './ProjectTransitions';
 import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation';
-
-const playfair = Playfair_Display({ subsets: ['latin'] });
+import Image from 'next/image';
+import ProjectBackground from '../../../public/background-SBA_CIA.png';
 const dmSans = DM_Sans({ subsets: ['latin'] });
 
 const projects = [
@@ -71,12 +71,22 @@ export const ProjectsSection = () => {
     : projects.filter(project => project.category === activeCategory);
 
   return (
-    <div className="md:py-24 py-16 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+    <div className="md:py-8 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 relative">
+      <div className='absolute top-0 left-0 h-full w-full z-0'>
+        <Image
+          src={ProjectBackground}
+          alt="About Background"
+          layout="fill"
+          quality={100}
+        />
+
+      </div>
+      {/* Main Container */}
+      <div className="container mx-auto px-6 relative">
 
 
-      <div className="container mx-auto px-6">
 
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 50, scale: 0.8 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -109,7 +119,7 @@ export const ProjectsSection = () => {
             Explore our portfolio of innovative architectural designs spanning residential,
             commercial, and landscape projects.
           </p>
-        </motion.div>
+        </motion.div> */}
 
         {/* Category Filter */}
 

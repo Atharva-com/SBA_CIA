@@ -137,7 +137,7 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({ project, isOpen, onClos
                 transition={{ delay: 0.2 }}
                 className="space-y-6"
               >
-                <h2 className="text-3xl font-bold text-white font-display">{project.title}</h2>
+                <h2 className="text-3xl font-bold text-gradient font-display">{project.title}</h2>
                 <p className="text-gray-500 font-ui md:block hidden">{project.description}</p>
                 
                 <div className="space-y-4  font-ui">
@@ -170,7 +170,7 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({ project, isOpen, onClos
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full bg-yellow-400 text-gray-900 px-6 py-3 rounded-lg flex items-center justify-center gap-2 font-ui"
+                  className="w-full bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] text-gray-900 px-6 py-3 rounded-lg flex items-center justify-center gap-2 font-ui"
                 >
                   View Full Project
                   <ExternalLink className="w-4 h-4" />
