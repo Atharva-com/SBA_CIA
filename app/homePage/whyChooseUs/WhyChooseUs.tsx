@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { motion, useScroll, useTransform  } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import {
-  Ruler, Compass, Building2, Users, Award,Building, Scale, Brush, Warehouse, HardHat, Scan,
+  Ruler, Compass, Building2, Users, Award, Building, Scale, Brush, Warehouse, HardHat, Scan,
 } from 'lucide-react';
 import { Playfair_Display, Inter, DM_Sans } from 'next/font/google';
 
@@ -86,9 +86,9 @@ const WhyChooseUs = () => {
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.2 }}
     >
-      <motion.div 
+      <motion.div
         className="w-12 h-12 flex items-center justify-center rounded-full bg-yellow-400 text-gray-900 font-bold"
-        whileHover={{ scale: 1.1, rotate: 360 }}
+        whileHover={{ scale: 1.1 }}
         transition={{ duration: 0.5 }}
       >
         {index + 1}
@@ -155,7 +155,7 @@ const WhyChooseUs = () => {
         {/* Enhanced Section Header */}
         <motion.div
           className="text-center mb-16 sm:mb-20"
-          initial={{ opacity: 0, y: 50, scale: 0.8 }} 
+          initial={{ opacity: 0, y: 50, scale: 0.8 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
@@ -180,8 +180,8 @@ const WhyChooseUs = () => {
           </p>
         </motion.div>
 
-       {/* Feature Cards Grid */}
-       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 relative mb-20">
+        {/* Feature Cards Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 relative mb-20">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -202,11 +202,11 @@ const WhyChooseUs = () => {
                   repeat: Infinity,
                 }}
               />
-              
+
               <div className="relative z-10">
                 <motion.div
                   className="h-full bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-xl p-6 md:p-8"
-                  whileHover={{ 
+                  whileHover={{
                     scale: 1.02,
                     borderColor: '#EAB308',
                   }}
@@ -216,11 +216,11 @@ const WhyChooseUs = () => {
                   >
                     {feature.icon}
                   </motion.div>
-                  
+
                   <h3 className={`${dmSans.className} text-xl md:text-2xl font-bold text-gray-100 mb-4`}>
                     {feature.title}
                   </h3>
-                  
+
                   <p className="text-gray-400 text-sm md:text-base mb-6">
                     {feature.description}
                   </p>
@@ -261,14 +261,14 @@ const WhyChooseUs = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
         >
-          <motion.h3 
-          initial={{ opacity: 0, y: 50, scale: 0.8 }} 
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className={`${playfair.className} text-3xl md:text-4xl font-bold text-center text-gray-100 mb-12`}>
+          <motion.h3
+            initial={{ opacity: 0, y: 50, scale: 0.8 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className={`${playfair.className} text-3xl md:text-4xl font-bold text-center text-gray-100 mb-12`}>
             Our Design <span className="text-yellow-400">Process</span>
           </motion.h3>
-          
+
           <div className="space-y-8">
             {[
               {
@@ -317,7 +317,7 @@ const WhyChooseUs = () => {
             >
               <motion.div
                 className="text-yellow-400 w-8 h-8 md:w-12 md:h-12 mx-auto mb-3 md:mb-4 flex items-center justify-center"
-                animate={{ 
+                animate={{
                   rotate: [0, 360],
                 }}
                 transition={{

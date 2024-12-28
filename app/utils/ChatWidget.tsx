@@ -188,7 +188,7 @@ const ChatWidget = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="bg-gray-900 rounded-lg shadow-xl w-96 mb-4 border border-gray-800"
+            className="bg-gray-900 rounded-lg shadow-xl md:w-96 w-[20rem] mb-4 border border-gray-800"
           >
             {/* Chat Header */}
             <div className="bg-gray-800 p-4 rounded-t-lg flex items-center justify-between">
@@ -291,7 +291,7 @@ const ChatWidget = () => {
                 />
                 <button
                   onClick={handleSendMessage}
-                  className="bg-yellow-400 text-gray-900 p-2 rounded-lg hover:bg-yellow-500 transition-colors"
+                  className="btn-bg p-2 rounded-lg dark:hover:bg-yellow-500 hover:bg-gray-700 transition-colors"
                 >
                   <Send className="w-5 h-5" />
                 </button>
@@ -309,7 +309,7 @@ const ChatWidget = () => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             onClick={() => setMinimized(false)}
-            className="bg-yellow-400 text-gray-900 p-4 rounded-lg shadow-lg flex items-center gap-2"
+            className="btn-bg p-4 rounded-lg shadow-lg flex items-center gap-2 dark:hover:bg-yellow-500 hover:bg-gray-700"
           >
             <MessageCircle className="w-5 h-5" />
             <span className={`${dmSans.className} font-medium`}>Continue Chat</span>
@@ -320,7 +320,7 @@ const ChatWidget = () => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             onClick={() => setIsOpen(true)}
-            className="bg-yellow-400 text-gray-900 p-4 rounded-full shadow-lg hover:bg-yellow-500 transition-colors"
+            className="btn-bg p-4 rounded-full shadow-lg dark:hover:bg-yellow-500 hover:bg-gray-700 transition-colors"
           >
             <MessageCircle className="w-6 h-6" />
           </motion.button>

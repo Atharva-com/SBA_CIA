@@ -20,8 +20,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
     <motion.div
       layoutId={`project-${project.id}`}
       className="relative group cursor-pointer"
-      initial={{ opacity: 0, y: 20, rotate: -2 }}
-      animate={{ opacity: 1, y: 0, rotate: 0 }}
+      initial={{ opacity: 0, y: 20, rotate: -5 }}
+      whileInView={{ opacity: 1, y: 0, rotate: 0 }}
       whileHover={{ scale: 1.02, rotate: 1 }}
       transition={{
         duration: 0.5,

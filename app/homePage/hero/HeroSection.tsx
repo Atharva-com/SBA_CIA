@@ -1,320 +1,258 @@
-import React, { useState, useEffect } from 'react';
-import { motion, useMotionValue, useTransform, AnimatePresence } from 'framer-motion';
-import { ChevronRightIcon, Clock, Award, Users } from 'lucide-react';
-import { Inter, Playfair_Display, DM_Sans } from 'next/font/google';
-import { useInView } from 'react-intersection-observer';
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import HeroBg from './HeroBg';
+import Link from 'next/link';
+import {
+    Home,
+    Building2,
+    LayoutDashboard,
+    House,
+    Hammer,
+    PencilRuler,
+    ArrowRight
+} from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
-const inter = Inter({ subsets: ['latin'] });
-const playfair = Playfair_Display({ subsets: ['latin'] });
-const dmSans = DM_Sans({ subsets: ['latin'] });
-
+const services = [
+    {
+        name: "Interior Designing",
+        icon: Home,
+        rotation: 15
+    },
+    {
+        name: "Building Works",
+        icon: Building2,
+        rotation: -15
+    },
+    {
+        name: "Space Planning",
+        icon: LayoutDashboard,
+        rotation: 20
+    },
+    {
+        name: "Residential Design",
+        icon: House,
+        rotation: -20
+    },
+    {
+        name: "Renovation",
+        icon: Hammer,
+        rotation: 15
+    },
+    {
+        name: "Design Consultancy",
+        icon: PencilRuler,
+        rotation: -15
+    }
+];
 
 const Hero = () => {
-    const [scrollY, setScrollY] = useState(0);
-    const [hoveredStat, setHoveredStat] = useState<number | null>(null);
-    const [ref, inView] = useInView({ triggerOnce: true }); // Detects when the stats section is in view
-    const [values, setValues] = useState([0, 0, 0, 0]);
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
 
-    const rotateX = useTransform(mouseY, [-300, 300], [5, -5]);
-    const rotateY = useTransform(mouseX, [-300, 300], [-5, 5]);
-
+    // const services = ["Interior Designing", "Building Works", "Space Planning", "Residential Design", "Renovation", "Design Consultancy"];
+    const [currentService, setCurrentService] = useState(0);
 
     useEffect(() => {
-        const statsData = [
-            { icon: Clock, number: '15+', label: 'Years Experience', color: 'bg-yellow-400' },
-            { icon: Award, number: '200+', label: 'Projects Completed', color: 'bg-gray-700' },
-            { icon: Users, number: '50+', label: 'Awards Won', color: 'bg-yellow-600' }
-        ];
-        if (inView) {
-            statsData.forEach((stat, index) => {
-                let count = 0;
-                const interval = setInterval(() => {
-                    count++;
-                    setValues((prev) => {
-                        const updated = [...prev];
-                        updated[index] = count;
-                        return updated;
-                    });
-                    if (count >= parseInt(stat.number)) clearInterval(interval);
-                }, 30); // Adjust the interval speed
-            });
-        }
-    }, [inView]);
-
-    useEffect(() => {
-        const handleScroll = () => setScrollY(window.scrollY);
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        const interval = setInterval(() => {
+            setCurrentService((prev) => (prev + 1) % services.length);
+        }, 3000); // Change every 3 seconds
+        return () => clearInterval(interval);
     }, []);
 
-    const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-        const rect = event.currentTarget.getBoundingClientRect();
-        const x = event.clientX - rect.left - rect.width / 2;
-        const y = event.clientY - rect.top - rect.height / 2;
-        mouseX.set(x);
-        mouseY.set(y);
+    const router = useRouter();
+
+    const handleServiceClick = () => {
+        router.push("/services");
     };
 
-    const parallaxY = scrollY * 0.5;
-
-    const stats = [
-        { icon: Clock, number: '15+', label: 'Years Experience', color: 'bg-yellow-400' },
-        { icon: Award, number: '200+', label: 'Projects Completed', color: 'bg-gray-700' },
-        { icon: Users, number: '50+', label: 'Awards Won', color: 'bg-yellow-600' }
-    ];
+    const textAnimation = {
+        hidden: { opacity: 0, y: 40, Scale: 0.8 },
+        visible: {
+            opacity: 1,
+            y: [40, -10, 0],
+            scale: 1,
+            transition: {
+                duration: 0.6,
+                type: "spring",
+                stiffness: 400,
+                damping: 15,
+            },
+        }
+    };
 
     return (
-        <div className="relative min-h-screen bg-gray-950 overflow-hidden">
-            {/* Enhanced animated background patterns */}
-            <div className="absolute inset-0 md:opacity-20 opacity-10">
-                <motion.div
-                    animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.2, 0.3, 0.2],
-                    }}
-                    transition={{
-                        duration: 8,
-                        repeat: Infinity,
-                        repeatType: "reverse"
-                    }}
-                    className="absolute w-96 h-96 bg-yellow-400 rounded-full blur-3xl md:top-0 md:left-0"
-                />
-                <motion.div
-                    animate={{
-                        scale: [1, 1.1, 1],
-                        opacity: [0.2, 0.3, 0.2],
-                    }}
-                    transition={{
-                        duration: 6,
-                        repeat: Infinity,
-                        repeatType: "reverse"
-                    }}
-                    className="absolute w-96 h-96 bg-gray-400 rounded-full blur-3xl md:bottom-12 md:right-0 top-0"
-                />
-            </div>
+        <motion.div
+            className="relative min-h-[125vh] overflow-hidden">
 
-            {/* Interactive grid pattern overlay */}
-            <motion.div
-                className="absolute inset-0 bg-grid-pattern opacity-30 top-0 left-0"
-                animate={{
-                    backgroundPosition: ['0px 0px', '40px 40px', '0px 0px'],
-                }}
-                transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: "linear"
-                }}
-            />
+            {/* Hero Background */}
+            <HeroBg />
 
             {/* Main content */}
-            <div className="relative container mx-auto px-6 pt-32">
-                <div className="grid md:grid-cols-2 gap-12 items-center">
-                    {/* Left column - Enhanced text content */}
+            <motion.div
+                initial="hidden"
+                whileInView="visible"
+                variants={textAnimation}
+                className="relative container mx-auto px-6 pt-24">
+
+                <div className='flex flex-col items-center justify-center flex-nowrap mx-auto gap-7'>
+
+                    {/* Badge */}
+                    <Link href="/services">
+                        <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            variants={textAnimation}
+                            transition={{ delay: 0.2 }}
+                            whileHover={{ scale: 1.05 }}
+                            className="flex items-center justify-center animate-pulse cursor-pointer font-ui bg-gradient-to-r from-[#ff9217]/40 via-yellow-500/40 to-yellow-600/40 border border-white/20 rounded-full uppercase w-auto py-3 px-6 h-8">
+                            <div className='space-x-2 flex items-center justify-center'>
+                                <span className='text-center font-medium text-sm tracking-wide text-yellow-400'>Innovative Architecture</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none"><path d="M4.8125 2.8125L8.1875 6L4.8125 9.1875" stroke="#FF9217" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>
+
+                            </div>
+                        </motion.div>
+                    </Link>
+
+                    {/* heading */}
                     <motion.div
-                        initial={{ opacity: 0, x: -100, scale: 0.8 }}
-                        whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="space-y-8"
+                        initial="hidden"
+                        whileInView="visible"
+                        variants={textAnimation}
+                        transition={{ delay: 0.4 }}
                     >
-                        <div className="space-y-4 text-center md:text-left">
-                            <motion.div
-                                className="relative inline-block p-4"
-                                whileHover={{ scale: 1.05 }}
-                                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        <motion.h1
+                            initial="hidden"
+                            whileInView="visible"
+                            variants={textAnimation}
+                            transition={{ delay: 0.4 }}
+                            className="text-transparent font-display text-4xl md:text-6xl font-bold">
+
+                            <motion.span
+                                initial="hidden"
+                                whileInView="visible"
+                                variants={textAnimation}
+                                transition={{ delay: 0.4 }}
+                                className='pl-2 text-gradient'
                             >
-                                <motion.span
-                                    className={`${dmSans.className} text-yellow-400 text-lg tracking-wider relative z-10`}
-                                >
-                                    INNOVATIVE ARCHITECTURE
-                                </motion.span>
-                                <div
-                                    className="absolute inset-0 bg-gray-800 opacity-20 rounded-lg -z-10"
-                                // layoutId="highlight"
-                                />
-                            </motion.div>
-
-                            <motion.h1
-                                className={`${playfair.className} text-5xl md:text-7xl font-bold text-gray-100 leading-tight`}
-                                whileHover={{ scale: 1.02 }}
-                                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                            >
-                                Designing the Future
-                                <motion.span
-                                    className="text-yellow-400 inline-block"
-                                    animate={{ rotate: [0, 5, 0] }}
-                                    transition={{ duration: 2, repeat: Infinity }}
-                                >
-                                    .
-                                </motion.span>
-                            </motion.h1>
-
-                            <motion.p
-                                className={`${inter.className} text-gray-400 text-lg max-w-md`}
-                                whileHover={{ x: 10 }}
-                            >
-                                Transform your space with our innovative architectural solutions.
-                                We blend modern aesthetics with functional design.
-                            </motion.p>
-                        </div>
-
-                        {/* Enhanced button animations */}
-                        <motion.div
-                            className="flex gap-6 justify-center md:justify-start"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.8 }}
-                        >
-                            <motion.button
-                                className={`${dmSans.className} group bg-yellow-400 hover:bg-yellow-500 text-gray-900 md:px-8 px-3 py-4 rounded-lg flex items-center gap-2 transition-all duration-300`}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                Explore Projects
-                                <motion.div
-                                    className="group-hover:translate-x-1 transition-transform"
-                                >
-                                    <ChevronRightIcon className="w-5 h-5" />
-                                </motion.div>
-                            </motion.button>
-
-                            <motion.button
-                                className={`${dmSans.className} relative overflow-hidden border border-gray-700 hover:border-yellow-400 text-gray-100 md:px-8 px-3 py-4 rounded-lg`}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <motion.span className="relative z-10">Consult Us</motion.span>
-                                <motion.div
-                                    className="absolute inset-0 bg-yellow-400 opacity-0 hover:opacity-10 transition-opacity"
-                                    initial={false}
-                                    whileHover={{ scale: 1.5 }}
-                                    transition={{ duration: 0.4 }}
-                                />
-                            </motion.button>
-                        </motion.div>
-
-                        {/* Enhanced stats section */}
-                        <motion.div
-                            ref={ref}
-                            className="grid grid-cols-3 gap-8 pt-12 md:border-t border-gray-800"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                        >
-                            {stats.map((stat, index) => (
-                                <motion.div
-                                    key={index}
-                                    className="relative group"
-                                    onHoverStart={() => setHoveredStat(index)}
-                                    onHoverEnd={() => setHoveredStat(null)}
-                                    whileHover={{ y: -5 }}
-                                >
-                                    <motion.div
-                                        className={`w-12 h-12 ${stat.color} rounded-lg mb-4 flex items-center justify-center`}
-                                        whileHover={{ rotate: 360 }}
-                                        transition={{ duration: 0.6 }}
-                                    >
-                                        <stat.icon className="w-6 h-6 text-white" />
-                                    </motion.div>
-
-                                    <motion.h3
-
-                                        className={`${playfair.className} text-3xl font-bold text-yellow-400`}
-                                        animate={{ scale: hoveredStat === index ? 1.1 : 1 }}
-                                    >
-                                        {values[index]}+
-                                    </motion.h3>
-                                    <p className={`${inter.className} text-sm text-gray-400`}>
-                                        {stat.label}
-                                    </p>
-                                </motion.div>
-                            ))}
-                        </motion.div>
+                                Design. Build. Inspire..
+                            </motion.span>
+                        </motion.h1>
                     </motion.div>
 
-                    {/* Right column - Enhanced image/3D content */}
+                    {/* Subheading */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1 }}
-                        style={{
-                            y: -parallaxY,
-                            rotateX: rotateX,
-                            rotateY: rotateY,
-                        }}
-                        onMouseMove={handleMouseMove}
-                        
-                        className="relative hidden md:block perspective-1000"
-                    >
-                        <motion.div
-                            className="relative w-full aspect-square cursor-pointer"
-                            whileHover={{ scale: 1.02 }}
-                            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                        >
-
-                            <AnimatePresence>
-                                {/* {isHoveringImage && ( */}
-                                    <motion.div
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        className="absolute inset-0 bg-yellow-400 mix-blend-saturation z-10 rounded-xl"
-                                    />
-                                {/* )} */}
-                            </AnimatePresence>
-
-                            {/* <div className="absolute inset-0 bg-gradient-to-tr from-gray-900 to-transparent opacity-40 z-10 rounded-xl" /> */}
-                            <div className="flex min-h-screen bg-gray-900">
-                                <div className="grid grid-cols-4 grid-rows-4 gap-2 w-full overflow-hidden">
-                                    {/* 16 Divs for grid cells */}
-                                    {Array.from({ length: 16 }).map((_, index) => (
-                                        <div
-                                            key={index}
-                                            className="bg-cover bg-no-repeat mix-blend-hard-light rounded-xl"
-                                            style={{
-                                                backgroundImage: "url('https://images.unsplash.com/photo-1662377517331-0dafaf91cc20?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')", // Replace with your image URL
-                                                backgroundSize: "400%",
-                                                backgroundPosition: `${(index % 4) * 33.33}% ${(Math.floor(index / 4)) * 33.33}%`,
+                        initial="hidden"
+                        whileInView="visible"
+                        variants={textAnimation}
+                        transition={{ delay: 0.6 }}
+                        className="relative w-full max-w-xl h-[110px]">
+                        {services.map((service, index) => {
+                            const IconComponent = service.icon;
+                            return (
+                                <div
+                                    key={service.name}
+                                    className={`absolute w-full h-full text-center transform transition-all duration-500 ease-in-out ${index === currentService
+                                        ? 'translate-y-0 opacity-100'
+                                        : index < currentService
+                                            ? '-translate-y-full opacity-0'
+                                            : 'translate-y-full opacity-0'
+                                        }`}
+                                >
+                                    <div className="flex flex-col items-center gap-4">
+                                        <motion.div
+                                            initial={{ rotateY: 0 }}
+                                            animate={{
+                                                rotateY: 360,
+                                                // rotate: service.rotation
                                             }}
-                                        ></div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Enhanced floating card */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 1.2 }}
-                                whileHover={{ scale: 1.05, y: -5 }}
-                                className="absolute -bottom-10 -left-10 bg-gray-900 p-6 rounded-xl border border-gray-800 shadow-xl cursor-pointer z-10"
-                            >
-                                <div className="flex items-center gap-4">
-                                    <motion.div
-                                        className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center"
-                                        whileHover={{ rotate: 360 }}
-                                        transition={{ duration: 0.6 }}
-                                    >
-                                        <span className="text-2xl">🏆</span>
-                                    </motion.div>
-                                    <div>
-                                        <motion.h4
-                                            className={`${dmSans.className} text-gray-100 font-semibold`}
-                                            whileHover={{ x: 5 }}
+                                            transition={{
+                                                duration: 3,
+                                                repeat: Infinity,
+                                                ease: "linear"
+                                            }}
+                                            className="relative"
                                         >
-                                            Best Design Award
-                                        </motion.h4>
-                                        <p className={`${inter.className} text-sm text-gray-400`}>
-                                            2024 Architecture Excellence
-                                        </p>
+                                            <IconComponent
+                                                size={40}
+                                                className="text-yellow-400 drop-shadow-lg"
+                                            />
+                                        </motion.div>
+                                        <h2 className="h-[80px] text-3xl md:text-5xl font-bold font-ui text-gradient"
+
+                                        >
+                                            {service.name}
+                                        </h2>
                                     </div>
                                 </div>
-                            </motion.div>
-                        </motion.div>
+                            );
+                        })}
                     </motion.div>
+
+                    {/* description */}
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        variants={textAnimation}
+                        transition={{ delay: 0.8 }}
+                        className='text-center text-lg md:text-xl font-sans mx-auto max-w-2xl font-medium text-gray-300'>
+                        Transform your space with our innovative architectural solutions with functional design.
+                        <br />
+                        We are the architects of your dreams.
+                    </motion.div>
+
+                    {/* CTA buttons */}
+                    <motion.div
+                        className="flex gap-6 justify-center md:justify-start"
+                    >
+                        <motion.button
+                            onClick={handleServiceClick}
+                            whileHover={{
+                                scale: 1.05,
+                                background: "linear-gradient(90deg, #FFD700, #FFC107, #FFB300)",
+                                boxShadow: "0px 0px 15px rgba(255, 213, 0, 0.7)",
+                            }}
+                            whileTap={{ scale: 0.95 }}
+                            className="relative overflow-hidden px-8 md:px-16 md:py-4 py-3 text-sm md:text-base font-medium bg-yellow-400 text-gray-900 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-500 transition-all duration-300 ring-2 ring-gray-300"
+                        >
+                            <span className="relative flex items-center justify-center gap-2 font-sans">
+                                Discuss Your Vision
+
+                                <motion.span
+                                    initial={{ x: -10 }}
+                                    animate={{ x: [0, 5, 0] }}
+                                    transition={{
+                                        repeat: Infinity,
+                                        repeatType: "loop",
+                                        duration: 1.5,
+                                    }}
+                                >
+                                    <ArrowRight className="w-4 h-4" />
+                                </motion.span>
+                            </span>
+
+                            {/* Ripple Effect */}
+                            <span
+                                aria-hidden="true"
+                                className="absolute inset-0 bg-yellow-500 opacity-20 rounded-full transform scale-0 group-hover:scale-150 transition-all duration-700 ease-out"
+                            ></span>
+                        </motion.button>
+
+                        {/* <motion.button
+                            className={`font-ui relative overflow-hidden border border-gray-300 text-gray-100 md:px-8 px-3 py-4 rounded-lg`}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <motion.span className="relative z-10">Consult Us</motion.span>
+
+                        </motion.button> */}
+                    </motion.div>
+
                 </div>
-            </div>
-        </div>
+
+            </motion.div>
+
+        </motion.div>
+
+
     );
 };
 

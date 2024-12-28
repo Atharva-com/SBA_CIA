@@ -11,12 +11,15 @@ const DynamicBackground = ({ children }: { children: ReactNode }) => {
 
   // Background patterns for light mode (yellow tones)
   const lightPatterns = [
-    'bg-yellow-100'
+    'bg-[#e0e7ff]'
   ];
 
   // Background patterns for dark mode (yellow and gray tones)
   const darkPatterns = [
-    'bg-[#030712]'
+    'bg-[#030712]',
+    'bg-[#2c2f36]',
+    'bg-[#0f172b]',
+    ' bg-[#101d2d]',
   ];
 
   return (
@@ -25,14 +28,14 @@ const DynamicBackground = ({ children }: { children: ReactNode }) => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       className={`transition-colors duration-700 ease-in-out
-        ${theme === 'dark' ? darkPatterns[0] : lightPatterns[0]}
+        ${theme === 'dark' ? "bg-white" : lightPatterns[0]}
       `}
     >
 
-        {/* Content container */}
-        <div className="relative">
-          {children}
-        </div>
+      {/* Content container */}
+      <div className="relative">
+        {children}
+      </div>
     </motion.div>
   );
 };

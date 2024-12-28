@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import ThemeProvider from "./components/ThemeProvider";
-import DynamicBackground from "./utils/DynamicBackground";
 
 import { Inter, Playfair_Display, DM_Sans } from 'next/font/google'
 import Layout from "./components/layout";
@@ -36,15 +34,11 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} ${dmSans.variable} antialiased`}
       >
-        <ThemeProvider>
-          <DynamicBackground>
-            <div className="flex min-h-screen flex-col">
+            <div className="flex min-h-screen flex-col bg-white">
               <Layout>
                 {children}
               </Layout>
             </div>
-          </DynamicBackground>
-        </ThemeProvider>
       </body>
     </html>
   );

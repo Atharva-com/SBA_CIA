@@ -55,7 +55,7 @@ export const ProjectsSection = () => {
   const router = useRouter();
 
   const handleExploreClick = () => {
-    router.push("/projects"); 
+    router.push("/projects");
   };
 
   const handleProjectClick = (project: { id: number; title: string; category: string; year: string; location: string; description: string; images: string[]; tags: string[] }) => {
@@ -71,10 +71,13 @@ export const ProjectsSection = () => {
     : projects.filter(project => project.category === activeCategory);
 
   return (
-    <div className="bg-gray-950 py-24">
+    <div className="md:py-24 py-16 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+
+
       <div className="container mx-auto px-6">
+
         <motion.div
-          initial={{ opacity: 0, y: 50, scale: 0.8 }} 
+          initial={{ opacity: 0, y: 50, scale: 0.8 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ margin: "-100px" }}
@@ -109,7 +112,7 @@ export const ProjectsSection = () => {
         </motion.div>
 
         {/* Category Filter */}
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

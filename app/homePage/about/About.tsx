@@ -1,111 +1,110 @@
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 const AboutSection = () => {
     const [hovered, setHovered] = useState(false);
     const ref = useRef(null);
-    const isInView = useInView(ref, { margin: '-100px' });
     const containerVariants = {
-        hidden: { opacity: 0 },
+        hidden: { opacity: 0, y: 50 },
         visible: {
             opacity: 1,
-            transition: { staggerChildren: 0.3 },
+            y: 0,
+            transition: { staggerChildren: 0.3, duration: 0.8, delay: 0.2 },
         },
     };
 
     const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
+        hidden: { opacity: 0, y: 40 },
         visible: {
             opacity: 1,
             y: 0,
-            transition: { duration: 0.8 }
+            transition: {
+                duration: 0.6,
+            },
         }
     };
 
 
     return (
-        <div ref={ref} className="bg-gray-950 md:py-24 py-16 px-6 relative overflow-hidden">
-            {/* Floating Decorative Elements */}
-            {/* <motion.div
-                className="absolute top-16 right-16 w-32 h-32 bg-yellow-400 rounded-full blur-2xl opacity-30"
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 4, repeat: Infinity }}
-            ></motion.div> */}
-            <motion.div
-                className="absolute bottom-12 left-0 w-96 h-96 bg-gray-800 rounded-full blur-2xl opacity-10"
-                animate={{ scale: [1, 0.9, 1] }}
-                transition={{ duration: 6, repeat: Infinity }}
-            ></motion.div>
+        <div ref={ref} className="md:py-24 py-16 px-6 relative overflow-hidden">
 
             <div className="container mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
                 {/* Left Content */}
                 <motion.div
                     variants={containerVariants}
-                    initial={{ opacity: 0, scale:0.8, x: -100 }}
-                    animate={isInView ? { opacity: 1, scale:1, x: 0 } : {}} 
-                    transition={{ duration: 1, delay: 0.2 }}
+                    initial="hidden"
+                    whileInView="visible"
                     className="md:w-1/2 space-y-6"
                 >
                     <motion.div
                         initial="hidden"
-                        animate="visible"
-                        variants={{
-                            hidden: { opacity: 0 },
-                            visible: { opacity: 1, transition: { duration: 1 } }
-                        }}
+                        whileInView="visible"
+                        variants={itemVariants}
                     >
                         {/* Wrapper for the leader section */}
                         <motion.div
                             initial="hidden"
-                            animate="visible"
+                            whileInView="visible"
                             variants={itemVariants}
                             className=""
                         >
                             {/* Subheading */}
                             <motion.span
-                                className="text-yellow-400 text-sm tracking-wider uppercase font-sans"
+                                className="text-yellow-400 text-sm tracking-wider uppercase font-sans font-bold"
                                 whileHover={{ scale: 1.05 }}
+                                initial="hidden"
+                                whileInView="visible"
                                 variants={itemVariants}
+                                style={{
+                                    background: 'linear-gradient(to right, #f59e0b, #fbbf24)',
+                                    WebkitBackgroundClip: 'text',
+                                    WebkitTextFillColor: 'transparent',
+                                }}
                             >
                                 Shree Bhargava and Associate
                             </motion.span>
 
                             {/* Main Heading */}
                             <motion.h2
-                                className="text-4xl md:text-6xl font-bold text-gray-100 font-display"
+                                initial="hidden"
+                                whileInView="visible"
+                                className="text-4xl md:text-6xl font-bold text-gray-800 font-display text-transparent bg-gradient-to-r from-gray-600 to-gray-900 bg-clip-text"
                                 variants={itemVariants}
                             >
                                 Meet Our Leader
                             </motion.h2>
                         </motion.div>
                     </motion.div>
-                    <motion.p
+
+                    {/* <motion.p
                         className="text-gray-400 leading-relaxed font-ui md:block hidden"
                         variants={itemVariants}
                     >
                         At SBA-CIA, we transform spaces into timeless masterpieces, blending creativity and precision to bring every client’s vision to life. Our designs harmonize aesthetics with functionality, delivering personalized architectural experiences that inspire and endure
-                    </motion.p>
+                    </motion.p> */}
 
                     {/* Founder Quote */}
-                    <div className="mt-6 bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div className="mt-6 bg-gradient-to-r from-gray-700 to-gray-900 p-6 rounded-lg shadow-lg">
                         <p className="text-gray-300 italic">
                             “we go beyond building structures; we craft environments that inspire, reflect, and elevate the way you live and work.”
                         </p>
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="mt-4 px-4 py-2 text-sm bg-yellow-400 text-gray-900 rounded-full shadow hover:bg-yellow-300 transition-all duration-300 font-ui"
+                            className="mt-4 px-4 py-2 text-sm text-gray-800 bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] rounded-full shadow hover:bg-gradient-to-r hover:from-[#fbbf24] hover:to-[#f59e0b] transition-all duration-300 font-ui cursor-pointer"
                         >
                             Read My Story
                         </motion.button>
+
                     </div>
+
                 </motion.div>
 
                 {/* Right Content (Founder Image and Info) */}
                 <motion.div
                     className="md:w-1/2 relative"
-                    initial={{ opacity: 0, scale: 0.8, x: 100}}
-                    animate={isInView ? { opacity: 1, scale:1, x: 0 } : {}}
-                    transition={{ duration: 1, delay: 0.2 }}
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
                 >
                     {/* Founder Image with Hover Effects */}
                     <div
@@ -128,7 +127,7 @@ const AboutSection = () => {
                                     : "rotateY(0deg) rotateX(0deg)",
                             }}
                         >
-                            <h3 className="text-2xl font-bold text-yellow-400 font-display">Ar. Shashank Pare</h3>
+                            <h3 className="text-2xl font-bold bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] text-transparent bg-clip-text font-display">Ar. Shashank Pare</h3>
                             <p className="text-gray-400 text-sm font-ui">Shree Bhargava and Associate - Creative Indian Architect</p>
                             <p className="text-gray-300 text-sm font-ui">Founder & Lead Architect</p>
                         </motion.div>

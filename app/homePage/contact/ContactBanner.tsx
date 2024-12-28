@@ -127,7 +127,7 @@ const ContactBanner = () => {
     <div
       ref={ref}
 
-      className={`${inter.className} bg-[#f3ce1b] text-gray-100 relative`}>
+      className={`${inter.className} bg-white text-gray-100 relative`}>
 
       <div className="container mx-auto px-4 md:px-16 py-12">
         {/* Tabs */}

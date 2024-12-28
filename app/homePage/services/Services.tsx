@@ -241,7 +241,7 @@ const ServicesSection = () => {
 
 
   return (
-    <div ref={ref} className="bg-gray-950 md:py-24 py-16 px-6">
+    <div ref={ref} className="md:py-24 py-16 px-6 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
       <div className="container mx-auto">
         {/* Section Header */}
         <motion.div
