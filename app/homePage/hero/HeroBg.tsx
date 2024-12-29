@@ -23,7 +23,7 @@ const HeroBg = () => {
     return (
         <>
             {/* hero background color */}
-            <div className='absolute top-0 left-0 bottom-0 right-0 pointer-events-none bg-[#101d2d]' area-hidden="true"
+            <div className='absolute top-0 left-0 bottom-0 right-0 pointer-events-none bg-gray-900' area-hidden="true"
                 style={{
                     clipPath: "polygon(0 0, 5760px 0, 5760px calc(100% - 352px), 0 100%)"
                 }}></div>
@@ -43,7 +43,8 @@ const HeroBg = () => {
                 whileInView="visible"
                 variants={textAnimation}
                     className="absolute max-w-none "
-                >
+                >   
+                    
                     <Image
                         src={ringsBg}
                         alt="Background SVG"

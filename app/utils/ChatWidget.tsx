@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  MessageCircle, Send, Minus, X, 
+import {
+  MessageCircle, Send, Minus, X,
   Building, Home, Palette, Trees,
   Clock, Calendar, Phone
 } from 'lucide-react';
@@ -13,22 +13,43 @@ const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [minimized, setMinimized] = useState(false);
   const [message, setMessage] = useState('');
+
   interface Message {
     text: string;
     sender: 'user' | 'bot';
     time: string;
   }
-  
+
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [quickReplies, setQuickReplies] = useState<{ text: string; icon: React.ComponentType }[]>([]);
   const [conversationState, setConversationState] = useState('initial');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Automated responses based on conversation state and user input
+  const getTimeBasedGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good morning";
+    if (hour < 17) return "Good afternoon";
+    return "Good evening";
+  };
+
+  const getRandomResponse = (responses: string[]) => {
+    return responses[Math.floor(Math.random() * responses.length)];
+  };
+
+  // Enhanced response templates with variations
   const responseTemplates = {
     initial: {
-      message: "👋 Hello! Welcome to ArchitectStudio. How can I assist you today?",
+      greetText: "👋 Hello! Welcome to SBA_CIA. How can we assist you today?",
+
+      message: () => {
+        const greetingResponses = [
+          `${getTimeBasedGreeting()}! Welcome to ArchitectStudio. How can I assist you today?`,
+          `${getTimeBasedGreeting()}! I'm here to help you create your dream space. What can I do for you?`,
+          `${getTimeBasedGreeting()}! Ready to transform your space? Let me know what you're looking for.`
+        ];
+        return getRandomResponse(greetingResponses);
+      },
       quickReplies: [
         { text: "Interior Design", icon: Palette },
         { text: "Home Design", icon: Home },
@@ -38,7 +59,11 @@ const ChatWidget = () => {
     },
     service_selected: {
       "Interior Design": {
-        message: "Great choice! Our interior design team specializes in creating beautiful, functional spaces. What type of space are you looking to transform?",
+        message: () => getRandomResponse([
+          "Great choice! Our interior design team specializes in creating beautiful, functional spaces. What type of space are you looking to transform?",
+          "Excellent! Interior design is our passion. What kind of space would you like to work on?",
+          "Perfect! We love bringing interior spaces to life. What area would you like to focus on?"
+        ]),
         quickReplies: [
           { text: "Residential", icon: Home },
           { text: "Commercial", icon: Building },
@@ -47,7 +72,11 @@ const ChatWidget = () => {
         ]
       },
       "Home Design": {
-        message: "Excellent! We love creating dream homes. What stage of the home design process are you in?",
+        message: () => getRandomResponse([
+          "Excellent! We love creating dream homes. What stage of the home design process are you in?",
+          "How exciting! Home design is where memories begin. Where are you in your journey?",
+          "Perfect! Let's create your ideal home. What phase of the project are you currently in?"
+        ]),
         quickReplies: [
           { text: "Initial Planning", icon: Home },
           { text: "Ready to Build", icon: Building },
@@ -55,27 +84,14 @@ const ChatWidget = () => {
           { text: "Just Exploring", icon: Trees }
         ]
       },
-      "Landscape Design": {
-        message: "Perfect! Our landscape architects create stunning outdoor spaces. What type of landscape project are you interested in?",
-        quickReplies: [
-          { text: "Garden Design", icon: Trees },
-          { text: "Outdoor Living", icon: Home },
-          { text: "Commercial", icon: Building },
-          { text: "View Projects", icon: Palette }
-        ]
-      },
-      "Office Design": {
-        message: "Wonderful! We specialize in creating productive and inspiring workspaces. What's the scope of your office project?",
-        quickReplies: [
-          { text: "Small Office", icon: Building },
-          { text: "Corporate Space", icon: Building },
-          { text: "Renovation", icon: Palette },
-          { text: "Get Quote", icon: Calendar }
-        ]
-      }
+      // ... similar variations for other services
     },
     consultation: {
-      message: "I'd be happy to help you schedule a consultation. When would be the best time for you?",
+      message: () => getRandomResponse([
+        "I'd be happy to help you schedule a consultation. When would be the best time for you?",
+        "Let's get you set up with one of our experts. What timing works best for you?",
+        "Great choice! Our team would love to meet with you. When are you available?"
+      ]),
       quickReplies: [
         { text: "This Week", icon: Calendar },
         { text: "Next Week", icon: Calendar },
@@ -83,15 +99,12 @@ const ChatWidget = () => {
         { text: "Email Me", icon: MessageCircle }
       ]
     },
-    contact_method: {
-      message: "Great! Please provide your preferred contact information, and our team will reach out to you within 24 hours.",
-      quickReplies: [
-        { text: "Call Now", icon: Phone },
-        { text: "Send Email", icon: MessageCircle }
-      ]
-    },
     closing: {
-      message: "Thank you for your interest! Our team will be in touch soon. Is there anything else you'd like to know?",
+      message: () => getRandomResponse([
+        "Thank you for your interest! Our team will be in touch soon. Is there anything else you'd like to know?",
+        "We're excited to work with you! While you wait for our team to contact you, can I help you with anything else?",
+        "Perfect! Our team will reach out shortly. In the meantime, what other questions can I answer for you?"
+      ]),
       quickReplies: [
         { text: "View Portfolio", icon: Palette },
         { text: "Services", icon: Building },
@@ -99,6 +112,46 @@ const ChatWidget = () => {
         { text: "No, thanks!", icon: X }
       ]
     }
+  };
+
+  // Enhanced automated responses
+  const getAutomatedResponse = (input: string) => {
+    const lowercaseInput = input.toLowerCase();
+
+    // Time-sensitive responses
+    const currentHour = new Date().getHours();
+    const isOutsideBusinessHours = currentHour < 9 || currentHour >= 17;
+
+    if (isOutsideBusinessHours && (lowercaseInput.includes('call') || lowercaseInput.includes('consultation'))) {
+      return {
+        message: "Our office is currently closed, but I can help you schedule a callback during business hours (9 AM - 5 PM). When would you like us to contact you?",
+        quickReplies: responseTemplates.consultation.quickReplies
+      };
+    }
+
+    // Project timeline responses
+    if (lowercaseInput.includes('how long') || lowercaseInput.includes('timeline')) {
+      return {
+        message: "Project timelines vary based on scope and complexity. Generally:\n- Interior Design: 2-4 months\n- Home Design: 4-8 months\n- Landscape: 1-3 months\nWould you like to discuss your specific project?",
+        quickReplies: [
+          { text: "Get Timeline", icon: Clock },
+          { text: "Book Consultation", icon: Calendar }
+        ]
+      };
+    }
+
+    // Budget-related responses
+    if (lowercaseInput.includes('cost') || lowercaseInput.includes('price') || lowercaseInput.includes('budget')) {
+      return {
+        message: "We work with various budgets and can create custom solutions that align with your financial goals. Would you like to discuss pricing with one of our experts?",
+        quickReplies: [
+          { text: "Get Quote", icon: Calendar },
+          { text: "View Packages", icon: Palette }
+        ]
+      };
+    }
+
+    return null;
   };
 
   const handleUserResponse = (text: string) => {
@@ -109,62 +162,74 @@ const ChatWidget = () => {
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
     setMessages(prev => [...prev, userMessage]);
-    
-    // Process response based on current state and user input
+
+    // Process response
     setIsTyping(true);
     setTimeout(() => {
-      let response;
-      let newState = conversationState;
-      let newQuickReplies: { text: string; icon: React.ComponentType }[] = [];
+      // Check for automated responses first
+      const automatedResponse = getAutomatedResponse(text);
 
-      if (conversationState === 'initial') {
-        const serviceResponse = responseTemplates.service_selected[text as keyof typeof responseTemplates.service_selected];
-        if (serviceResponse) {
-          response = serviceResponse.message;
-          newQuickReplies = serviceResponse.quickReplies;
-          newState = 'service_selected';
-        }
-      } else if (text.includes('Consultation') || text.includes('Quote')) {
-        response = responseTemplates.consultation.message;
-        newQuickReplies = responseTemplates.consultation.quickReplies;
-        newState = 'consultation';
-      } else if (text.includes('Call') || text.includes('Email')) {
-        response = responseTemplates.contact_method.message;
-        newQuickReplies = responseTemplates.contact_method.quickReplies;
-        newState = 'contact_method';
-      } else if (text === 'No, thanks!') {
-        response = "Thank you for chatting with us! Feel free to reach out if you have any questions.";
-        newState = 'closed';
+      if (automatedResponse) {
+        const botMessage: Message = {
+          text: automatedResponse.message,
+          sender: 'bot',
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+        setMessages(prev => [...prev, botMessage]);
+        setQuickReplies(automatedResponse.quickReplies);
       } else {
-        response = responseTemplates.closing.message;
-        newQuickReplies = responseTemplates.closing.quickReplies;
-        newState = 'closing';
+        // Process normal flow responses
+        let response;
+        let newState = conversationState;
+        let newQuickReplies: { text: string; icon: React.ComponentType }[] = [];
+
+        if (conversationState === 'initial') {
+          const serviceResponse = responseTemplates.service_selected[text as keyof typeof responseTemplates.service_selected];
+          if (serviceResponse) {
+            response = serviceResponse.message();
+            newQuickReplies = serviceResponse.quickReplies;
+            newState = 'service_selected';
+          }
+        } else if (text.includes('Consultation') || text.includes('Quote')) {
+          response = responseTemplates.consultation.message();
+          newQuickReplies = responseTemplates.consultation.quickReplies;
+          newState = 'consultation';
+        } else if (text === 'No, thanks!') {
+          response = "Thank you for chatting with us! Have a great " +
+            (new Date().getHours() < 17 ? "day" : "evening") + "!";
+          newState = 'closed';
+        } else {
+          response = responseTemplates.closing.message();
+          newQuickReplies = responseTemplates.closing.quickReplies;
+          newState = 'closing';
+        }
+
+        const botMessage: Message = {
+          text: response || '',
+          sender: 'bot',
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+
+        setMessages(prev => [...prev, botMessage]);
+        setQuickReplies(newQuickReplies);
+        setConversationState(newState);
       }
-
-      const botMessage: Message = {
-        text: response || '',
-        sender: 'bot',
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      };
-
-      setMessages(prev => [...prev, botMessage]);
-      setQuickReplies(newQuickReplies);
-      setConversationState(newState);
       setIsTyping(false);
     }, 1000);
   };
 
   const handleSendMessage = () => {
-    if (!message.trim()) return;
-    handleUserResponse(message);
-    setMessage('');
+    if (message.trim() !== '') {
+      handleUserResponse(message);
+      setMessage('');
+    }
   };
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
       const initialMessage = responseTemplates.initial;
       setMessages([{
-        text: initialMessage.message,
+        text: initialMessage.greetText,
         sender: 'bot',
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       }]);
@@ -192,30 +257,43 @@ const ChatWidget = () => {
           >
             {/* Chat Header */}
             <div className="bg-gray-800 p-4 rounded-t-lg flex items-center justify-between">
+
+              {/* Chat Box Title */}
               <div className="flex items-center gap-2">
+
                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <h3 className={`${dmSans.className} font-medium text-gray-100`}>
-                  Chat with ArchitectStudio
+
+                <h3 className={`${dmSans.className} font-medium font-display text-gray-100`}>
+                  Chat with SBA_CIA
                 </h3>
+
               </div>
+
+              {/* button */}
               <div className="flex items-center gap-2">
-                <button 
+
+                {/* Minimize button */}
+                <button
                   onClick={() => setMinimized(true)}
                   className="text-gray-400 hover:text-gray-300"
                 >
                   <Minus className="w-4 h-4" />
                 </button>
-                <button 
+
+                {/* Close button */}
+                <button
                   onClick={() => setIsOpen(false)}
                   className="text-gray-400 hover:text-gray-300"
                 >
                   <X className="w-4 h-4" />
                 </button>
+
               </div>
+
             </div>
 
             {/* Chat Messages */}
-            <div className="h-[19rem] overflow-y-auto p-4 space-y-4">
+            <div className="h-[19rem] overflow-y-auto p-4 space-y-4 font-ui">
               {messages.map((msg, index) => (
                 <motion.div
                   key={index}
@@ -223,11 +301,10 @@ const ChatWidget = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`max-w-[80%] ${
-                    msg.sender === 'user' 
-                      ? 'bg-yellow-400 text-gray-900' 
+                  <div className={`max-w-[80%] ${msg.sender === 'user'
+                      ? 'bg-yellow-400 text-gray-900'
                       : 'bg-gray-800 text-gray-100'
-                  } rounded-lg p-3`}>
+                    } rounded-lg p-3`}>
                     <p className="text-sm">{msg.text}</p>
                     <span className="text-xs opacity-75 mt-1 block">
                       {msg.time}
@@ -259,7 +336,7 @@ const ChatWidget = () => {
 
             {/* Quick Replies */}
             {quickReplies.length > 0 && (
-              <div className="p-4 border-t border-gray-800">
+              <div className="p-4 border-t border-gray-800 font-sans">
                 <div className="flex flex-wrap gap-2">
                   {quickReplies.map((reply, index) => (
                     <motion.button
@@ -279,7 +356,7 @@ const ChatWidget = () => {
             )}
 
             {/* Chat Input */}
-            <div className="p-4 border-t border-gray-800">
+            <div className="p-4 border-t border-gray-800 font-ui">
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -287,7 +364,7 @@ const ChatWidget = () => {
                   onChange={(e) => setMessage(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                   placeholder="Type your message..."
-                  className="flex-1 bg-gray-800 rounded-lg px-4 py-2 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="flex-1 bg-gray-800 rounded-lg px-4 py-2 text-gray-100 placeholder-gray-400 focus:outline-none"
                 />
                 <button
                   onClick={handleSendMessage}
@@ -309,7 +386,7 @@ const ChatWidget = () => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             onClick={() => setMinimized(false)}
-            className="btn-bg p-4 rounded-lg shadow-lg flex items-center gap-2 dark:hover:bg-yellow-500 hover:bg-gray-700"
+            className="btn-bg p-4 rounded-lg shadow-lg flex items-center gap-2 hover:bg-yellow-500"
           >
             <MessageCircle className="w-5 h-5" />
             <span className={`${dmSans.className} font-medium`}>Continue Chat</span>
@@ -320,7 +397,7 @@ const ChatWidget = () => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             onClick={() => setIsOpen(true)}
-            className="btn-bg p-4 rounded-full shadow-lg dark:hover:bg-yellow-500 hover:bg-gray-700 transition-colors"
+            className="btn-bg p-4 rounded-full shadow-lg hover:bg-yellow-500 bg-gray-700 transition-colors"
           >
             <MessageCircle className="w-6 h-6" />
           </motion.button>

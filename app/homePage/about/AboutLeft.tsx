@@ -13,10 +13,11 @@ const AboutLeft = () => {
     };
 
     const itemVariants = {
-        hidden: { y: 30, opacity: 0 },
+        hidden: { y: 30, opacity: 0, scale: 0.8 },
         visible: {
             y: 0,
             opacity: 1,
+            scale: 1,
             transition: {
                 duration: 0.6,
                 delay: 0.2,
@@ -46,16 +47,11 @@ const AboutLeft = () => {
                     >
                         {/* Subheading */}
                         <motion.span
-                            className="text-yellow-400 text-sm tracking-wider uppercase font-sans font-bold"
+                            className="text-gradient-yellow text-sm tracking-wider uppercase font-sans font-bold"
                             whileHover={{ scale: 1.05 }}
                             initial="hidden"
                             whileInView="visible"
                             variants={itemVariants}
-                            style={{
-                                background: 'linear-gradient(to right, #f59e0b, #fbbf24)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                            }}
                         >
                             SBA_CIA - Crafting Spaces Since 2016
                         </motion.span>
@@ -64,22 +60,26 @@ const AboutLeft = () => {
                         <motion.h2
                             initial="hidden"
                             whileInView="visible"
-                            className="text-4xl md:text-6xl font-bold text-gray-800 font-display text-transparent bg-gradient-to-r from-gray-600 to-gray-900 bg-clip-text"
+                            className="text-4xl md:text-6xl font-bold font-display text-transparent bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text"
                             variants={itemVariants}
                         >
-                            Who We Are
+                            Who We Are ?
                         </motion.h2>
                     </motion.div>
+
                 </motion.div>
 
                 {/* Paragraph */}
                 <motion.p
-                    className="text-gray-700 text-lg leading-relaxed font-ui md:block hidden"
+                    className="text-gray-700 text-sm leading-relaxed font-ui md:block hidden"
                     initial="hidden"
                     whileInView="visible"
                     variants={itemVariants}
                 >
-                    We are visionary architects and designers who believe in the transformative power of thoughtful design. Our expertise spans residential masterpieces, commercial landmarks, and urban renewal projects, each reflecting our timeless architecture.
+                    {/* We are visionary architects and designers who believe in the transformative power of thoughtful design. Our expertise spans residential masterpieces, commercial landmarks, and urban renewal projects, each reflecting our timeless architecture. */}
+                    <span className='font-bold text-lg text-gradient-yellow'>Shree Bhargava and Associates_Creative Indian Architects (SBA_CIA)</span>
+                    <br />
+                    Renowned for our creative ideas and innovative approach, we leverage the latest architectural technologies to deliver exceptional designs tailored to your needs. Our expertise spans interior design, construction management, and creating functional yet aesthetic spaces.
                 </motion.p>
 
                 {/* Founder Quote */}
@@ -87,8 +87,8 @@ const AboutLeft = () => {
                     initial="hidden"
                     whileInView="visible"
                     variants={itemVariants}
-                    className="mt-6 bg-gradient-to-r from-gray-700 to-gray-900 p-6 rounded-lg shadow-lg">
-                    <motion.p className="text-gray-300 italic">
+                    className="mt-6 bg-gradient p-6 rounded-lg shadow-lg">
+                    <motion.p className="text-gray-800 italic">
                         {/* “we go beyond building structures; we craft environments that inspire, reflect, and elevate the way you live and work.” */}
 
                         “Architecture is not just about buildings; it&apos;s about creating experiences that resonate with people&apos;s lives, aspirations, and dreams. Every project we undertake is an opportunity to leave a lasting legacy in the built environment.”
@@ -98,7 +98,7 @@ const AboutLeft = () => {
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="mt-4 px-4 py-2 text-sm font-bold text-gray-800 bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] rounded-full shadow hover:bg-gradient-to-r hover:from-[#fbbf24] hover:to-[#f59e0b] transition-all duration-300 font-ui cursor-pointer flex items-center"
+                        className="mt-4 px-4 py-2 text-sm font-bold text-gray-800 bg-gradient-to-r from-[#e5f4ff] to-[#facc15] rounded-full shadow transition-all duration-300 font-ui cursor-pointer flex items-center"
                     >
                         Discover Our Journey
                         <motion.span

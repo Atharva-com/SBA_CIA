@@ -1,14 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import {
-  Home,
-  Trees,
-  Paintbrush2,
   ArrowRight,
-  Clock,
-  Badge,
-  Banknote,
-  Users,
   // Ruler,
   // Building,
   // Palette,
@@ -18,114 +11,14 @@ import {
   // Mountain,
   // Scale,
 } from 'lucide-react';
-import { Inter, Playfair_Display, DM_Sans } from 'next/font/google';
+import { Playfair_Display, DM_Sans } from 'next/font/google';
 import { ServiceCard } from './ServiceCard';
 import { useRouter } from 'next/navigation';
+import services from './ServicesData';
 
-const inter = Inter({ subsets: ['latin'] });
+
 const playfair = Playfair_Display({ subsets: ['latin'] });
 const dmSans = DM_Sans({ subsets: ['latin'] });
-
-const services = [
-  {
-    icon: <Home className="w-8 h-8" />,
-    title: "Architectural Design",
-    description: "Custom building design for residential, commercial, and industrial projects.",
-    features: [
-      "Custom Floor Plans",
-      "Smart Home Integration Planning",
-      "Conceptual and schematic design.",
-      "schematic and design development.",
-    ],
-
-    benefits: [
-      { icon: <Clock />, text: "Fast turnaround time - 4-6 weeks for initial designs" },
-      { icon: <Badge />, text: "Award-winning residential designs" },
-      { icon: <Banknote />, text: "Transparent pricing and milestone-based payments" },
-      { icon: <Users />, text: "Dedicated project manager throughout" }
-    ],
-    processSteps: [
-      "Initial Consultation & Requirements Gathering",
-      "Concept Development & Sketches",
-      "3D Visualization & Virtual Walkthrough",
-      "Detailed Planning & Documentation",
-      "Construction Support & Supervision"
-    ]
-  },
-  // {
-  //   icon: <Building2 className="w-8 h-8" />,
-  //   title: "Office Design",
-  //   description: "Transform your workplace into a productive and inspiring environment with our commercial architecture solutions. We create spaces that enhance collaboration, productivity, and employee wellbeing.",
-  //   features: [
-  //     "Space Optimization & Planning",
-  //     "Modern Facilities Integration",
-  //     "Ergonomic Workspace Design",
-  //     "Smart Building Technologies"
-  //   ],
-  //   benefits: [
-  //     { icon: <Clock />, text: "Efficient project completion within 8-12 weeks" },
-  //     { icon: <Badge />, text: "Certified commercial space planners" },
-  //     { icon: <Banknote />, text: "Cost-effective solutions for any budget" },
-  //     { icon: <Users />, text: "Expert commercial design team" }
-  //   ],
-  //   processSteps: [
-  //     "Workplace Analysis & Requirements",
-  //     "Space Planning & Layout Design",
-  //     "Technology Integration Planning",
-  //     "Material & Furniture Selection",
-  //     "Implementation & Setup Support"
-  //   ]
-  // },
-  {
-    icon: <Trees className="w-8 h-8" />,
-    title: "Landscape Design",
-    description: "Shape outdoor spaces that harmonize with nature while meeting your functional needs.",
-    features: [
-      "Sustainable Garden Planning",
-      "Water-Efficient Irrigation Systems",
-      "Native Plant Selection",
-      "Outdoor Living Spaces Design"
-    ],
-    benefits: [
-      { icon: <Clock />, text: "Seasonal planning for year-round beauty" },
-      { icon: <Badge />, text: "Eco-friendly design practices" },
-      { icon: <Banknote />, text: "Maintenance-conscious planning" },
-      { icon: <Users />, text: "Expert horticulturists on team" }
-    ],
-    processSteps: [
-      "Site Analysis & Environmental Study",
-      "Concept Development & Visualization",
-      "Plant Selection & Arrangement",
-      "Irrigation System Planning",
-      "Installation & Maintenance Guide"
-    ]
-  },
-  {
-    icon: <Paintbrush2 className="w-8 h-8" />,
-    title: "Interior Solutions",
-    description: "Elevate your spaces with our comprehensive interior design services that reflect style.",
-    features: [
-      "Custom Color & Material Consultation",
-      "Lighting Design & Planning",
-      "Furniture Selection & Layout",
-      "Art & Accessories Curation"
-    ],
-
-    benefits: [
-      { icon: <Clock />, text: "Quick design concepts within 2 weeks" },
-      { icon: <Badge />, text: "Access to exclusive furniture collections" },
-      { icon: <Banknote />, text: "Flexible design packages available" },
-      { icon: <Users />, text: "Experienced interior design team" }
-    ],
-    processSteps: [
-      "Style Assessment & Brief",
-      "Concept Board Creation",
-      "Material & Color Selection",
-      "Furniture & Accessories Sourcing",
-      "Installation & Styling"
-    ]
-  }
-];
 
 
 
@@ -230,12 +123,13 @@ const ServicesSection = () => {
   const handleExploreClick = () => {
     router.push("/services");
   };
+  
 
   return (
     <div ref={ref} className="relative md:py-24 py-16 px-6">
 
       {/* serives Background */}
-      <div className="absolute top-0 left-0 w-full h-2/3 inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900"></div>
+      <div className="absolute top-0 left-0 w-full h-1/2 inset-0 bg-gradient-to-tr from-gray-700 via-gray-800 to-gray-900"></div>
 
       {/* Main Content */}
       <div className="container mx-auto">
@@ -255,14 +149,14 @@ const ServicesSection = () => {
             OUR EXPERTISE
           </motion.span>
 
-          <h2 className={`${playfair.className} text-4xl md:text-5xl font-bold text-gray-100`}>
+          <h2 className={`${playfair.className} text-4xl md:text-5xl font-bold text-gradient`}>
             Comprehensive Architectural Services
           </h2>
 
-          <p className={`${inter.className} text-gray-400 max-w-2xl mx-auto`}>
+          {/* <p className={`${inter.className} text-gray-400 max-w-2xl mx-auto`}>
             From concept to completion, we offer a full range of architectural services
             tailored to your unique vision and requirements.
-          </p>
+          </p> */}
 
         </motion.div>
 

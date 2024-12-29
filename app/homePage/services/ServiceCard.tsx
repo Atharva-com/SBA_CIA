@@ -17,7 +17,7 @@ export const ServiceCard = ({ service, index }: { service: Service, index: numbe
     const [activeTab, setActiveTab] = useState('process');
     const [hoveredStep, setHoveredStep] = useState<number | null>(null);
 
-    
+
 
     const handleFlip = () => {
         setIsFlipped((prev) => !prev);
@@ -27,14 +27,14 @@ export const ServiceCard = ({ service, index }: { service: Service, index: numbe
         }
     };
 
-   
+
 
     return (
         <motion.div
-        initial={{ opacity: 0, y: 30 * index, scale: 0.8 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.3 * index }}
-            className="relative h-[460px] w-full perspective-1000">
+            initial={{ opacity: 0, y: 30 * index, scale: 0.8 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 * index }}
+            className="relative h-[500px] w-full perspective-1000">
             <motion.div
 
                 className="w-full h-full relative preserve-3d transition-transform duration-700"

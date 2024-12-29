@@ -13,7 +13,7 @@ const AboutSection = () => {
     return (
         <div ref={ref} className="md:py-24 py-16 px-6 relative overflow-hidden">
 
-            <div className='absolute top-10 left-0 w-full h-full z-0'>
+            <div className='absolute top-10 left-0 w-full h-full z-0 opacity-50'>
                 <Image
                     src={AboutBackground}
                     alt="About Background"

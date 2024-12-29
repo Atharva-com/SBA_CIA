@@ -6,10 +6,11 @@ const AboutRight = () => {
     const [hovered, setHovered] = useState(false);
 
     const containerVariants = {
-        hidden: { opacity: 0, y: 50 },
+        hidden: { opacity: 0, y: 50, scale: 0.8 },
         visible: {
             opacity: 1,
             y: 0,
+            scale: 1,
             transition: { staggerChildren: 0.3, duration: 0.6, delay: 0.2 },
         },
     };

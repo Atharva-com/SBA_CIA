@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import Image from 'next/image';
@@ -16,18 +18,47 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
+
+  const cardsRef = useRef<HTMLDivElement[]>([]);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    cardsRef.current.forEach((card, index) => {
+      gsap.fromTo(card,
+        {
+          scale: 0,
+          opacity: 0
+        },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 1,
+          scrollTrigger: {
+            trigger: card,
+            start: "top bottom-=100",
+            end: "top center",
+            scrub: 1,
+            toggleActions: "play none none reverse"
+          },
+          delay: index * 0.2
+        }
+      );
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
   return (
     <motion.div
+      ref={(el) => {
+        if (el && !cardsRef.current.includes(el)) {
+          cardsRef.current.push(el);
+        }
+      }}
       layoutId={`project-${project.id}`}
       className="relative group cursor-pointer"
-      initial={{ opacity: 0, y: 20, rotate: -5 }}
-      whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-      whileHover={{ scale: 1.02, rotate: 1 }}
-      transition={{
-        duration: 0.5,
-        type: "spring",
-        stiffness: 200
-      }}
     >
       <div className="relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 hover:border-yellow-400 hover:border-2">
         <motion.div
@@ -84,7 +115,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
           </motion.div>
 
         </motion.div>
-        
+
       </div>
     </motion.div>
   );

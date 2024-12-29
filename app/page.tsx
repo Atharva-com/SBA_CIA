@@ -8,6 +8,8 @@ import ContactBanner from './homePage/contact/ContactBanner';
 // import WhyChooseUs from './homePage/whyChooseUs/WhyChooseUs';
 import ChatWidget from './utils/ChatWidget';
 import { ParallaxProvider } from 'react-scroll-parallax';
+import AnimatedText from './utils/AnimatedText';
+import TestimonialsSection from './homePage/testimonals/TestimonialsSection';
 
 
 
@@ -16,21 +18,26 @@ export default function Home() {
     <ParallaxProvider>
       <main className="min-h-screen overflow-x-hidden">
         <ChatWidget />
-        
-          <Hero />
-        
-        
-          <AboutSection />
-        
-        
-          <ServicesSection />
-        
-        
-          <ContactBanner />
-        
-        
-          <ProjectsSection />
-        
+
+        <Hero />
+
+
+        <AboutSection />
+
+
+        <ServicesSection />
+
+
+        <AnimatedText />
+
+
+        <ContactBanner />
+
+
+        <ProjectsSection />
+
+        <TestimonialsSection />
+
         {/* <WhyChooseUs /> */}
       </main>
     </ParallaxProvider>

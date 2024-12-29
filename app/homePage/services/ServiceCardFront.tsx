@@ -36,12 +36,12 @@ const ServiceCardFront: React.FC<ServiceCardFrontProps> = ({ handleFlip, service
             <div className="absolute w-full h-full backface-hidden">
 
                 <motion.div
-                    className="h-full relative overflow-hidden rounded-2xl bg-gray-900 md:p-8 p-4 border border-gray-800 hover:border-yellow-400 transition-all duration-300 group"
+                    className="h-full flex items-center relative overflow-hidden rounded-2xl bg-gray-900 md:p-6 p-4 border border-gray-800 hover:border-yellow-400 transition-all duration-300 group"
                     whileHover={{ y: -5 }}
                 >
 
                     {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
 
                     {/* Animated Background Pattern */}
                     <motion.div
@@ -128,8 +128,11 @@ const ServiceCardFront: React.FC<ServiceCardFrontProps> = ({ handleFlip, service
                             Show More
                             <ChevronRight className="w-4 h-4" />
                         </motion.button>
+
                     </motion.div>
+
                 </motion.div>
+
             </div>
         </>
     )

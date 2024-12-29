@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DM_Sans } from 'next/font/google';
 import ProjectCard from './ProjectCard';
@@ -53,6 +53,8 @@ export const ProjectsSection = () => {
   // const [direction, setDirection] = useState(0);
   const direction = 0;
   const router = useRouter();
+  const containerRef = useRef(null);
+  
 
   const handleExploreClick = () => {
     router.push("/projects");
@@ -71,8 +73,10 @@ export const ProjectsSection = () => {
     : projects.filter(project => project.category === activeCategory);
 
   return (
-    <div className="md:py-8 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 relative">
-      <div className='absolute top-0 left-0 h-full w-full z-0'>
+    <div className="md:py-24 py-16 px-6 bg-gray-950 relative">
+      
+      <div className='absolute top-0 left-0 h-full w-full z-0 opacity-0'>
+
         <Image
           src={ProjectBackground}
           alt="About Background"
@@ -81,10 +85,9 @@ export const ProjectsSection = () => {
         />
 
       </div>
+
       {/* Main Container */}
       <div className="container mx-auto px-6 relative">
-
-
 
         {/* <motion.div
           initial={{ opacity: 0, y: 50, scale: 0.8 }}
@@ -147,9 +150,10 @@ export const ProjectsSection = () => {
         {/* Projects Grid */}
         <AnimatePresence mode="wait">
           <ProjectTransitions direction={direction}>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProjects.map((project) => (
                 <ProjectCard
+                
                   key={project.id}
                   project={project}
                   onClick={() => handleProjectClick(project)}
@@ -165,6 +169,8 @@ export const ProjectsSection = () => {
             onClick={handleExploreClick}
             whileHover={{
               scale: 1.05,
+            }}
+            style={{
               background: "linear-gradient(90deg, #FFD700, #FFC107, #FFB300)",
               boxShadow: "0px 0px 15px rgba(255, 213, 0, 0.7)",
             }}

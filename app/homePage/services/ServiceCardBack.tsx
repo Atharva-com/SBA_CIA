@@ -114,7 +114,7 @@ const ServiceCardBack = ({ isFlipped, hoveredStep, setHoveredStep, index, servic
                                 whileInView={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -20 }}
                                 transition={{ duration: 0.3 }}
-                                className="flex-grow overflow-y-auto overflow-x-hidden scroll-hidden"
+                                className="flex-grow overflow-y-auto overflow-x-hidden "
                             >
                                 {activeTab === 'process' && (
                                     <motion.div className="space-y-4">

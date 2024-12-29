@@ -103,7 +103,7 @@ const Hero = () => {
                             variants={textAnimation}
                             transition={{ delay: 0.2 }}
                             whileHover={{ scale: 1.05 }}
-                            className="flex items-center justify-center animate-pulse cursor-pointer font-ui bg-gradient-to-r from-[#ff9217]/40 via-yellow-500/40 to-yellow-600/40 border border-white/20 rounded-full uppercase w-auto py-3 px-6 h-8">
+                            className="flex items-center justify-center animate-pulse cursor-pointer font-ui bg-gradient-to-r from-orange-300/50 to-[#facc15]/50 border border-white/20 rounded-full uppercase w-auto py-3 px-6 h-8">
                             <div className='space-x-2 flex items-center justify-center'>
                                 <span className='text-center font-medium text-sm tracking-wide text-yellow-400'>Innovative Architecture</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none"><path d="M4.8125 2.8125L8.1875 6L4.8125 9.1875" stroke="#FF9217" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>
@@ -133,7 +133,9 @@ const Hero = () => {
                                 transition={{ delay: 0.4 }}
                                 className='pl-2 text-gradient'
                             >
-                                Design. Build. Inspire..
+                                Design. 
+                                <span className=' px-4'>Build.</span>  
+                                Inspire.
                             </motion.span>
                         </motion.h1>
                     </motion.div>
@@ -173,10 +175,10 @@ const Hero = () => {
                                         >
                                             <IconComponent
                                                 size={40}
-                                                className="text-yellow-400 drop-shadow-lg"
+                                                className="text-yellow-500 drop-shadow-lg"
                                             />
                                         </motion.div>
-                                        <h2 className="h-[80px] text-3xl md:text-5xl font-bold font-ui text-gradient"
+                                        <h2 className="h-[80px] text-3xl md:text-5xl font-bold font-ui text-gradient-yellow"
 
                                         >
                                             {service.name}
@@ -193,10 +195,11 @@ const Hero = () => {
                         whileInView="visible"
                         variants={textAnimation}
                         transition={{ delay: 0.8 }}
-                        className='text-center text-lg md:text-xl font-sans mx-auto max-w-2xl font-medium text-gray-300'>
-                        Transform your space with our innovative architectural solutions with functional design.
+                        className='text-center text-lg md:text-xl font-sans mx-auto max-w-2xl font-medium text-gray-400'>
+                        {/* Transform your space with our innovative architectural solutions with functional design. */}
+                        We don’t only build and design, We create an Environment for Healthy, Comfortable & Royal life.
                         <br />
-                        We are the architects of your dreams.
+                        <span className='text-yellow-400'>SBA_CIA </span> - the architects of your dreams.
                     </motion.div>
 
                     {/* CTA buttons */}
@@ -207,11 +210,14 @@ const Hero = () => {
                             onClick={handleServiceClick}
                             whileHover={{
                                 scale: 1.05,
+                                
+                            }}
+                            style={{
                                 background: "linear-gradient(90deg, #FFD700, #FFC107, #FFB300)",
                                 boxShadow: "0px 0px 15px rgba(255, 213, 0, 0.7)",
                             }}
                             whileTap={{ scale: 0.95 }}
-                            className="relative overflow-hidden px-8 md:px-16 md:py-4 py-3 text-sm md:text-base font-medium bg-yellow-400 text-gray-900 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-500 transition-all duration-300 ring-2 ring-gray-300"
+                            className="relative overflow-hidden px-8 md:px-16 md:py-4 py-3 text-sm md:text-base font-medium bg-yellow-400 text-gray-900 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-500 transition-all duration-300"
                         >
                             <span className="relative flex items-center justify-center gap-2 font-sans">
                                 Discuss Your Vision
