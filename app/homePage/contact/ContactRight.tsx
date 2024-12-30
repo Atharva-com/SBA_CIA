@@ -14,7 +14,7 @@ const ContactRight: React.FC<ContactRightProps> = ({ handleContactMethod, url })
     <>
 <motion.div
             initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative h-full"
           >

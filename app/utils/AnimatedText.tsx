@@ -4,6 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import architectBg from '../../public/background/OIU9QH0 (1).jpg'
 
 const AnimatedText = () => {
     const containerRef = useRef(null);
@@ -64,12 +66,18 @@ const AnimatedText = () => {
     return (
         <div
             ref={containerRef}
-            style={{ backgroundImage: `url('\architecture-background-design (1).jpg')` }}
-            className='bg-gray-800 bg-left bg-no-repeat bg-contain h-screen px-24 py-24 pb-12 relative flex items-center justify-end before:content-[" "] before:block before:h-[100px] before:w-full before:absolute before:top-[-26px]'
+            // style={{ backgroundImage: `url('\architecture-background-design (1).jpg')` }}
+            className='h-[200vh] px-24 py-24 pb-12 relative lg:flex items-center justify-center hidden'
         >
 
+            <Image
+                src={architectBg}
+                alt="Architecture background"
+                className="absolute inset-0 z-0 w-full h-[200vh] object-cover opacity-85"
+            />
 
-            <div className="flex flex-col items-end gap-3 text-center">
+
+            <div className="flex flex-col items-center gap-3 text-center">
 
                 <div className='perspective-1000 relative'>
 
@@ -91,8 +99,8 @@ const AnimatedText = () => {
                             <motion.button
                                 onClick={handleExploreClick}
                                 whileHover={{
-                                    scale: 1.05 
-                                    
+                                    scale: 1.05
+
                                 }}
                                 style={{
                                     background: "linear-gradient(90deg, #FFD700, #FFC107, #FFB300)",

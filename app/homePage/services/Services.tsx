@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   ArrowRight,
   // Ruler,
@@ -117,7 +117,6 @@ const ServicesSection = () => {
   // const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   // const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const ref = useRef(null);
-  const isInView = useInView(ref, { margin: '-100px' });
   const router = useRouter();
 
   const handleExploreClick = () => {
@@ -137,7 +136,7 @@ const ServicesSection = () => {
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 50, scale: 0.8 }}
-          animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-center mb-16 space-y-4 relative z-10"
         >
@@ -210,7 +209,7 @@ const ServicesSection = () => {
       {/* Additional Services Section */}
       {/* <motion.div
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        animate={{ opacity: 1 }}
         viewport={{ once: true }}
         className="mt-24"
       >
@@ -231,7 +230,7 @@ const ServicesSection = () => {
             <motion.div
               key={service.title}
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -5 }}
@@ -258,7 +257,7 @@ const ServicesSection = () => {
                   <motion.div
                     key={featureIndex}
                     initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    animate={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: featureIndex * 0.1 }}
                     className="flex items-center gap-2"

@@ -32,7 +32,8 @@ export default {
   			ui: [
   				'var(--font-inter)',
                     ...fontFamily.sans
-                ]
+                ],
+			outfit: ['var(--font-outfit)',...fontFamily.sans],
   		},
   		fontSize: {
   			'display-large': [

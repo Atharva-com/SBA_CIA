@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion} from 'framer-motion';
 import { Inter } from 'next/font/google';
 import ContactLeft from './ContactLeft';
 import ContactRight from './ContactRight';
@@ -9,7 +9,6 @@ const ContactBanner = () => {
 
   const [activeTab, setActiveTab] = useState('contact');
   const ref = useRef(null);
-  const isInView = useInView(ref, { margin: '-100px' });
 
   // Business information
   const businessInfo = {
@@ -55,14 +54,14 @@ const ContactBanner = () => {
     <div
       ref={ref}
 
-      className={`${inter.className} bg-white text-gray-100 relative`}>
+      className={`${inter.className} relative md:py-24 py-12 px-6 md:px-10`}>
 
-      <div className="container mx-auto px-4 md:px-24 md:py-24 py-16 ">
+        <div className='container py-12 rounded-tr-[100px] bg-[#1e293b]'>
 
         {/* Tabs */}
         <motion.div
-          initial={{ opacity: 0, y: -50 }} // Slide up from below
-          animate={isInView ? { opacity: 1, y: 0 } : {}} // Fade in and slide into place
+          initial={{ opacity: 0, y: -50 }} 
+          animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 1.25, ease: "easeOut" }}
           className="flex justify-center mb-8">
 
@@ -71,11 +70,11 @@ const ContactBanner = () => {
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
           >
-            {['contact', 'hours', 'social'].map((tab) => (
+            {['contact', 'social'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-6 py-2 rounded-md transition-all duration-300 ${activeTab === tab
+                className={`px-12 py-2 rounded-md transition-all duration-300 ${activeTab === tab
                   ? 'bg-yellow-400 text-gray-900'
                   : 'text-yellow-400 hover:text-gray-200'
                   }`}
@@ -87,16 +86,18 @@ const ContactBanner = () => {
         </motion.div>
 
         <motion.div
-          className="grid md:grid-cols-2 gap-8 items-start">
+          className="flex items-center justify-center">
 
           {/* Left Section */}
           <ContactLeft activeTab={activeTab} handleContactMethod={handleContactMethod} />
 
           {/* Map Section */}
-          <ContactRight handleContactMethod={handleContactMethod} url={businessInfo.mapUrl} />
+          {/* <ContactRight handleContactMethod={handleContactMethod} url={businessInfo.mapUrl} /> */}
           
         </motion.div>
-      </div>
+
+        </div>
+     
     </div>
   );
 };

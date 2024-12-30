@@ -21,22 +21,22 @@ export default function Home() {
 
         <Hero />
 
-
         <AboutSection />
-
-
-        <ServicesSection />
-
 
         <AnimatedText />
 
 
-        <ContactBanner />
+        <ServicesSection />
+        
+
+        {/* <ContactBanner /> */}
 
 
-        <ProjectsSection />
+        {/* <ProjectsSection /> */}
 
-        <TestimonialsSection />
+
+        {/* <TestimonialsSection /> */}
+
 
         {/* <WhyChooseUs /> */}
       </main>

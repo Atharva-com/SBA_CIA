@@ -31,10 +31,10 @@ const contactDetails = [
 
 // SocialDetails
 const socialDetails = [
-    { icon: Instagram, name: 'Instagram', url: businessInfo.socials.instagram, color: 'bg-pink-600' },
-    { icon: Facebook, name: 'Facebook', url: businessInfo.socials.facebook, color: 'bg-blue-600' },
-    { icon: Twitter, name: 'LinkedIn', url: businessInfo.socials.linkedin, color: 'bg-blue-700' },
-    { icon: X, name: 'Twitter', url: businessInfo.socials.twitter, color: 'bg-gray-700' }
+    { icon: Instagram, name: 'Instagram', url: businessInfo.socials.instagram, color: 'bg-gradient-to-r from-[#f9ce34] via-[#ee2a7b] to-[#6228d7]' },
+    { icon: Facebook, name: 'Facebook', url: businessInfo.socials.facebook, color: 'bg-gradient-to-r from-[#00c6ff] to-[#0072ff]' },
+    { icon: Twitter, name: 'LinkedIn', url: businessInfo.socials.linkedin, color: 'bg-[#0077B5]' },
+    { icon: X, name: 'Twitter', url: businessInfo.socials.twitter, color: 'bg-gradient-to-r from-[#1DA1F2] to-[#0d90e0]' }
 ]
 
 interface ContactLeftProps {
@@ -106,13 +106,13 @@ const ContactLeft: React.FC<ContactLeftProps> = ({ activeTab, handleContactMetho
                 <motion.div
                     key={activeTab}
                     initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="bg-gray-900 rounded-xl p-4 space-y-4"
                 >
                     {activeTab === 'contact' && (
                         <>
-                            <div className="space-y-4">
+                            <div className="grid grid-cols-2 gap-4">
                                 {/* Contact methods */}
                                 {contactDetails.map((item, index) => (
 
@@ -189,10 +189,10 @@ const ContactLeft: React.FC<ContactLeftProps> = ({ activeTab, handleContactMetho
                                     animate={{ opacity: 1, scale: 1 }}
                                     whileHover={{ scale: 1.05 }}
                                     onClick={() => handleContactMethod('social', social.url)}
-                                    className={`${social.color} p-4 rounded-lg flex items-center gap-3 transition-all duration-300`}
+                                    className={`${social.color} py-4 px-16 rounded-lg flex items-center gap-3 transition-all duration-300`}
                                 >
                                     <social.icon className="w-5 h-5" />
-                                    <span className="font-medium">{social.name}</span>
+                                    <span className="font-medium font-ui text-gray-950">{social.name}</span>
                                 </motion.button>
                             ))}
                         </div>

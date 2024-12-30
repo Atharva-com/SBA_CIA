@@ -1,237 +1,161 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRightIcon, Clock, Award, Users } from 'lucide-react';
-import { useInView } from 'react-intersection-observer';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { ArrowRight } from 'lucide-react';
+
 
 const HeroLeft = () => {
 
-    const [ref, inView] = useInView({ triggerOnce: true });
-    const [hoveredStat, setHoveredStat] = useState<number | null>(null);
-    const [values, setValues] = useState([0, 0, 0, 0]);
 
-    useEffect(() => {
-        const statsData = [
-            { icon: Clock, number: '15+', label: 'Years Experience', color: 'bg-yellow-400' },
-            { icon: Award, number: '200+', label: 'Projects Completed', color: 'bg-gray-700' },
-            { icon: Users, number: '50+', label: 'Awards Won', color: 'bg-yellow-600' }
-        ];
-        if (inView) {
-            statsData.forEach((stat, index) => {
-                let count = 0;
-                const interval = setInterval(() => {
-                    count++;
-                    setValues((prev) => {
-                        const updated = [...prev];
-                        updated[index] = count;
-                        return updated;
-                    });
-                    if (count >= parseInt(stat.number)) clearInterval(interval);
-                }, 30); // Adjust the interval speed
-            });
+    const router = useRouter();
+
+    const handleServiceClick = () => {
+        router.push("/services");
+    };
+
+    const textAnimation = {
+        hidden: { opacity: 0, y: 40, Scale: 0.8 },
+        visible: {
+            opacity: 1,
+            y: [40, -10, 0],
+            scale: 1,
+            transition: {
+                duration: 0.6,
+                type: "spring",
+                stiffness: 400,
+                damping: 15,
+            },
         }
-    }, [inView]);
+    };
 
-    const stats = [
-        { icon: Clock, number: '15+', label: 'Years Experience', color: 'bg-yellow-400' },
-        { icon: Award, number: '200+', label: 'Projects Completed', color: 'bg-gray-700' },
-        { icon: Users, number: '50+', label: 'Awards Won', color: 'bg-yellow-600' }
-    ];
     return (
         <>
             {/* Left column - Enhanced text content */}
             <motion.div
-                initial={{ opacity: 0, x: -100, scale: 0.8 }}
-                whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="space-y-8"
-            >
-                <div className="text-center md:text-left">
-                    {/* Animated tagline */}
-                    <motion.div
-                        className="relative inline-block p-4"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                    >
-                        <motion.span
-                            className={`font-sans text-yellow-400 text-sm tracking-wider relative z-10`}
-                        >
-                            INNOVATIVE ARCHITECTURE
-                        </motion.span>
-                    </motion.div>
+                initial="hidden"
+                whileInView="visible"
+                variants={textAnimation}
+                className="relative container">
 
-                    {/* <motion.h1
-                                className={`${playfair.className} text-5xl md:text-7xl font-bold text-gray-100 leading-tight`}
-                                whileHover={{ scale: 1.02 }}
-                                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                            >
-                                Designing the Future
-                                <motion.span
-                                    className="text-yellow-400 inline-block"
-                                    animate={{ rotate: [0, 5, 0] }}
-                                    transition={{ duration: 2, repeat: Infinity }}
-                                >
-                                    .
-                                </motion.span>
-                            </motion.h1> */}
+                <div className='flex flex-col justify-center md:items-start items-center flex-nowrap mx-auto gap-5'>
 
-                    <div className="space-y-4">
-                        {/* Animated Company Name */}
+                    {/* Badge */}
+                    <Link href="/services" className='relative w-fit'>
                         <motion.div
-                            className="overflow-hidden"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.7 }}
-                        >
-                            <motion.h1
-                                className={`font-display text-5xl md:text-6xl font-bold text-gray-100`}
-                                initial={{ y: 50 }}
-                                animate={{ y: 0 }}
-                                transition={{ type: 'spring', stiffness: 100, delay: 0.8 }}
-                            >
-                                Shree Bhargava
-                            </motion.h1>
+                            initial="hidden"
+                            whileInView="visible"
+                            variants={textAnimation}
+                            transition={{ delay: 0.2 }}
+                            whileHover={{ scale: 1.05 }}
+                            className="flex items-center justify-center animate-pulse cursor-pointer font-ui bg-gradient-to-r from-orange-300/50 to-[#facc15]/50 border border-white/20 rounded-full uppercase py-3 px-6 h-7">
+                            <div className='space-x-2 flex items-center justify-center'>
+
+                                <span className='text-center font-medium text-sm tracking-wide text-yellow-400'>Innovative Architecture</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none"><path d="M4.8125 2.8125L8.1875 6L4.8125 9.1875" stroke="#FF9217" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>
+
+                            </div>
                         </motion.div>
+                    </Link>
 
-                        {/* Highlighted Associates Section */}
-                        <motion.div
-                            className="relative overflow-hidden"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.9 }}
-                        >
-                            <motion.h1
-                                className={`font-display text-5xl md:text-7xl font-bold`}
-                                initial={{ y: 50 }}
-                                animate={{ y: 0 }}
-                                transition={{ type: 'spring', stiffness: 100, delay: 1 }}
+                    {/* heading */}
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        variants={textAnimation}
+                        transition={{ delay: 0.4 }}
+                    >
+                        <motion.h1
+                            initial="hidden"
+                            whileInView="visible"
+                            variants={textAnimation}
+                            transition={{ delay: 0.4 }}
+                            className="text-transparent font-outfit text-4xl md:text-6xl font-bold">
+
+                            <motion.span
+                                initial="hidden"
+                                whileInView="visible"
+                                variants={textAnimation}
+                                transition={{ delay: 0.4 }}
+                                className='pl-2 text-gradient'
                                 style={{
-                                    background: 'linear-gradient(to right, #f59e0b, #fbbf24)',
-                                    WebkitBackgroundClip: 'text',
-                                    WebkitTextFillColor: 'transparent',
+                                    lineHeight: '1.1'
                                 }}
                             >
-                                & Associates.
+                                New way of designing and living
+                                <span className='pl-2 text-yellow-400'>.</span>
+                                {/* Design. 
+                                <span className=' px-4'>Build.</span>  
+                                Inspire. */}
+                            </motion.span>
+                        </motion.h1>
+                    </motion.div>
 
-                            </motion.h1>
-                        </motion.div>
+                    {/* description */}
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        variants={textAnimation}
+                        transition={{ delay: 0.8 }}
+                        className='text-lg md:text-xl font-sans mx-auto max-w-2xl font-medium text-gray-400'>
+                        {/* Transform your space with our innovative architectural solutions with functional design. */}
+                        We don’t only build and design, We create an Environment for Healthy, Comfortable & Royal life.
+                        <br />
+                        <span className='text-yellow-400 mt-2'>SBA_CIA </span> - the architects of your dreams.
+                    </motion.div>
 
-                        {/* Highlighted Creative Indian Architects */}
-                        <motion.div
-                            className="overflow-hidden"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 1.1 }}
+                    {/* CTA buttons */}
+                    <motion.div
+                        className="flex gap-6 justify-center md:justify-start"
+                    >
+                        <motion.button
+                            onClick={handleServiceClick}
+                            whileHover={{
+                                scale: 1.05,
+
+                            }}
+                            style={{
+                                background: "linear-gradient(90deg, #FFD700, #FFC107, #FFB300)",
+                                boxShadow: "0px 0px 15px rgba(255, 213, 0, 0.7)",
+                            }}
+                            whileTap={{ scale: 0.95 }}
+                            className="relative overflow-hidden px-8 md:px-16 md:py-4 py-3 text-sm md:text-base font-medium bg-yellow-400 text-gray-900 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-500 transition-all duration-300"
                         >
-                            <motion.h3
-                                className={`font-sans text-xl md:text-2xl font-bold`}
-                                initial={{ y: 20 }}
-                                animate={{ y: 0 }}
-                                transition={{ type: 'spring', stiffness: 120, delay: 1.2 }}
-                            >
-                                <span className="text-gray-400">Creative </span>
+                            <span className="relative flex items-center justify-center gap-2 font-sans">
+                                Discuss Your Vision
+
                                 <motion.span
-                                    className="text-yellow-400"
-                                    transition={{ type: 'spring', stiffness: 300 }}
-                                    style={{
-                                        textShadow: "0px 0px 10px rgba(255, 191, 0, 0.8)"
+                                    initial={{ x: -10 }}
+                                    animate={{ x: [0, 5, 0] }}
+                                    transition={{
+                                        repeat: Infinity,
+                                        repeatType: "loop",
+                                        duration: 1.5,
                                     }}
                                 >
-                                    Indian Architects
+                                    <ArrowRight className="w-4 h-4" />
                                 </motion.span>
-                            </motion.h3>
-                        </motion.div>
+                            </span>
 
-                        {/* Additional Animated Accent Line */}
-                        <motion.div
-                            className="h-1 bg-gradient-to-r from-yellow-500 to-orange-500 w-1/2 mx-auto"
-                            initial={{ scaleX: 0 }}
-                            animate={{ scaleX: 1 }}
-                            transition={{ delay: 1.4, duration: 0.8 }}
-                        />
-                    </div>
+                            {/* Ripple Effect */}
+                            <span
+                                aria-hidden="true"
+                                className="absolute inset-0 bg-yellow-500 opacity-20 rounded-full transform scale-0 group-hover:scale-150 transition-all duration-700 ease-out"
+                            ></span>
+                        </motion.button>
 
-                    {/* Enhanced paragraph with animations */}
-                    {/* <motion.p
-                                className={`${inter.className} mt-6 text-gray-400 text-lg max-w-md`}
-                                whileHover={{ x: 10 }}
-                            >
-                                Transform your space with our innovative architectural solutions.
-                                We blend modern aesthetics with functional design.
-                            </motion.p> */}
+                        {/* <motion.button
+                            className={`font-ui relative overflow-hidden border border-gray-300 text-gray-100 md:px-8 px-3 py-4 rounded-lg`}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <motion.span className="relative z-10">Consult Us</motion.span>
+
+                        </motion.button> */}
+                    </motion.div>
 
                 </div>
 
-                {/* Enhanced button animations */}
-                <motion.div
-                    className="flex gap-6 justify-center md:justify-start"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8 }}
-                >
-                    <motion.button
-                        className={`font-ui group bg-yellow-400 hover:bg-yellow-500 text-gray-900 md:px-8 px-3 py-4 rounded-lg flex items-center gap-2 transition-all duration-300`}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        Explore Projects
-                        <motion.div
-                            className="group-hover:translate-x-1 transition-transform"
-                        >
-                            <ChevronRightIcon className="w-5 h-5" />
-                        </motion.div>
-                    </motion.button>
-
-                    <motion.button
-                        className={`font-ui relative overflow-hidden border border-gray-700 hover:border-yellow-400 text-gray-100 md:px-8 px-3 py-4 rounded-lg`}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        <motion.span className="relative z-10">Consult Us</motion.span>
-                        <motion.div
-                            className="absolute inset-0 bg-yellow-400 opacity-0 hover:opacity-10 transition-opacity"
-                            initial={false}
-                            whileHover={{ scale: 1.5 }}
-                            transition={{ duration: 0.4 }}
-                        />
-                    </motion.button>
-                </motion.div>
-
-                {/* Enhanced stats section */}
-                <motion.div
-                    ref={ref}
-                    className="grid grid-cols-3 gap-8 pt-12 md:border-t border-gray-800"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                >
-                    {stats.map((stat, index) => (
-                        <motion.div
-                            key={index}
-                            className="relative group"
-                            onHoverStart={() => setHoveredStat(index)}
-                            onHoverEnd={() => setHoveredStat(null)}
-                            whileHover={{ y: -5 }}
-                        >
-                            <motion.div
-                                className={`w-12 h-12 ${stat.color} rounded-lg mb-4 flex items-center justify-center`}
-                                whileHover={{ rotate: 360 }}
-                                transition={{ duration: 0.6 }}
-                            >
-                                <stat.icon className="w-6 h-6 text-white" />
-                            </motion.div>
-
-                            <motion.h3
-
-                                className={`font-display text-3xl font-bold text-yellow-400`}
-                                animate={{ scale: hoveredStat === index ? 1.1 : 1 }}
-                            >
-                                {values[index]}+
-                            </motion.h3>
-                            <p className={`font-ui text-sm text-gray-400`}>
-                                {stat.label}
-                            </p>
-                        </motion.div>
-                    ))}
-                </motion.div>
             </motion.div>
         </>
     )

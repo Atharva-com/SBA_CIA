@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import { Inter, Playfair_Display, DM_Sans } from 'next/font/google'
+import { Inter, Playfair_Display, DM_Sans, Outfit  } from 'next/font/google'
 import Layout from "./components/layout";
 
 const inter = Inter({
@@ -18,6 +18,11 @@ const dmSans = DM_Sans({
   variable: '--font-dm-sans'
 })
 
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-outfit',
+});
+
 export const metadata: Metadata = {
   title: 'ArchStudio - Modern Architectural Solutions',
   description: 'Professional architectural services including interior design, landscape design, and home design.',
@@ -32,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${playfair.variable} ${dmSans.variable} antialiased`}
+        className={`${inter.variable} ${playfair.variable} ${dmSans.variable} ${outfit.variable} antialiased`}
       >
             <div className="flex min-h-screen flex-col bg-white">
               <Layout>

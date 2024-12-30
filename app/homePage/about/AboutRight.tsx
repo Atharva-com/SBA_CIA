@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from "framer-motion";
 
-
 const AboutRight = () => {
     const [hovered, setHovered] = useState(false);
 
@@ -29,10 +28,10 @@ const AboutRight = () => {
                     onMouseLeave={() => setHovered(false)}
                 >
                     <motion.img
-                        src="https://plus.unsplash.com/premium_photo-1661335257817-4552acab9656?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Replace with actual image path
+                        src='/SBA_CIA-globe.jpg' 
                         alt="Founder of SBA-CIA"
-                        className="w-full md:h-full h-96 object-cover transition-transform duration-500"
-                        animate={{ scale: hovered ? 1.05 : 1 }}
+                        className="w-full md:h-[28rem] h-96 object-cover transition-transform duration-500"
+                        whileInView={{ scale: hovered ? 1.05 : 1 }}
                     />
                     {/* 3D Tilt Effect */}
                     <motion.div

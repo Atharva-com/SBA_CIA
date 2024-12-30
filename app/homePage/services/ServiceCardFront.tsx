@@ -18,14 +18,14 @@ const ServiceCardFront: React.FC<ServiceCardFrontProps> = ({ handleFlip, service
 
     const cardInnerVariants = {
         hidden: {
-            x: -20,
+            x: -30,
             opacity: 0
         },
         visible: {
             x: 0,
             opacity: 1,
             transition: {
-                duration: 0.5,
+                duration: 0.8,
                 ease: "easeOut"
             }
         }
@@ -73,7 +73,6 @@ const ServiceCardFront: React.FC<ServiceCardFrontProps> = ({ handleFlip, service
                                 variants={cardInnerVariants}
                                 className="p-3 bg-gray-800 rounded-lg text-yellow-400 group-hover:bg-yellow-400 group-hover:text-gray-900 transition-all duration-300"
                                 whileHover={{ rotate: 360 }}
-                                transition={{ duration: 0.5 }}
                             >
                                 {service.icon}
                             </motion.div>
@@ -106,7 +105,7 @@ const ServiceCardFront: React.FC<ServiceCardFrontProps> = ({ handleFlip, service
                                     className="flex items-center gap-2 text-gray-300"
                                     initial={{ opacity: 0, x: -20 }}
                                     whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: featureIndex * 0.1 }}
+                                    transition={{ delay: featureIndex * 0.2 }}
                                 >
                                     <CheckCircle2 className="w-4 h-4 text-yellow-400" />
                                     <span className={`font-sans text-sm`}>{feature}</span>

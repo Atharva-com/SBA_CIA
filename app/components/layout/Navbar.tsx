@@ -29,31 +29,30 @@ const Navbar = () => {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Carrer', href: '/carrer' },
-    { 
-      name: 'Services', 
+    {
+      name: 'Services',
       href: '/services',
-      hasDropdown: true 
+      hasDropdown: true
     },
     { name: 'Projects', href: '/projects' },
     { name: 'Gallery', href: '/gallery' },
-    
+
   ];
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-gray-900/95 backdrop-blur-sm py-4' 
+      className={`fixed w-full z-50 transition-all duration-300 ${isScrolled
+          ? 'bg-gray-900/95 backdrop-blur-sm py-4'
           : 'bg-transparent py-6'
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/">
-            <motion.div 
+            <motion.div
               className={`font-display text-2xl font-bold text-yellow-400`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -111,7 +110,7 @@ const Navbar = () => {
                     whileHover={{ y: -2 }}
                     className="relative group"
                   >
-                    <Link 
+                    <Link
                       href={item.href}
                       className={`nav-text hover:text-yellow-400 transition-colors`}
                     >
@@ -132,13 +131,14 @@ const Navbar = () => {
               className="flex items-center btn-bg px-4 py-2 rounded-full transition-colors"
             >
               <Phone size={16} className="mr-2" />
-              <span className={`font-ui font-medium`}>Contact Us</span>
+              <span className={`font-ui font-medium`}>Get in Touch</span>
             </motion.button>
+
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-4">
-            
+
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsOpen(!isOpen)}
@@ -156,7 +156,7 @@ const Navbar = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden mt-4 bg-yellow-400 p-4 rounded-b-3xl"
+              className="md:hidden mt-4 bg-gradient-to-tr from-yellow-400 to-orange-400 p-4 rounded-b-3xl"
             >
               {navItems.map((item) => (
                 <div key={item.name}>
@@ -202,7 +202,7 @@ const Navbar = () => {
                       animate={{ x: 0, opacity: 1 }}
                       className="py-2"
                     >
-                      <Link 
+                      <Link
                         href={item.href}
                         className={`font-ui block text-gray-800 hover:text-yellow-400 transition-colors`}
                         onClick={() => setIsOpen(false)}
@@ -219,12 +219,12 @@ const Navbar = () => {
                 className="w-full mt-4 flex items-center justify-center px-4 py-2 rounded-full bg-gray-800 text-gray-300 hover:bg-yellow-300 transition-colors"
               >
                 <Phone size={16} className="mr-2" />
-                <span className={`font-ui font-medium`}>Contact Us</span>
+                <span className={`font-ui font-medium`}>Get in Touch</span>
               </motion.button>
             </motion.div>
           )}
         </AnimatePresence>
-        
+
       </div>
     </motion.nav>
   );
