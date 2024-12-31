@@ -126,7 +126,7 @@ const ServicesSection = () => {
 
 
   return (
-    <div ref={ref} className="relative px-6 py-20 md:py-20 lg:py-40 lg:my-20 lg:mx-auto h-auto md:h-[200vh]">
+    <div ref={ref} className="relative px-6 py-20 md:py-20 lg:py-40 lg:mt-20 lg:mx-auto h-auto md:h-[200vh]">
 
       {/* serives Background */}
       <div className='absolute top-0 left-0 bottom-0 right-0 pointer-events-none ' area-hidden="true">

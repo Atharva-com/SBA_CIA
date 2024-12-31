@@ -119,7 +119,7 @@ const HeroLeft = () => {
                             className="relative overflow-hidden px-8 md:px-16 md:py-4 py-3 text-sm md:text-base font-medium bg-yellow-400 text-gray-900 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-500 transition-all duration-300"
                         >
                             <span className="relative flex items-center justify-center gap-2 font-sans">
-                                Discuss Your Vision
+                                Book Your Consultation
 
                                 <motion.span
                                     initial={{ x: -10 }}

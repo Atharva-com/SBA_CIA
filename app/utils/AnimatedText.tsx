@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useRef } from 'react';
+// import gsap from 'gsap';
+// import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -10,58 +10,58 @@ import architectBg from '../../public/background/OIU9QH0 (1).jpg'
 const AnimatedText = () => {
     const containerRef = useRef(null);
     const textRef = useRef(null);
-    const bgRef = useRef(null);
+    // const bgRef = useRef(null);
     const router = useRouter();
 
     const handleExploreClick = () => {
         router.push("/projects");
     };
 
-    useEffect(() => {
-        gsap.registerPlugin(ScrollTrigger);
+    // useEffect(() => {
+    //     gsap.registerPlugin(ScrollTrigger);
 
-        // Create a timeline for coordinated animations
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: "center center",
-                end: "bottom center",
-                scrub: 1,
-                pin: true,
-                pinSpacing: true,
-                toggleActions: "play none none none",
-                markers: false,
-            },
-        });
+    //     // Create a timeline for coordinated animations
+    //     const tl = gsap.timeline({
+    //         scrollTrigger: {
+    //             trigger: containerRef.current,
+    //             start: "center center",
+    //             end: "bottom center",
+    //             scrub: 1,
+    //             pin: true,
+    //             pinSpacing: true,
+    //             toggleActions: "play none none none",
+    //             markers: false,
+    //         },
+    //     });
 
-        // Add animations to the timeline
-        tl.fromTo(
-            bgRef.current,
-            { opacity: 0 },
-            { opacity: 1, duration: 5 }
-        ).fromTo(
-            textRef.current,
-            {
-                opacity: 0,
-                y: 100,
-                z: -500,
-                scale: 0,
-            },
-            {
-                opacity: 1,
-                y: 0,
-                z: 0,
-                scale: 0.9,
-                duration: 5,
-            },
-            "-=0.5" // Start this animation slightly earlier
-        );
+    //     // Add animations to the timeline
+    //     tl.fromTo(
+    //         bgRef.current,
+    //         { opacity: 0 },
+    //         { opacity: 1, duration: 5 }
+    //     ).fromTo(
+    //         textRef.current,
+    //         {
+    //             opacity: 0,
+    //             y: 100,
+    //             z: -500,
+    //             scale: 0,
+    //         },
+    //         {
+    //             opacity: 1,
+    //             y: 0,
+    //             z: 0,
+    //             scale: 0.9,
+    //             duration: 5,
+    //         },
+    //         "-=0.5" // Start this animation slightly earlier
+    //     );
 
-        // Cleanup ScrollTriggers on unmount
-        return () => {
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-        };
-    }, []);
+    //     // Cleanup ScrollTriggers on unmount
+    //     return () => {
+    //         ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    //     };
+    // }, []);
 
     return (
         <div
@@ -117,7 +117,7 @@ const AnimatedText = () => {
                                 className="relative overflow-hidden px-8 md:px-12 py-3 text-sm md:text-base font-medium bg-yellow-400 text-gray-900 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-500 transition-all duration-300"
                             >
                                 <span className="relative z-10 flex items-center justify-center gap-2 font-sans">
-                                    Let&apos; Create Together
+                                    Let&apos; Consult Together
                                     <motion.span
                                         initial={{ x: -10 }}
                                         animate={{ x: [0, 5, 0] }}
