@@ -25,11 +25,9 @@ export default function Home() {
 
         <AnimatedText />
 
-
         <ServicesSection />
-        
 
-        {/* <ContactBanner /> */}
+        <ContactBanner />
 
 
         {/* <ProjectsSection /> */}

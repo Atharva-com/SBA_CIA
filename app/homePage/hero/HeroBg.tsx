@@ -2,10 +2,10 @@ import React from 'react'
 import HeroGridPattern from './HeroGridPattern'
 import Image from 'next/image'
 import ringsBg from '../../../public/rings.png'
-import iconBg from '../../../public/hero-bg.png'
+// import iconBg from '../../../public/hero-bg.png'
 import heroBgMob from '../../../public/heroBg/heroImageMob.jpg'
 import { motion } from 'framer-motion'
-import heroBackground from '../../../public/heroBg/heroBg.jpg'
+import heroBackground from '../../../public/heroBg/heroBg1.jpg'
 
 const HeroBg = () => {
     const textAnimation = {
@@ -30,15 +30,16 @@ const HeroBg = () => {
                     clipPath: "polygon(0 0, 5760px 0, 5760px calc(100% - 352px), 0 100%)"
                 }}></div> */}
 
-
+            {/* hero background image */}
             <div className='absolute top-0 left-0 bottom-0 right-0 pointer-events-none' area-hidden="true">
                 <Image
                     src={heroBackground}
                     alt="About Background"
                     layout="fill"
                     objectFit="cover"
+                    objectPosition='left center'
                     quality={100}
-                    className='md:block hidden opacity-95'
+                    className='opacity-95'
                 />
 
                 <Image
@@ -47,7 +48,7 @@ const HeroBg = () => {
                     layout="fill"
                     objectFit="cover"
                     quality={100}
-                    className="md:hidden"
+                    className="hidden"
                 />
             </div>
 
@@ -93,13 +94,13 @@ const HeroBg = () => {
                         }}
                         variants={textAnimation}
                         className='absolute top-0 left-0 w-full opacity-30 md:hidden block'>
-                        <Image
+                        {/* <Image
                             src={iconBg}
                             alt="Icon 1"
                             width={2146}
                             height={774}
                             className="animate-spin-slow z-[10]"
-                        />
+                        /> */}
                     </motion.div>
 
                 </motion.div>

@@ -11,13 +11,14 @@ import {
   // Mountain,
   // Scale,
 } from 'lucide-react';
-import { Playfair_Display, DM_Sans } from 'next/font/google';
+import { DM_Sans } from 'next/font/google';
 import { ServiceCard } from './ServiceCard';
 import { useRouter } from 'next/navigation';
 import services from './ServicesData';
+import Image from 'next/image';
+import serviceBg from '../../../public/heroBg/heroBg.jpg'
+import heroBgMob from '../../../public/heroBg/heroImageMob.jpg'
 
-
-const playfair = Playfair_Display({ subsets: ['latin'] });
 const dmSans = DM_Sans({ subsets: ['latin'] });
 
 
@@ -122,34 +123,50 @@ const ServicesSection = () => {
   const handleExploreClick = () => {
     router.push("/services");
   };
-  
+
 
   return (
-    <div ref={ref} className="relative md:py-24 py-16 px-6">
+    <div ref={ref} className="relative px-6 py-20 md:py-20 lg:py-40 lg:my-20 lg:mx-auto h-auto md:h-[200vh]">
 
       {/* serives Background */}
-      <div className="absolute top-0 left-0 w-full h-1/2 inset-0 bg-gradient-to-tr from-gray-700 via-gray-800 to-gray-900"></div>
+      <div className='absolute top-0 left-0 bottom-0 right-0 pointer-events-none ' area-hidden="true">
+        <Image
+          src={serviceBg}
+          alt="Services Background"
+          quality={100}
+          className='h-[200vh] md:block hidden'
+        />
+
+        <Image
+          src={heroBgMob}
+          alt="About Background"
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+          className="md:hidden block"
+        />
+      </div>
 
       {/* Main Content */}
-      <div className="container mx-auto">
+      <div className="container mx-auto flex gap-24 flex-col">
 
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 50, scale: 0.8 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center mb-16 space-y-4 relative z-10"
+          className="text-end relative z-1 flex flex-col items-end justify-center"
         >
 
           <motion.span
-            className={`${dmSans.className} text-yellow-400 text-lg tracking-wider`}
+            className={`${dmSans.className} text-gray-400 text-lg tracking-wider`}
             whileHover={{ scale: 1.05 }}
           >
             OUR EXPERTISE
           </motion.span>
 
-          <h2 className={`${playfair.className} text-4xl md:text-5xl font-bold text-gradient`}>
-            Comprehensive Architectural Services
+          <h2 className={`font-outfit text-3xl md:text-5xl md:max-w-2xl font-bold text-gradient`}>
+            Plan Your Dream Space With Our Services
           </h2>
 
           {/* <p className={`${inter.className} text-gray-400 max-w-2xl mx-auto`}>
@@ -161,7 +178,8 @@ const ServicesSection = () => {
 
         {/* Services Grid */}
         <motion.div
-          className="grid md:grid-cols-3 gap-8"
+          className="grid md:grid-cols-3 gap-12 "
+
         >
 
           {services.map((service, index) => (
@@ -169,8 +187,8 @@ const ServicesSection = () => {
           ))}
         </motion.div>
 
-
-        <div className="text-center mt-12">
+        {/* Explore serice */}
+        <div className="text-center md:mt-12">
           <motion.button
             onClick={handleExploreClick}
             whileHover={{
@@ -185,7 +203,7 @@ const ServicesSection = () => {
               Explore All Services
               <motion.span
                 initial={{ x: -10 }}
-                animate={{ x: [0, 5, 0] }}
+                whileInView={{ x: [0, 5, 0] }}
                 transition={{
                   repeat: Infinity,
                   repeatType: "loop",
@@ -209,7 +227,7 @@ const ServicesSection = () => {
       {/* Additional Services Section */}
       {/* <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         className="mt-24"
       >
@@ -230,7 +248,7 @@ const ServicesSection = () => {
             <motion.div
               key={service.title}
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -5 }}
@@ -257,7 +275,7 @@ const ServicesSection = () => {
                   <motion.div
                     key={featureIndex}
                     initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
+                    whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: featureIndex * 0.1 }}
                     className="flex items-center gap-2"

@@ -9,7 +9,7 @@ html {
 @layer utilities {
 
   .nav-text{
-    @apply font-ui text-gray-300 font-semibold;
+    @apply font-ui bg-gradient-to-r from-gray-200 to-gray-300 bg-clip-text text-transparent font-semibold;
   }
 
   .btn-bg{

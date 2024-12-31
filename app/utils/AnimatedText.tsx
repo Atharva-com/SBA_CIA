@@ -51,7 +51,7 @@ const AnimatedText = () => {
                 opacity: 1,
                 y: 0,
                 z: 0,
-                scale: 1.2,
+                scale: 0.9,
                 duration: 5,
             },
             "-=0.5" // Start this animation slightly earlier
@@ -67,13 +67,16 @@ const AnimatedText = () => {
         <div
             ref={containerRef}
             // style={{ backgroundImage: `url('\architecture-background-design (1).jpg')` }}
-            className='h-[200vh] px-24 py-24 pb-12 relative lg:flex items-center justify-center hidden'
+            className='h-[150vh] px-24 py-24 pb-12 relative flex items-center justify-center'
+            style={{
+                padding: "0rem",
+            }}
         >
 
             <Image
                 src={architectBg}
                 alt="Architecture background"
-                className="absolute inset-0 z-0 w-full h-[200vh] object-cover opacity-85"
+                className="absolute inset-0 z-0 w-full h-[150vh] object-cover opacity-85"
             />
 
 
@@ -83,15 +86,19 @@ const AnimatedText = () => {
 
                     <div ref={textRef} className='flex flex-col items-center justify-center gap-4 transform-gpu'>
 
-                        <div className="perspective-1000 font-display font-bold max-w-xl text-3xl md:text-[3rem] text-gradient leading-tight">
+                        <div className="perspective-1000 font-outfit max-w-xl text-2xl text-gray-700 leading-tight">
                             Designing Dreams, Building Realities.
                         </div>
 
-                        <div className="text-gray-300">
-                            <div>
-                                Transforming spaces into timeless designs,<br />
-                                crafted with precision and creativity.
-                            </div>
+                        <div className="text-gray-800 italic text-3xl md:text-5xl"
+                            style={{
+                                fontFamily: 'cursive',
+                                textShadow: "0px 0px 10px rgba(0, 0, 0, 0.7)",
+                                lineHeight: "1.3"
+                            }}
+                        >
+                            Shree Bhargava Infrastructure Development <br />
+                            Creative Indian Architects
                         </div>
 
                         {/* All projects Button */}
@@ -107,10 +114,10 @@ const AnimatedText = () => {
                                     boxShadow: "0px 0px 15px rgba(255, 213, 0, 0.7)",
                                 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="relative overflow-hidden px-8 md:px-16 md:py-4 py-3 text-sm md:text-base font-medium bg-yellow-400 text-gray-900 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-500 transition-all duration-300"
+                                className="relative overflow-hidden px-8 md:px-12 py-3 text-sm md:text-base font-medium bg-yellow-400 text-gray-900 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-500 transition-all duration-300"
                             >
                                 <span className="relative z-10 flex items-center justify-center gap-2 font-sans">
-                                    Explore Our Work
+                                    Let&apos; Create Together
                                     <motion.span
                                         initial={{ x: -10 }}
                                         animate={{ x: [0, 5, 0] }}

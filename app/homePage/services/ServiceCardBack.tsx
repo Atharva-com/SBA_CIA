@@ -46,7 +46,7 @@ const ServiceCardBack = ({ isFlipped, hoveredStep, setHoveredStep, index, servic
                     pointerEvents: isFlipped ? "auto" : "none" // Allow interaction only when flipped
                 }}
             >
-                <motion.div className="h-full relative rounded-2xl bg-gray-900 md:p-8 p-4 border border-yellow-400 group">
+                <motion.div className="h-full relative rounded-2xl bg-gray-900 md:p-6 p-4 border border-yellow-400 group">
 
                     <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -70,7 +70,7 @@ const ServiceCardBack = ({ isFlipped, hoveredStep, setHoveredStep, index, servic
                     <motion.div className="relative z-10 h-full flex flex-col">
 
                         {/* Header */}
-                        <motion.div
+                        {/* <motion.div
                             initial="hidden"
                             whileInView="visible"
                             variants={cardInnerVariants}
@@ -82,10 +82,12 @@ const ServiceCardBack = ({ isFlipped, hoveredStep, setHoveredStep, index, servic
 
                             <ActionButton service={service} />
 
-                        </motion.div>
+                        </motion.div> */}
 
                         {/* Tabs */}
-                        <motion.div className="flex gap-2 mb-6">
+                        <motion.div className="flex flex-col-reverse md:flex-row gap-4 md:gap-2 mb-6 items-start md:items-center justify-center">
+
+                            <motion.div className="flex gap-2 items-center justify-center">
                             {tabs.map((tab) => (
                                 <motion.button
                                     key={tab.id}
@@ -104,6 +106,9 @@ const ServiceCardBack = ({ isFlipped, hoveredStep, setHoveredStep, index, servic
                                     {tab.label}
                                 </motion.button>
                             ))}
+                            </motion.div>
+
+                            <ActionButton service={service} />
                         </motion.div>
 
                         {/* Tab Content */}
@@ -114,10 +119,10 @@ const ServiceCardBack = ({ isFlipped, hoveredStep, setHoveredStep, index, servic
                                 whileInView={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -20 }}
                                 transition={{ duration: 0.3 }}
-                                className="flex-grow overflow-y-auto overflow-x-hidden "
+                                className="flex-grow overflow-y-auto overflow-x-hidden pr-4"
                             >
                                 {activeTab === 'process' && (
-                                    <motion.div className="space-y-4">
+                                    <motion.div className="space-y-2">
                                         {service.processSteps.map((step, stepIndex) => (
                                             <motion.div
                                                 key={stepIndex}

@@ -46,22 +46,10 @@ const AboutLeft = () => {
                         variants={itemVariants}
                         className=""
                     >
-                        {/* Subheading */}
-                        {/* <motion.span
-                            className="text-gradient-yellow text-sm tracking-wider uppercase font-sans font-bold"
-                            whileHover={{ scale: 1.05 }}
-                            initial="hidden"
-                            whileInView="visible"
-                            variants={itemVariants}
-                        >
-                            SBA_CIA - Crafting Spaces Since 2016
-                        </motion.span> */}
-
-                        {/* Main Heading */}
                         <motion.h2
                             initial="hidden"
                             whileInView="visible"
-                            className="text-4xl md:text-6xl font-bold font-display text-transparent bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text"
+                            className="text-4xl md:text-6xl font-bold font-outfit text-transparent bg-gradient-to-r from-gray-600 to-gray-800 bg-clip-text"
                             variants={itemVariants}
                         >
                             Who We Are ?
@@ -72,12 +60,12 @@ const AboutLeft = () => {
 
                 {/* Paragraph */}
                 <motion.p
-                    className="text-gray-700 text-sm leading-relaxed font-ui md:block hidden"
+                    className="text-gray-700 text-sm leading-relaxed font-ui"
                     initial="hidden"
                     whileInView="visible"
                     variants={itemVariants}
                 >
-                    <span className='font-bold text-lg text-gradient-yellow'>Shree Bhargava and Associates_Creative Indian Architects (SBA_CIA)</span>
+                    <span className='font-bold text-lg text-gray-800'>Shree Bhargava and Associates_Creative Indian Architects (SBA_CIA)</span>
                     <br />
                     Renowned for our creative ideas and innovative approach, we leverage the latest architectural technologies to deliver exceptional designs tailored to your needs. Our expertise spans interior design, construction management, and creating functional yet aesthetic spaces.
                 </motion.p>
@@ -87,8 +75,12 @@ const AboutLeft = () => {
                     initial="hidden"
                     whileInView="visible"
                     variants={itemVariants}
-                    className="mt-6 bg-custom-gradient p-6 rounded-lg shadow-lg">
-                    <motion.p className="text-gray-800 italic">
+                    className="mt-6 p-6 rounded-lg shadow-lg">
+                    <motion.p className="text-gray-800 italic"
+                    style={{
+                        fontFamily: 'cursive'
+                    }}
+                    >
                         “Architecture is not just about buildings; it&apos;s about creating experiences that resonate with people&apos;s lives, aspirations, and dreams. Every project we undertake is an opportunity to leave a lasting legacy in the built environment.”
                     </motion.p>
 
@@ -96,7 +88,7 @@ const AboutLeft = () => {
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="mt-4 px-4 py-2 text-sm font-bold text-gray-800 bg-gradient-to-r from-[#FFD700] via-[#FFC107] to-[#FFB300] rounded-full shadow transition-all duration-300 font-ui cursor-pointer flex items-center"
+                        className="mt-4 px-4 py-2 text-sm font-bold text-gray-200 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 rounded-full shadow transition-all duration-300 font-ui cursor-pointer flex items-center"
                     >
                         Discover Our Journey
                         <motion.span

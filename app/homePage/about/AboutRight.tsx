@@ -42,8 +42,8 @@ const AboutRight = () => {
                                 : "rotateY(0deg) rotateX(0deg)",
                         }}
                     >
-                        <h3 className="text-2xl font-bold bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] text-transparent bg-clip-text font-display">Ar. Shashank Pare</h3>
-                        <p className="text-gray-400 text-sm font-ui">Shree Bhargava and Associate - Creative Indian Architect</p>
+                        <h3 className="text-3xl font-bold bg-gradient-to-r from-[#f59e0b] to-[#fbbf24] text-transparent bg-clip-text font-outfit">Ar. Shashank Pare</h3>
+                        {/* <p className="text-gray-500 text-sm font-ui">Shree Bhargava and Associate - Creative Indian Architect</p> */}
                         <p className="text-gray-300 text-sm font-ui">Founder & Lead Architect</p>
                     </motion.div>
                 </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ChevronRight, CheckCircle2 } from 'lucide-react'
+import { CheckCircle2, RotateCcw } from 'lucide-react'
 
 interface ServiceCardFrontProps {
     handleFlip: () => void;
@@ -19,15 +19,13 @@ const ServiceCardFront: React.FC<ServiceCardFrontProps> = ({ handleFlip, service
     const cardInnerVariants = {
         hidden: {
             x: -30,
-            opacity: 0
+            opacity: 0,
+            scale: 0.8
         },
         visible: {
             x: 0,
             opacity: 1,
-            transition: {
-                duration: 0.8,
-                ease: "easeOut"
-            }
+            scale: 1,
         }
     };
 
@@ -60,12 +58,11 @@ const ServiceCardFront: React.FC<ServiceCardFrontProps> = ({ handleFlip, service
                         }}
                     />
 
-
                     {/* Front Content */}
-                    <motion.div className="relative z-10">
+                    <motion.div className="relative z-10 flex flex-col w-full h-full justify-between">
 
                         {/* Icon and Title */}
-                        <div className="flex items-center justify-between mb-6">
+                        <motion.div className="flex items-center justify-between">
 
                             <motion.div
                                 initial="hidden"
@@ -77,25 +74,27 @@ const ServiceCardFront: React.FC<ServiceCardFrontProps> = ({ handleFlip, service
                                 {service.icon}
                             </motion.div>
 
-                        </div>
+                        </motion.div>
 
+                        {/* Title and Description */}
                         <motion.h3
                             initial="hidden"
                             whileInView="visible"
                             variants={cardInnerVariants}
                             transition={{ delay: 0.2 }}
-                            className={`font-display text-2xl font-bold text-gray-100 mb-4`}>
+                            className={`font-display text-2xl font-bold text-gray-100`}>
                             {service.title}
                         </motion.h3>
 
-                        <motion.p
+                        {/* paragraph */}
+                        {/* <motion.p
                             initial="hidden"
                             whileInView="visible"
                             variants={cardInnerVariants}
                             transition={{ delay: 0.4 }}
-                            className={`font-ui text-gray-400 mb-6`}>
+                            className={`font-ui text-gray-400`}>
                             {service.description}
-                        </motion.p>
+                        </motion.p> */}
 
                         {/* Features */}
                         <div className="space-y-3">
@@ -122,10 +121,10 @@ const ServiceCardFront: React.FC<ServiceCardFrontProps> = ({ handleFlip, service
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={handleFlip}
-                            className={`font-sans mt-8 px-6 py-3 bg-gray-800 text-gray-100 rounded-lg hover:bg-yellow-400 hover:text-gray-900 transition-all duration-300 w-full flex items-center justify-center gap-2`}
+                            className={`font-sans px-6 py-3 bg-gray-800 text-gray-100 rounded-lg hover:bg-yellow-400 hover:text-gray-900 transition-all duration-300 w-full flex items-center justify-center gap-2`}
                         >
                             Show More
-                            <ChevronRight className="w-4 h-4" />
+                            <RotateCcw className="w-4 h-4" />
                         </motion.button>
 
                     </motion.div>

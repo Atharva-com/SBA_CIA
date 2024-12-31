@@ -75,7 +75,7 @@ const Navbar = () => {
                       className={`flex items-center nav-text transition-colors`}
                     >
                       {item.name}
-                      <ChevronDown size={16} className="ml-1" />
+                      <ChevronDown size={16} className="ml-1 text-gray-200" />
                     </button>
                     <AnimatePresence>
                       {activeDropdown === item.name && (
@@ -83,19 +83,19 @@ const Navbar = () => {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 10 }}
-                          className="absolute left-0 mt-2 w-64 rounded-md shadow-lg bg-[#0f172b] ring-1 ring-black ring-opacity-5"
+                          className="absolute left-0 mt-2 w-64 rounded-md shadow-lg bg-gradient-to-br from-gray-300  via-gray-200 to-gray-400 ring-1 ring-black ring-opacity-5"
                         >
                           <div className="py-1">
                             {services.map((service) => (
                               <Link
                                 key={service.name}
                                 href={service.href}
-                                className="block px-4 py-3 hover:bg-gray-700"
+                                className="block px-4 py-3 hover:bg-gray-400"
                               >
-                                <span className="block text-sm font-medium tracking-wide font-ui text-yellow-400">
+                                <span className="block text-sm font-medium tracking-wide font-sans text-gray-800">
                                   {service.name}
                                 </span>
-                                <span className="block mt-1 text-xs tracking-wide font-ui text-gray-300">
+                                <span className="block mt-1 text-xs tracking-wide font-ui text-gray-500">
                                   {service.description}
                                 </span>
                               </Link>
@@ -124,17 +124,17 @@ const Navbar = () => {
               </div>
             ))}
 
-            {/* Contact Button */}
-            <motion.button
+          </div>
+
+          {/* Contact Button */}
+          <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center btn-bg px-4 py-2 rounded-full transition-colors"
+              className="md:flex items-center btn-bg px-4 py-2 rounded-full transition-colors hidden"
             >
               <Phone size={16} className="mr-2" />
               <span className={`font-ui font-medium`}>Get in Touch</span>
-            </motion.button>
-
-          </div>
+          </motion.button>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-4">
@@ -147,6 +147,7 @@ const Navbar = () => {
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </motion.button>
           </div>
+
         </div>
 
         {/* Mobile Navigation */}
@@ -156,7 +157,7 @@ const Navbar = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden mt-4 bg-gradient-to-tr from-yellow-400 to-orange-400 p-4 rounded-b-3xl"
+              className="md:hidden mt-4 bg-gradient-to-br from-yellow-400 to-orange-400 p-4 rounded-b-3xl"
             >
               {navItems.map((item) => (
                 <div key={item.name}>
@@ -175,7 +176,7 @@ const Navbar = () => {
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
-                            className="mt-2 pl-4 bg-gray-800 rounded-lg"
+                            className="mt-2 pl-4 bg-gradient-to-br from-gray-300  via-gray-200 to-gray-400 rounded-lg"
                           >
                             {services.map((service) => (
                               <Link
@@ -184,10 +185,10 @@ const Navbar = () => {
                                 className="block py-2"
                                 onClick={() => setIsOpen(false)}
                               >
-                                <span className="block text-sm font-medium text-yellow-400 font-ui">
+                                <span className="block text-sm font-medium text-gray-700 font-ui">
                                   {service.name}
                                 </span>
-                                <span className="block mt-1 text-xs text-gray-300 font-ui">
+                                <span className="block mt-1 text-xs text-gray-500 font-ui">
                                   {service.description}
                                 </span>
                               </Link>
@@ -213,14 +214,6 @@ const Navbar = () => {
                   )}
                 </div>
               ))}
-              <motion.button
-                initial={{ x: -20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                className="w-full mt-4 flex items-center justify-center px-4 py-2 rounded-full bg-gray-800 text-gray-300 hover:bg-yellow-300 transition-colors"
-              >
-                <Phone size={16} className="mr-2" />
-                <span className={`font-ui font-medium`}>Get in Touch</span>
-              </motion.button>
             </motion.div>
           )}
         </AnimatePresence>

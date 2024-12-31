@@ -11,7 +11,7 @@ const AboutSection = () => {
     const ref = useRef(null);
 
     return (
-        <div ref={ref} className="px-4 md:px-6 py-12 md:py-20 lg:py-40 lg:mx-auto relative overflow-hidden">
+        <div ref={ref} className="px-6 py-20 md:py-20 lg:py-40 lg:my-20 lg:mx-auto relative overflow-hidden">
 
             <div className='absolute top-10 left-0 w-full h-full z-0 opacity-50'>
                 <Image
