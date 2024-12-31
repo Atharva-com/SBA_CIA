@@ -72,7 +72,7 @@ const ContactBanner = () => {
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
           >
-            {['contact', 'hours', 'social'].map((tab) => (
+            {['social', 'contact', 'hours'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
