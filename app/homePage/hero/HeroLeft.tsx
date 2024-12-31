@@ -38,7 +38,7 @@ const HeroLeft = () => {
                 variants={textAnimation}
                 className="relative container">
 
-                <div className='flex flex-col justify-center items-center md:items-start flex-nowrap mx-auto gap-7 max-w-xl'>
+                <div className='flex flex-col justify-center items-center md:items-start flex-nowrap mx-auto gap-7 max-w-xl md:mt-12'>
 
                     {/* Badge */}
                     <Link href="/services" className='relative w-fit'>
