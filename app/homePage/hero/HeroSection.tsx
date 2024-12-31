@@ -16,7 +16,7 @@ const Hero = () => {
             <HeroBg />
 
             {/* Main content */}
-            <div className="relative lg:container lg:mx-auto px-6 md:px-8 md:py-28 xl:py-20 flex items-center justify-start h-screen">
+            <div className="relative lg:container lg:mx-auto px-6 md:px-8 md:py-28 xl:py-20 flex items-start justify-center md:justify-start h-screen mt-10 md:mt-0">
 
                 <div className="flex justify-center items-center">
 

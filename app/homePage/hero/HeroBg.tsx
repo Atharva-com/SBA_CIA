@@ -5,7 +5,7 @@ import ringsBg from '../../../public/rings.png'
 // import iconBg from '../../../public/hero-bg.png'
 import heroBgMob from '../../../public/heroBg/heroImageMob.jpg'
 import { motion } from 'framer-motion'
-import heroBackground from '../../../public/heroBg/heroBg1.jpg'
+import heroBackground from '../../../public/heroBg/heroBg3.jpg'
 
 const HeroBg = () => {
     const textAnimation = {
@@ -37,9 +37,9 @@ const HeroBg = () => {
                     alt="About Background"
                     layout="fill"
                     objectFit="cover"
-                    objectPosition='left center'
+                    objectPosition='top center'
                     quality={100}
-                    className='opacity-95'
+                    className='bg-opacity-90'
                 />
 
                 <Image

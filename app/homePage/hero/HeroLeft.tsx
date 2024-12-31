@@ -38,7 +38,7 @@ const HeroLeft = () => {
                 variants={textAnimation}
                 className="relative container">
 
-                <div className='flex flex-col justify-center items-start flex-nowrap mx-auto gap-7 max-w-xl'>
+                <div className='flex flex-col justify-center items-center md:items-start flex-nowrap mx-auto gap-7 max-w-xl'>
 
                     {/* Badge */}
                     <Link href="/services" className='relative w-fit'>
@@ -48,10 +48,10 @@ const HeroLeft = () => {
                             variants={textAnimation}
                             transition={{ delay: 0.2 }}
                             whileHover={{ scale: 1.05 }}
-                            className="flex items-center justify-center cursor-pointer font-ui bg-transparent backdrop-blur-sm border border-white rounded-full uppercase py-3 px-6 h-7">
+                            className="md:flex items-center justify-center hidden cursor-pointer font-ui bg-yellow-300 backdrop-blur-sm border border-white rounded-full uppercase py-3 px-6 h-7">
                             <div className='space-x-2 flex items-center justify-center'>
 
-                                <span className='text-center font-medium text-sm tracking-wide text-yellow-400'>Innovative Architecture</span>
+                                <span className='text-center font-medium text-sm tracking-wide text-gray-950'>Innovative Architecture</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none"><path d="M4.8125 2.8125L8.1875 6L4.8125 9.1875" stroke="#facc15" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>
 
                             </div>
@@ -95,10 +95,10 @@ const HeroLeft = () => {
                         whileInView="visible"
                         variants={textAnimation}
                         transition={{ delay: 0.8 }}
-                        className='text-lg md:text-xl font-sans mx-auto max-w-2xl font-medium text-gray-300'>
+                        className='text-lg md:text-xl font-sans mx-auto max-w-2xl font-medium text-gray-800'>
                         Transform your space with our innovative architectural solutions with functional design. We create an Environment for Healthy, Comfortable & Royal life.
                         <br />
-                        <span className='text-yellow-400 mt-2'>SBA_CIA </span> - the architects of your dreams.
+                        <span className='text-gradient mt-2'>SBA_CIA </span> - the architects of your dreams.
                     </motion.div>
 
                     {/* CTA buttons */}
