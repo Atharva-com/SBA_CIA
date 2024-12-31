@@ -156,7 +156,7 @@ const ContactLeft: React.FC<ContactLeftProps> = ({ activeTab, handleContactMetho
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="bg-gray-900 rounded-xl p-4 md:py-0 md:px-3 bg-transparent space-y-4 w-full "
+                    className="bg-gray-900 rounded-xl p-4 md:py-0 md:px-3 md:bg-transparent space-y-4 w-full "
                 >
                     {activeTab === 'contact' && (
                         <>
