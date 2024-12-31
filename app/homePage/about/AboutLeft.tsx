@@ -75,7 +75,7 @@ const AboutLeft = () => {
                     initial="hidden"
                     whileInView="visible"
                     variants={itemVariants}
-                    className="mt-6 p-6 rounded-lg shadow-lg">
+                    className="mt-6 p-6 rounded-lg shadow-lg bg-gradient">
                     <motion.p className="text-gray-800 italic"
                     style={{
                         fontFamily: 'cursive'

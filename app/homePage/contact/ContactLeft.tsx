@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     MapPin, Phone, Mail, MessageCircle, Twitter,
@@ -46,6 +46,7 @@ const ContactLeft: React.FC<ContactLeftProps> = ({ activeTab, handleContactMetho
 
     const [isOpen, setIsOpen] = useState(false);
     const [openingIn, setOpeningIn] = useState('');
+    
 
     type Day =
         | 'mon'
@@ -56,47 +57,94 @@ const ContactLeft: React.FC<ContactLeftProps> = ({ activeTab, handleContactMetho
         | 'sat'
         | 'sun';
 
-    const businessHours: Record<Day, { open: string; close: string }> = {
-        mon: { open: '9:00 AM', close: '5:00 PM' },
-        tue: { open: '9:00 AM', close: '5:00 PM' },
-        wed: { open: '9:00 AM', close: '5:00 PM' },
-        thu: { open: '9:00 AM', close: '5:00 PM' },
-        fri: { open: '9:00 AM', close: '5:00 PM' },
-        sat: { open: '10:00 AM', close: '4:00 PM' },
-        sun: { open: '', close: '' }, // Closed
-    };
+    const businessHours: Record<Day, { open: string; close: string }> = useMemo(() => ({
+        mon: { open: '09:30', close: '18:30' },
+        tue: { open: '09:30', close: '18:30' },
+        wed: { open: '09:30', close: '18:30' },
+        thu: { open: '09:30', close: '18:30' },
+        fri: { open: '09:30', close: '18:30' },
+        sat: { open: '10:00', close: '14:00' },
+        sun: { open: '', close: '' }
+    }), []);
 
-    // Business hours check
     useEffect(() => {
         const checkBusinessHours = () => {
+            // Create date object for Indian time
             const now = new Date();
-            const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-            const currentDay = days[now.getDay()] as Day;
+            const indiaTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+
+            const days: Day[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+            const currentDay = days[indiaTime.getDay()];
             const hours = businessHours[currentDay];
 
             if (!hours.open || !hours.close) {
                 setIsOpen(false);
+                setOpeningIn('Closed today');
                 return;
             }
 
-            const currentTime = now.getHours() * 60 + now.getMinutes();
+            // Convert current time to minutes (Indian time)
+            const currentTime = indiaTime.getHours() * 60 + indiaTime.getMinutes();
+
+            // Convert business hours to minutes
             const [openHour, openMinute] = hours.open.split(':').map(Number);
             const [closeHour, closeMinute] = hours.close.split(':').map(Number);
             const openTime = openHour * 60 + openMinute;
             const closeTime = closeHour * 60 + closeMinute;
 
-            setIsOpen(currentTime >= openTime && currentTime < closeTime);
+            const isCurrentlyOpen = currentTime >= openTime && currentTime < closeTime;
+            setIsOpen(isCurrentlyOpen);
 
-            if (currentTime < openTime) {
-                const diff = openTime - currentTime;
-                setOpeningIn(`Opens in ${Math.floor(diff / 60)}h ${diff % 60}m`);
+            // Calculate time until opening
+            if (!isCurrentlyOpen) {
+                if (currentTime < openTime) {
+                    // Will open later today
+                    const diff = openTime - currentTime;
+                    setOpeningIn(`Opens in ${Math.floor(diff / 60)}h ${diff % 60}m`);
+                } else {
+                    // Find next opening time
+                    let nextDayIndex = (indiaTime.getDay() + 1) % 7;
+                    let daysChecked = 0;
+
+                    // Look for the next open day
+                    while (daysChecked < 7) {
+                        const nextDay = days[nextDayIndex];
+                        const nextDayHours = businessHours[nextDay];
+
+                        if (nextDayHours.open && nextDayHours.close) {
+                            //   const [nextOpenHour, nextOpenMinute] = nextDayHours.open.split(':').map(Number);
+                            //   const minutesToNextDay = (24 * 60 - currentTime) + (nextOpenHour * 60 + nextOpenMinute);
+
+                            if (daysChecked === 0) {
+                                setOpeningIn(`Opens tomorrow at ${nextDayHours.open}`);
+                            } else {
+                                setOpeningIn(`Opens ${days[nextDayIndex]} at ${nextDayHours.open}`);
+                            }
+                            break;
+                        }
+
+                        nextDayIndex = (nextDayIndex + 1) % 7;
+                        daysChecked++;
+                    }
+
+                    if (daysChecked === 7) {
+                        setOpeningIn('Temporarily closed');
+                    }
+                }
+            } else {
+                // Calculate remaining open time
+                const remainingTime = closeTime - currentTime;
+                setOpeningIn(`Closes in ${Math.floor(remainingTime / 60)}h ${remainingTime % 60}m`);
             }
         };
 
+        // Initial check
         checkBusinessHours();
+
+        // Update every minute
         const interval = setInterval(checkBusinessHours, 60000);
         return () => clearInterval(interval);
-    }, []);
+    }, [businessHours]);
 
 
     return (
@@ -108,11 +156,11 @@ const ContactLeft: React.FC<ContactLeftProps> = ({ activeTab, handleContactMetho
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="bg-gray-900 rounded-xl p-4 space-y-4"
+                    className="bg-gray-900 rounded-xl p-4 md:px-6 md:py-0 space-y-4 w-full "
                 >
                     {activeTab === 'contact' && (
                         <>
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-3">
                                 {/* Contact methods */}
                                 {contactDetails.map((item, index) => (
 
@@ -122,16 +170,16 @@ const ContactLeft: React.FC<ContactLeftProps> = ({ activeTab, handleContactMetho
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: index * 0.1 }}
                                         onClick={() => handleContactMethod(item.type, item.value)}
-                                        className="flex items-center gap-4 p-3 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700/50 transition-colors group"
+                                        className="flex flex-col md:flex-row items-start md:items-center gap-4 p-4 rounded-lg cursor-pointer bg-gray-700/50 transition-colors group"
                                     >
                                         <item.icon className="w-5 h-5 text-yellow-400" />
-                                        <div>
+                                        <div className='flex-1'>
                                             <h4 className="font-medium text-gray-300">{item.label}</h4>
-                                            <p className="text-gray-400 group-hover:text-yellow-400 transition-colors">
+                                            <p className="text-gray-400 group-hover:text-yellow-400 transition-colors break-all">
                                                 {item.value}
                                             </p>
                                         </div>
-                                        <ArrowRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-yellow-400" />
+                                        <ArrowRight className="hidden md:block w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-yellow-400" />
                                     </motion.div>
                                 ))}
                             </div>
@@ -139,12 +187,12 @@ const ContactLeft: React.FC<ContactLeftProps> = ({ activeTab, handleContactMetho
                     )}
 
                     {activeTab === 'hours' && (
-                        <div className="">
+                        <div className="md:space-y-2 space-y-4">
                             <motion.div
                                 initial={{ scale: 0.95 }}
                                 animate={{ scale: 1 }}
-                                className={`p-3 rounded-lg ${isOpen ? 'bg-green-900/20' : 'bg-red-900/20'
-                                    } flex items-center justify-center`}
+                                className={`p-4 rounded-lg ${isOpen ? 'bg-green-900/20' : 'bg-red-900/20'
+                                    } flex items-center justify-center w-full`}
                             >
                                 <motion.div
                                     animate={{
@@ -163,25 +211,29 @@ const ContactLeft: React.FC<ContactLeftProps> = ({ activeTab, handleContactMetho
                                 </span>
                             </motion.div>
 
-                            {Object.entries(businessHours).map(([day, hours], index) => (
-                                <motion.div
-                                    key={day}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: index * 0.1 }}
-                                    className="flex justify-between p-3 bg-gray-900/50 rounded-lg"
-                                >
-                                    <span className="capitalize">{day}</span>
-                                    <span className="text-gray-400">
-                                        {hours.open ? `${hours.open} - ${hours.close}` : 'Closed'}
-                                    </span>
-                                </motion.div>
-                            ))}
+
+                            {/* Business Hours - Responsive Grid */}
+                            <div className="grid gap-2">
+                                {Object.entries(businessHours).map(([day, hours], index) => (
+                                    <motion.div
+                                        key={day}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: index * 0.1 }}
+                                        className="flex justify-between p-3 bg-gray-700/50 rounded-lg text-sm md:text-base text-gray-400"
+                                    >
+                                        <span className="capitalize">{day}</span>
+                                        <span className="">
+                                            {hours.open ? `${hours.open} - ${hours.close}` : 'Closed'}
+                                        </span>
+                                    </motion.div>
+                                ))}
+                            </div>
                         </div>
                     )}
 
                     {activeTab === 'social' && (
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {socialDetails.map((social) => (
                                 <motion.button
                                     key={social.name}
@@ -189,10 +241,10 @@ const ContactLeft: React.FC<ContactLeftProps> = ({ activeTab, handleContactMetho
                                     animate={{ opacity: 1, scale: 1 }}
                                     whileHover={{ scale: 1.05 }}
                                     onClick={() => handleContactMethod('social', social.url)}
-                                    className={`${social.color} py-4 px-16 rounded-lg flex items-center gap-3 transition-all duration-300`}
+                                    className={`${social.color} p-4 rounded-lg flex items-center justify-center md:justify-start gap-3 transition-all duration-300 w-full`}
                                 >
                                     <social.icon className="w-5 h-5" />
-                                    <span className="font-medium font-ui text-gray-950">{social.name}</span>
+                                    <span className="font-medium">{social.name}</span>
                                 </motion.button>
                             ))}
                         </div>

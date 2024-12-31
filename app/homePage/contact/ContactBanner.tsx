@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Inter } from 'next/font/google';
 import ContactLeft from './ContactLeft';
 import ContactRight from './ContactRight';
@@ -54,30 +54,33 @@ const ContactBanner = () => {
     <div
       ref={ref}
 
-      className={`${inter.className} relative md:py-24 py-12 px-6 md:px-10`}>
+      className={`${inter.className} relative py-20 md:py-20 lg:py-40 lg:my-20 px-4 md:px-10 min-h-screen md:min-h-0`}>
 
-        <div className='container py-12 rounded-tr-[100px] bg-[#1e293b]'>
+
+      <div className={`container md:mx-auto md:px-4 py-8 md:py-12 md:rounded-tr-[100px] md:bg-gray-900 transition-all duration-300`}>
+        
 
         {/* Tabs */}
         <motion.div
-          initial={{ opacity: 0, y: -50 }} 
-          animate={{ opacity: 1, y: 0 }} 
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.25, ease: "easeOut" }}
-          className="flex justify-center mb-8">
+          className="flex items-center justify-center mb-8">
 
           <motion.div
-            className="bg-gray-900 p-1 rounded-lg flex gap-2"
+            className="flex flex-row gap-2 w-full md:w-auto bg-gray-900 p-1 rounded-md"
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
           >
-            {['contact', 'social'].map((tab) => (
+            {['contact', 'hours', 'social'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-12 py-2 rounded-md transition-all duration-300 ${activeTab === tab
-                  ? 'bg-yellow-400 text-gray-900'
-                  : 'text-yellow-400 hover:text-gray-200'
-                  }`}
+                className={`px-4 md:px-8 py-2 rounded-md transition-all duration-300 ${
+                  activeTab === tab 
+                    ? 'bg-yellow-400 text-gray-900' 
+                    : 'text-gray-400 hover:text-gray-200'
+                } w-full md:w-auto text-center`}
               >
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
               </button>
@@ -85,19 +88,18 @@ const ContactBanner = () => {
           </motion.div>
         </motion.div>
 
-        <motion.div
-          className="flex items-center justify-center">
+        <motion.div className="grid md:grid-cols-2 gap-8 md:items-start md:justify-start">
 
           {/* Left Section */}
           <ContactLeft activeTab={activeTab} handleContactMethod={handleContactMethod} />
 
           {/* Map Section */}
-          {/* <ContactRight handleContactMethod={handleContactMethod} url={businessInfo.mapUrl} /> */}
-          
+          <ContactRight handleContactMethod={handleContactMethod} url={businessInfo.mapUrl} />
+
         </motion.div>
 
-        </div>
-     
+      </div>
+
     </div>
   );
 };
