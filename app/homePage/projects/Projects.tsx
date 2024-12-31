@@ -74,7 +74,7 @@ export const ProjectsSection = () => {
     : projects.filter(project => project.category === activeCategory);
 
   return (
-    <div className="px-6 py-20 md:py-20 lg:py-40 lg:mx-auto bg-gray-950 bg-opacity-90 relative">
+    <div className="px-2 md:px-6 py-20 md:py-20 lg:py-40 lg:mx-auto bg-gray-950 bg-opacity-90 relative">
 
       {/* Background Image */}
       <HeroGridPattern />
@@ -91,7 +91,7 @@ export const ProjectsSection = () => {
       </div>
 
       {/* Main Container */}
-      <div className="container mx-auto px-6 relative flex flex-col items-center justify-center text-center gap-20">
+      <div className="container mx-auto px-2 md:px-6 relative flex flex-col items-center justify-center text-center gap-20">
 
         <motion.div
           initial={{ opacity: 0, y: 50, scale: 0.8 }}
@@ -108,7 +108,7 @@ export const ProjectsSection = () => {
             Architectural Projects
           </motion.span>
 
-          <h2 className={`font-outfit text-3xl md:text-6xl font-bold text-gray-100`}>
+          <h2 className={`font-outfit text-4xl md:text-6xl font-bold text-gray-100`}>
             Architectural Marvels Brought to Life
             <motion.span
               className="text-yellow-400 inline-block pl-2"
@@ -127,7 +127,7 @@ export const ProjectsSection = () => {
           </h2>
 
           <p
-            className={`font-sans text-gray-400 max-w-2xl mx-auto mt-2 text-center` }
+            className={`font-sans text-gray-400 max-w-2xl mx-auto mt-2 text-center md:block hidden` }
           >
             Explore our crafted spaces of innovative architectural designs spanning residential,
             commercial, and landscape projects.

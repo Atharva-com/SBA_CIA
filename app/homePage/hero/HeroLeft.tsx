@@ -70,7 +70,7 @@ const HeroLeft = () => {
                             whileInView="visible"
                             variants={textAnimation}
                             transition={{ delay: 0.4 }}
-                            className="text-transparent font-outfit text-4xl md:text-6xl font-bold">
+                            className="text-transparent font-outfit text-5xl md:text-6xl font-bold text-center md:text-start">
 
                             <motion.span
                                 initial="hidden"
@@ -98,7 +98,7 @@ const HeroLeft = () => {
                         className='text-lg md:text-xl font-sans mx-auto max-w-2xl font-medium text-gray-800'>
                         Transform your space with our innovative architectural solutions with functional design. We create an Environment for Healthy, Comfortable & Royal life.
                         <br />
-                        <span className='text-gradient mt-2'>SBA_CIA </span> - the architects of your dreams.
+                        {/* <span className='text-gradient mt-2'>SBA_CIA </span> - the architects of your dreams. */}
                     </motion.div>
 
                     {/* CTA buttons */}

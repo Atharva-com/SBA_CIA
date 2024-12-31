@@ -166,7 +166,7 @@ const ServicesSection = () => {
             OUR EXPERTISE
           </motion.span>
 
-          <h2 className={`font-outfit text-3xl md:text-6xl md:max-w-2xl font-bold text-gray-100`}>
+          <h2 className={`font-outfit text-4xl md:text-6xl md:max-w-2xl font-bold text-gray-100`}>
             Plan Your Dream Space With Our Services
           </h2>
 

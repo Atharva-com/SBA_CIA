@@ -93,12 +93,12 @@ const OverlappingTestimonials = () => {
     };
 
     return (
-        <div className="relative min-h-screen bg-gray-950 bg-opacity-90 px-6 py-20 md:py-20 lg:py-40 lg:mx-auto ">
+        <div className="relative min-h-screen bg-gray-950 bg-opacity-90 px-4 md:px-6 py-20 md:py-20 lg:py-40 lg:mx-auto ">
             {/* Background Image */}
             <HeroGridPattern />
 
             {/* Content */}
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto px-2 md:px-6">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -140,9 +140,9 @@ const OverlappingTestimonials = () => {
                                     }}
                                 >
                                     <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800 h-full">
-                                        <div className="flex gap-4 h-full">
+                                        <div className="flex md:flex-row flex-col gap-4 h-full">
                                             {/* Left Section */}
-                                            <div className="w-1/3 border-r border-gray-800 pr-4">
+                                            <div className="md:w-1/3 border-r border-gray-800 pr-4">
                                                 <div className="flex flex-col items-center text-center space-y-4">
                                                     <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center">
                                                         <Icon className="w-8 h-8 text-yellow-400" />
@@ -162,7 +162,7 @@ const OverlappingTestimonials = () => {
                                             </div>
 
                                             {/* Right Section */}
-                                            <div className="w-2/3 flex items-center">
+                                            <div className="md:w-2/3 flex items-center">
                                                 <blockquote className={`${inter.className} text-gray-300 text-base italic`}>
                                                     &quot;{testimonial.content}&quot;
                                                 </blockquote>
@@ -172,10 +172,7 @@ const OverlappingTestimonials = () => {
                                 </motion.div>
                             );
                         })}
-                    </div>
-
-                    {/* Navigation */}
-                    
+                    </div>                    
 
                 </div>
 
@@ -205,6 +202,8 @@ const OverlappingTestimonials = () => {
                             <ChevronRight className="w-6 h-6" />
                         </motion.button>
                     </div>
+
+                
             </div>
         </div>
     );
