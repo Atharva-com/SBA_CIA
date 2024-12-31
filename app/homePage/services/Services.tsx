@@ -156,7 +156,7 @@ const ServicesSection = () => {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ margin: "-100px" }}
-          className="text-end relative z-1 flex flex-col items-end justify-center"
+          className="relative z-1 flex flex-col lg:items-end lg:text-end items-center justify-center text-center"
         >
 
           <motion.span

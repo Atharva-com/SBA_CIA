@@ -91,7 +91,7 @@ export const ProjectsSection = () => {
       </div>
 
       {/* Main Container */}
-      <div className="container mx-auto px-6 relative  flex flex-col gap-20">
+      <div className="container mx-auto px-6 relative flex flex-col items-center justify-center text-center gap-20">
 
         <motion.div
           initial={{ opacity: 0, y: 50, scale: 0.8 }}
