@@ -1,6 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import Image from 'next/image';
@@ -19,46 +17,18 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
 
-  const cardsRef = useRef<HTMLDivElement[]>([]);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    cardsRef.current.forEach((card, index) => {
-      gsap.fromTo(card,
-        {
-          scale: 0,
-          opacity: 0
-        },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 1,
-          scrollTrigger: {
-            trigger: card,
-            start: "top bottom-=100",
-            end: "top center",
-            scrub: 1,
-            toggleActions: "play none none reverse"
-          },
-          delay: index * 0.2
-        }
-      );
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
   return (
     <motion.div
-      ref={(el) => {
-        if (el && !cardsRef.current.includes(el)) {
-          cardsRef.current.push(el);
-        }
-      }}
       layoutId={`project-${project.id}`}
       className="relative group cursor-pointer"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -10 }}
+      transition={{
+        duration: 0.3,
+        type: "spring",
+        stiffness: 300
+      }}
     >
       <div className="relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 hover:border-yellow-400 hover:border-2">
         <motion.div
@@ -92,13 +62,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
             className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           >
             <div className="absolute bottom-0 left-0 p-6 w-full">
-              <h3
+              <motion.h3
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.3 }}
                 className="text-2xl font-bold text-gradient mb-2 font-sans"
               >
                 {project.title}
-              </h3>
+              </motion.h3>
 
-              <div
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.1 }}
                 className="flex justify-between items-center"
               >
                 <span className="text-gray-400 font-ui">{project.category}</span>
@@ -110,7 +86,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
                 >
                   <Plus className="w-6 h-6 text-gray-900" />
                 </motion.button>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
 

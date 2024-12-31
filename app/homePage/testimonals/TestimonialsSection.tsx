@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Building2, Home, TreePine, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Inter, Playfair_Display, DM_Sans } from 'next/font/google';
+import { Inter, DM_Sans } from 'next/font/google';
+import HeroGridPattern from '../hero/HeroGridPattern';
 
 const inter = Inter({ subsets: ['latin'] });
-const playfair = Playfair_Display({ subsets: ['latin'] });
 const dmSans = DM_Sans({ subsets: ['latin'] });
 
 const testimonials = [
@@ -93,7 +93,11 @@ const OverlappingTestimonials = () => {
     };
 
     return (
-        <div className="relative min-h-screen bg-gray-950 py-24">
+        <div className="relative min-h-screen bg-gray-950 bg-opacity-90 px-6 py-20 md:py-20 lg:py-40 lg:mx-auto ">
+            {/* Background Image */}
+            <HeroGridPattern />
+
+            {/* Content */}
             <div className="container mx-auto px-6">
                 {/* Header */}
                 <motion.div
@@ -101,11 +105,11 @@ const OverlappingTestimonials = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center max-w-2xl mx-auto mb-16"
                 >
-                    <h2 className={`${playfair.className} text-4xl md:text-6xl font-bold text-gradient mb-4`}>
-                    Client Success Stories
-                        <span className="text-yellow-400">.</span>
+                    <h2 className={`font-outfit text-4xl md:text-6xl font-bold text-gray-100 mb-4`}>
+                    Client Success Stories 
+                        <span className="text-yellow-400 pl-2">.</span>
                     </h2>
-                    <p className={`${inter.className} text-gray-400 text-lg`}>
+                    <p className={`${inter.className} text-gray-400`}>
                         Hear from our satisfied clients about their experience working with us.
                     </p>
                 </motion.div>

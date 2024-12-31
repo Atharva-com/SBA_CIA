@@ -8,6 +8,7 @@ import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import ProjectBackground from '../../../public/background-SBA_CIA.png';
+import HeroGridPattern from '../hero/HeroGridPattern';
 const dmSans = DM_Sans({ subsets: ['latin'] });
 
 const projects = [
@@ -54,7 +55,7 @@ export const ProjectsSection = () => {
   const direction = 0;
   const router = useRouter();
   const containerRef = useRef(null);
-  
+
 
   const handleExploreClick = () => {
     router.push("/projects");
@@ -73,8 +74,11 @@ export const ProjectsSection = () => {
     : projects.filter(project => project.category === activeCategory);
 
   return (
-    <div className="md:py-24 py-16 px-6 bg-gray-950 relative">
-      
+    <div className="px-6 py-20 md:py-20 lg:py-40 lg:mt-20 lg:mx-auto bg-gray-950 bg-opacity-90 relative">
+
+      {/* Background Image */}
+      <HeroGridPattern />
+
       <div className='absolute top-0 left-0 h-full w-full z-0 opacity-0'>
 
         <Image
@@ -87,42 +91,50 @@ export const ProjectsSection = () => {
       </div>
 
       {/* Main Container */}
-      <div className="container mx-auto px-6 relative">
+      <div className="container mx-auto px-6 relative  flex flex-col gap-20">
 
-        {/* <motion.div
+        <motion.div
           initial={{ opacity: 0, y: 50, scale: 0.8 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ margin: "-100px" }}
-          className="mb-16 text-center"
+          className="relative z-1 flex flex-col items-center justify-center"
         >
-          <div
+
+          <motion.span
+            className={`font-sans text-gray-400 text-lg tracking-wider`}
+            whileHover={{ scale: 1.05 }}
           >
-            <h2 className={`${playfair.className} text-4xl md:text-5xl font-bold text-gray-100 mb-4`}>
-              Featured Projects
-              <motion.span
-                className="text-yellow-400 inline-block"
-                animate={{
-                  rotate: [0, 5, 0],
-                  scale: [1, 1.2, 1]
-                }}
-                transition={{
-                  duration: 1,
-                  repeat: Infinity,
-                  repeatDelay: 5
-                }}
-              >
-                .
-              </motion.span>
-            </h2>
-          </div>
+            Architectural Projects
+          </motion.span>
+
+          <h2 className={`font-outfit text-3xl md:text-6xl font-bold text-gray-100`}>
+            Architectural Marvels Brought to Life
+            <motion.span
+              className="text-yellow-400 inline-block pl-2"
+              animate={{
+                rotate: [0, 5, 0],
+                scale: [1, 1.2, 1]
+              }}
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+                repeatDelay: 5
+              }}
+            >
+              .
+            </motion.span>
+          </h2>
+
           <p
-            className={`${dmSans.className} text-gray-400 max-w-2xl mx-auto`}
+            className={`font-sans text-gray-400 max-w-2xl mx-auto mt-2 text-center` }
           >
-            Explore our portfolio of innovative architectural designs spanning residential,
+            Explore our crafted spaces of innovative architectural designs spanning residential,
             commercial, and landscape projects.
           </p>
-        </motion.div> */}
+
+        </motion.div>
+
 
         {/* Category Filter */}
 
@@ -130,7 +142,7 @@ export const ProjectsSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="flex flex-wrap justify-center gap-4"
         >
           {categories.map((category) => (
             <motion.button
@@ -153,7 +165,7 @@ export const ProjectsSection = () => {
             <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProjects.map((project) => (
                 <ProjectCard
-                
+
                   key={project.id}
                   project={project}
                   onClick={() => handleProjectClick(project)}
@@ -164,7 +176,7 @@ export const ProjectsSection = () => {
         </AnimatePresence>
 
         {/* All projects Button */}
-        <div className="text-center mt-12">
+        <div className="text-center md:mt-12">
           <motion.button
             onClick={handleExploreClick}
             whileHover={{
@@ -178,7 +190,7 @@ export const ProjectsSection = () => {
             className="relative overflow-hidden px-8 md:px-16 md:py-4 py-3 text-sm md:text-base font-medium bg-yellow-400 text-gray-900 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-500 transition-all duration-300"
           >
             <span className="relative z-10 flex items-center justify-center gap-2 font-sans">
-              Explore Our Work
+              Discover Innovative Spaces
               <motion.span
                 initial={{ x: -10 }}
                 animate={{ x: [0, 5, 0] }}

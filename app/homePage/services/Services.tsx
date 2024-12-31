@@ -134,7 +134,7 @@ const ServicesSection = () => {
           src={serviceBg}
           alt="Services Background"
           quality={100}
-          className='h-[200vh] md:block hidden'
+          className='h-[200vh] md:block hidden opacity-90'
         />
 
         <Image
@@ -155,6 +155,7 @@ const ServicesSection = () => {
           initial={{ opacity: 0, y: 50, scale: 0.8 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ margin: "-100px" }}
           className="text-end relative z-1 flex flex-col items-end justify-center"
         >
 
@@ -165,7 +166,7 @@ const ServicesSection = () => {
             OUR EXPERTISE
           </motion.span>
 
-          <h2 className={`font-outfit text-3xl md:text-5xl md:max-w-2xl font-bold text-gradient`}>
+          <h2 className={`font-outfit text-3xl md:text-6xl md:max-w-2xl font-bold text-gray-100`}>
             Plan Your Dream Space With Our Services
           </h2>
 
@@ -200,7 +201,7 @@ const ServicesSection = () => {
             className="relative overflow-hidden px-8 md:px-16 md:py-4 py-3 text-sm md:text-base font-medium bg-yellow-400 text-gray-900 rounded-full shadow-lg hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-500 transition-all duration-300"
           >
             <span className="relative z-10 flex items-center justify-center gap-2 font-sans">
-              Explore All Services
+              Explore Premium Solutions
               <motion.span
                 initial={{ x: -10 }}
                 whileInView={{ x: [0, 5, 0] }}

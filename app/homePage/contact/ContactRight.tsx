@@ -14,9 +14,9 @@ const ContactRight: React.FC<ContactRightProps> = ({ handleContactMethod, url })
     <>
       <motion.div
         initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="relative h-[300px] md:h-[400px] w-full"
+        className="relative h-[300px] md:h-[400px] w-full px-3"
       >
         <div
           onClick={() => handleContactMethod('map', url)}
@@ -24,7 +24,7 @@ const ContactRight: React.FC<ContactRightProps> = ({ handleContactMethod, url })
         >
           <div className="absolute inset-0 transition-transform duration-300 group-hover:scale-105">
             <Image
-              className="w-full h-full object-cover opacity-70 group-hover:opacity-80 transition-opacity duration-300"
+              className="w-full h-full object-cover transition-opacity duration-300"
               src={mapBg}
               alt="Location Map"
             />

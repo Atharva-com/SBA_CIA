@@ -154,9 +154,9 @@ const ContactLeft: React.FC<ContactLeftProps> = ({ activeTab, handleContactMetho
                 <motion.div
                     key={activeTab}
                     initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="bg-gray-900 rounded-xl p-4 md:px-6 md:py-0 space-y-4 w-full "
+                    className="bg-gray-900 rounded-xl p-4 md:py-0 md:px-3 bg-transparent space-y-4 w-full "
                 >
                     {activeTab === 'contact' && (
                         <>
@@ -167,7 +167,7 @@ const ContactLeft: React.FC<ContactLeftProps> = ({ activeTab, handleContactMetho
                                     <motion.div
                                         key={item.type}
                                         initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
                                         transition={{ delay: index * 0.1 }}
                                         onClick={() => handleContactMethod(item.type, item.value)}
                                         className="flex flex-col md:flex-row items-start md:items-center gap-4 p-4 rounded-lg cursor-pointer bg-gray-700/50 transition-colors group"
@@ -190,12 +190,12 @@ const ContactLeft: React.FC<ContactLeftProps> = ({ activeTab, handleContactMetho
                         <div className="md:space-y-2 space-y-4">
                             <motion.div
                                 initial={{ scale: 0.95 }}
-                                animate={{ scale: 1 }}
+                                whileInView={{ scale: 1 }}
                                 className={`p-4 rounded-lg ${isOpen ? 'bg-green-900/20' : 'bg-red-900/20'
                                     } flex items-center justify-center w-full`}
                             >
                                 <motion.div
-                                    animate={{
+                                    whileInView={{
                                         scale: [1, 1.2, 1],
                                     }}
                                     transition={{
@@ -218,7 +218,7 @@ const ContactLeft: React.FC<ContactLeftProps> = ({ activeTab, handleContactMetho
                                     <motion.div
                                         key={day}
                                         initial={{ opacity: 0, x: -20 }}
-                                        animate={{ opacity: 1, x: 0 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
                                         transition={{ delay: index * 0.1 }}
                                         className="flex justify-between p-3 bg-gray-700/50 rounded-lg text-sm md:text-base text-gray-400"
                                     >
@@ -238,7 +238,7 @@ const ContactLeft: React.FC<ContactLeftProps> = ({ activeTab, handleContactMetho
                                 <motion.button
                                     key={social.name}
                                     initial={{ opacity: 0, scale: 0.9 }}
-                                    animate={{ opacity: 1, scale: 1 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
                                     whileHover={{ scale: 1.05 }}
                                     onClick={() => handleContactMethod('social', social.url)}
                                     className={`${social.color} p-4 rounded-lg flex items-center justify-center md:justify-start gap-3 transition-all duration-300 w-full`}

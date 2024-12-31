@@ -34,6 +34,7 @@ export const ServiceCard = ({ service, index }: { service: Service, index: numbe
             initial={{ opacity: 0, y: 30 * index, scale: 0.6 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 * index }}
+            viewport={{ margin: "-100px" }}
             className="relative h-[450px] md:h-[425px] w-full perspective-1000">
             <motion.div
 

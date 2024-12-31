@@ -137,9 +137,9 @@ const ProjectPreview: React.FC<ProjectPreviewProps> = ({ project, isOpen, onClos
                 transition={{ delay: 0.2 }}
                 className="space-y-6"
               >
-                <h2 className="text-3xl font-bold text-gradient font-display">{project.title}</h2>
+                <h2 className="text-3xl font-bold text-gray-100 font-display">{project.title}</h2>
                 <p className="text-gray-500 font-ui md:block hidden">{project.description}</p>
-                
+
                 <div className="space-y-4  font-ui">
                   <div className="flex justify-between text-gray-300">
                     <span>Location</span>

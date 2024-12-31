@@ -57,7 +57,7 @@ const ContactBanner = () => {
       className={`${inter.className} relative py-20 md:py-20 lg:py-40 lg:my-20 px-4 md:px-10 min-h-screen md:min-h-0`}>
 
 
-      <div className={`container md:mx-auto md:px-4 py-8 md:py-12 md:rounded-tr-[100px] md:bg-gray-900 transition-all duration-300`}>
+      <div className={`container md:mx-auto md:px-4 py-8 md:py-12 md:rounded-tr-[100px] md:bg-gray-950 md:opacity-90 transition-all duration-300`}>
         
 
         {/* Tabs */}
